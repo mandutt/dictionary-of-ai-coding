@@ -1,1409 +1,1416 @@
-<!--
-  GENERATED FILE — DO NOT EDIT.
-  Source: dictionary/*.md, internal/Curriculum.md, internal/README.template.md
-  Regenerate: npm run generate
--->
-
 <p>
   <a href="https://aicodingdictionary.com">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1782821584/dictionary-dark.png">
       <source media="(prefers-color-scheme: light)" srcset="https://res.cloudinary.com/total-typescript/image/upload/v1782821584/dictionary-light.png">
-      <img alt="AI Coding Dictionary" src="https://res.cloudinary.com/total-typescript/image/upload/v1782821584/dictionary-light.png" width="369">
+      <img alt="AI 코딩 사전" src="https://res.cloudinary.com/total-typescript/image/upload/v1782821584/dictionary-light.png" width="369">
     </picture>
   </a>
 </p>
 
-# AI Coding Dictionary
+# AI 코딩 사전 (AI Coding Dictionary)
 
-**AI coding can feel like it's just for experts**. Unexplained jargon. Mysterious failures. Bills that don't seem to match the work.
+**AI 코딩은 오직 전문가만을 위한 영역처럼 느껴지곤 합니다**. 설명 없는 전문 용어, 정체불명의 실패, 작업량과 맞지 않는 듯한 청구서까지.
 
-It isn't, really. A lot of the confusion is manufactured: **there's a whole VC-funded economy that benefits from keeping it hard to understand**.
+하지만 실제로는 그렇지 않습니다. 혼란의 상당 부분은 인위적으로 만들어진 것입니다. **이를 이해하기 어렵게 유지해야 이득을 보는 거대한 VC 투자 기반 경제가 존재하기 때문입니다**.
 
-The basic terms of engagement are learnable in an afternoon. Once you have them, the whole thing stops feeling like guesswork.
+상호작용의 기본 용어들은 오후 반나절이면 충분히 배울 수 있습니다. 이 개념들을 이해하고 나면, AI 코딩은 더 이상 막막한 찍기 놀음처럼 느껴지지 않습니다.
 
-Why does context degrade? Why is the bill so high? Why does the same prompt behave differently from one day to the next?
+왜 컨텍스트 품질이 저하될까요? 왜 요금이 이렇게 많이 나올까요? 왜 같은 프롬프트가 어제와 오늘 다르게 동작할까요?
 
-Each has a clean answer, once someone tells you the words to use.
+알맞은 단어만 알게 되면, 이 모든 질문에 깔끔하게 답할 수 있습니다.
 
-That's what this dictionary is for. **The vocabulary of AI coding, translated into plain English**.
+이것이 바로 이 사전의 존재 이유입니다. **AI 코딩의 어휘를 명쾌하고 쉬운 일상 언어로 번역했습니다**.
 
-**Want more than the vocabulary?** Join 62,000+ developers at **[aihero.dev/newsletter](https://www.aihero.dev/s/dictionary-newsletter)** for my latest skills, thinking on AI engineering, and the resources that'll keep you ahead of the curve.
+**어휘 이상의 지식을 원하시나요?** 최신 기술, AI 엔지니어링에 관한 인사이트, 그리고 기술 트렌드를 앞서갈 수 있는 자료를 받아보려면 62,000명 이상의 개발자가 함께하는 **[aihero.dev/newsletter](https://www.aihero.dev/s/dictionary-newsletter)**를 구독하세요.
 
 ---
 
-## Table of contents
+## 목차
 
 <details>
-<summary>Section 1 — The Model</summary>
+<summary>섹션 1 — 모델 (The Model)</summary>
 
-- [AI](#ai)
-- [Model](#model)
-- [Parameters](#parameters)
-- [Training](#training)
-- [Inference](#inference)
-- [Effort](#effort)
-- [Token](#token)
-- [Next-token prediction](#next-token-prediction)
-- [Non-determinism](#non-determinism)
-- [Model provider](#model-provider)
-- [Harness](#harness)
-- [Model provider request](#model-provider-request)
-- [Input tokens](#input-tokens)
-- [Output tokens](#output-tokens)
-- [Prefix cache](#prefix-cache)
-- [Cache tokens](#cache-tokens)
+- [AI (인공지능)](#ai)
+- [Model (모델)](#model)
+- [Parameters (매개변수/파라미터)](#parameters)
+- [Training (학습/훈련)](#training)
+- [Inference (추론)](#inference)
+- [Effort (추론 노력/에포트)](#effort)
+- [Token (토큰)](#token)
+- [Next-token prediction (다음 토큰 예측)](#next-token-prediction)
+- [Non-determinism (비결정성)](#non-determinism)
+- [Model provider (모델 제공자/프로바이더)](#model-provider)
+- [Harness (하네스)](#harness)
+- [Model provider request (모델 프로바이더 요청)](#model-provider-request)
+- [Input tokens (입력 토큰)](#input-tokens)
+- [Output tokens (출력 토큰)](#output-tokens)
+- [Prefix cache (접두사 캐시)](#prefix-cache)
+- [Cache tokens (캐시 토큰)](#cache-tokens)
 
 </details>
 
 <details>
-<summary>Section 2 — Sessions, Context Windows & Turns</summary>
+<summary>섹션 2 — 세션, 컨텍스트 윈도우, 턴 (Sessions, Context Windows & Turns)</summary>
 
-- [Stateless](#stateless)
-- [Context](#context)
-- [Context window](#context-window)
-- [Stateful](#stateful)
-- [Agent](#agent)
-- [System prompt](#system-prompt)
-- [Session](#session)
-- [Turn](#turn)
-
-</details>
-
-<details>
-<summary>Section 3 — Tools & Environment</summary>
-
-- [Environment](#environment)
-- [Filesystem](#filesystem)
-- [Tool](#tool)
-- [Tool call](#tool-call)
-- [Tool result](#tool-result)
-- [MCP](#mcp)
-- [Permission request](#permission-request)
-- [Permission mode](#permission-mode)
-- [Agent mode](#agent-mode)
-- [Sandbox](#sandbox)
+- [Stateless (무상태)](#stateless)
+- [Context (컨텍스트/맥락)](#context)
+- [Context window (컨텍스트 윈도우/문맥 창)](#context-window)
+- [Stateful (상태 유지)](#stateful)
+- [Agent (에이전트)](#agent)
+- [System prompt (시스템 프롬프트)](#system-prompt)
+- [Session (세션)](#session)
+- [Turn (턴)](#turn)
 
 </details>
 
 <details>
-<summary>Section 4 — Failure Modes</summary>
+<summary>섹션 3 — 툴과 환경 (Tools & Environment)</summary>
 
-- [Sycophancy](#sycophancy)
-- [Hallucination](#hallucination)
-- [Parametric knowledge](#parametric-knowledge)
-- [Knowledge cutoff](#knowledge-cutoff)
-- [Contextual knowledge](#contextual-knowledge)
-- [Attention relationship](#attention-relationship)
-- [Attention budget](#attention-budget)
-- [Attention degradation](#attention-degradation)
-- [Smart zone](#smart-zone)
-
-</details>
-
-<details>
-<summary>Section 5 — Handoffs</summary>
-
-- [Clearing](#clearing)
-- [Handoff](#handoff)
-- [Primary source](#primary-source)
-- [Secondary source](#secondary-source)
-- [Handoff artifact](#handoff-artifact)
-- [Spec](#spec)
-- [Ticket](#ticket)
-- [Compaction](#compaction)
-- [Autocompact](#autocompact)
+- [Environment (환경)](#environment)
+- [Filesystem (파일시스템)](#filesystem)
+- [Tool (툴/도구)](#tool)
+- [Tool call (툴 호출)](#tool-call)
+- [Tool result (툴 결과)](#tool-result)
+- [MCP (모델 컨텍스트 프로토콜)](#mcp)
+- [Permission request (권한 요청)](#permission-request)
+- [Permission mode (권한 모드)](#permission-mode)
+- [Agent mode (에이전트 모드)](#agent-mode)
+- [Sandbox (샌드박스)](#sandbox)
 
 </details>
 
 <details>
-<summary>Section 6 — Memory and Steering</summary>
+<summary>섹션 4 — 실패 모드 (Failure Modes)</summary>
 
-- [Memory system](#memory-system)
+- [Sycophancy (아첨/영합)](#sycophancy)
+- [Hallucination (환각)](#hallucination)
+- [Parametric knowledge (매개변수적 지식)](#parametric-knowledge)
+- [Knowledge cutoff (지식 컷오프)](#knowledge-cutoff)
+- [Contextual knowledge (맥락적 지식)](#contextual-knowledge)
+- [Attention relationship (어텐션 관계)](#attention-relationship)
+- [Attention budget (어텐션 예산)](#attention-budget)
+- [Attention degradation (어텐션 저하)](#attention-degradation)
+- [Smart zone (스마트 존)](#smart-zone)
+
+</details>
+
+<details>
+<summary>섹션 5 — 인계 (Handoffs)</summary>
+
+- [Clearing (비우기/초기화)](#clearing)
+- [Handoff (핸드오프/인계)](#handoff)
+- [Primary source (1차 출처/원천 소스)](#primary-source)
+- [Secondary source (2차 출처)](#secondary-source)
+- [Handoff artifact (핸드오프 아티팩트)](#handoff-artifact)
+- [Spec (스펙/명세)](#spec)
+- [Ticket (티켓)](#ticket)
+- [Compaction (압축)](#compaction)
+- [Autocompact (자동 압축)](#autocompact)
+
+</details>
+
+<details>
+<summary>섹션 6 — 메모리와 조향 (Memory and Steering)</summary>
+
+- [Memory system (메모리 시스템)](#memory-system)
 - [AGENTS.md](#agentsmd)
-- [Progressive disclosure](#progressive-disclosure)
-- [Context pointer](#context-pointer)
-- [Skill](#skill)
-- [Subagent](#subagent)
+- [Progressive disclosure (점진적 공개)](#progressive-disclosure)
+- [Context pointer (컨텍스트 포인터)](#context-pointer)
+- [Skill (스킬)](#skill)
+- [Subagent (서브에이전트/하위 에이전트)](#subagent)
 
 </details>
 
 <details>
-<summary>Section 7 — Patterns of Work</summary>
+<summary>섹션 7 — 작업 패턴 (Patterns of Work)</summary>
 
-- [Human-in-the-loop](#human-in-the-loop)
-- [AFK](#afk)
-- [Automated check](#automated-check)
-- [Automated review](#automated-review)
-- [Human review](#human-review)
-- [Vibe coding](#vibe-coding)
-- [Design concept](#design-concept)
-- [Grilling](#grilling)
-- [Prototyping](#prototyping)
-- [DX](#dx)
-- [AX](#ax)
+- [Human-in-the-loop (인간 참여/휴먼인더루프)](#human-in-the-loop)
+- [AFK (자리 비움 작업)](#afk)
+- [Automated check (자동화된 점검)](#automated-check)
+- [Automated review (자동화된 리뷰)](#automated-review)
+- [Human review (인간 검토)](#human-review)
+- [Vibe coding (바이브 코딩)](#vibe-coding)
+- [Design concept (디자인 콘셉트/설계 개념)](#design-concept)
+- [Grilling (그릴링/집요한 질의)](#grilling)
+- [Prototyping (프로토타이핑)](#prototyping)
+- [DX (개발자 경험)](#dx)
+- [AX (에이전트 경험)](#ax)
 
 </details>
 
-## Section 1 — The Model
+---
+
+## 섹션 1 — 모델 (The Model)
 
 ### AI
 
-A moving label, not a technology. "AI" doesn't name a fixed thing the way [model](#model) or [token](#token) does — it points at whatever computers can newly, impressively do. Right now it points at large language models. It has pointed at very different things before:
+특정 기술이 아니라 계속해서 이동하는 '라벨'입니다. "AI"는 [모델](#model)이나 [토큰](#token)처럼 고정된 실체를 지칭하지 않습니다. 컴퓨터가 새롭고 인상적으로 해낼 수 있는 무언가를 그때그때 가리킬 뿐입니다. 지금은 대규모 언어 모델(LLM)을 가리키고 있지만, 과거에는 완전히 다른 대상을 가리켰습니다:
 
-| Era       | What "AI" meant                                                                                       |
-| --------- | ----------------------------------------------------------------------------------------------------- |
-| 1950s     | Symbolic reasoning — theorem provers, checkers programs.                                              |
-| 1960s–70s | Rule-based symbolic programs — ELIZA, SHRDLU.                                                         |
-| 1980s     | Expert systems — thousands of hand-written if-then rules encoding human expertise.                    |
-| 1990s     | Game-tree search — Deep Blue beating Kasparov (1997). Researchers avoided the word "AI" entirely      |
-| 2000s     | Statistical machine learning — spam filters, recommenders. Still sold as "machine learning", not "AI" |
-| 2010s     | Deep learning — image recognition (AlexNet, 2012), AlphaGo (2016).                                    |
-| 2020s     | Large language models — ChatGPT (2022) made "AI" mean chatbots                                        |
+| 시대 | "AI"가 의미했던 것 |
+| --- | --- |
+| 1950년대 | 기호 추론(Symbolic reasoning) — 정리 증명기, 체커 프로그램 |
+| 1960–70년대 | 규칙 기반 기호 프로그램 — ELIZA, SHRDLU |
+| 1980년대 | 전문가 시스템 — 인간의 전문성을 수천 개의 'if-then' 규칙으로 하드코딩한 시스템 |
+| 1990년대 | 게임 트리 탐색 — 카스파로프를 꺾은 딥블루(1997). 당시 연구자들은 "AI"라는 단어 자체를 기피함 |
+| 2000년대 | 통계적 머신러닝 — 스팸 필터, 추천 시스템. "AI"가 아닌 "머신러닝"으로 판매됨 |
+| 2010년대 | 딥러닝 — 이미지 인식(AlexNet, 2012), 알파고(2016) |
+| 2020년대 | 대규모 언어 모델 — ChatGPT(2022) 출시 이후 "AI"는 챗봇을 뜻하게 됨 |
 
-The pointer moves by a known mechanism, sometimes called the AI effect: once a technique works reliably, it gets renamed — it's "just" search, "just" statistics — and "AI" slides forward to the next unsolved thing. The observation is old. Bertram Raphael put it this way in 1971: "AI is a collective name for problems which we do not yet know how to solve properly by computer." Larry Tesler's version, from around 1979: "Intelligence is whatever machines haven't done yet."
+이 지칭 대상은 흔히 'AI 효과(AI effect)'라 불리는 메커니즘에 의해 이동합니다. 어떤 기술이 안정적으로 작동하기 시작하면 이름이 바뀝니다. "그냥" 탐색 알고리즘일 뿐이라거나, "그냥" 통계일 뿐이라 격하되고, "AI"라는 단어는 아직 해결되지 않은 다음 난제로 옮겨갑니다. 이는 오래된 통찰입니다. 1971년 버트럼 라파엘(Bertram Raphael)은 이렇게 썼습니다: "AI란 컴퓨터로 어떻게 제대로 풀어야 할지 아직 모르는 문제들을 통칭하는 이름이다." 1979년경 래리 테슬러(Larry Tesler)의 표현을 빌리자면: "지능이란 기계가 아직 해내지 못한 모든 것을 뜻한다."
 
-This is why conversations about AI so often talk past each other. A claim like "AI can't reason" or "AI is overhyped" carries a hidden timestamp — it may be about expert systems, about 2010s image classifiers, or about last month's LLM, and each reference supports a different conclusion. When a discussion about AI stalls, the fix is usually to swap the word for whichever precise term is actually meant: the model, the [harness](#harness), the [agent](#agent), the [context](#context) it was given.
+사람들이 AI를 두고 대화할 때 자꾸 엇갈리는 이유가 바로 여기에 있습니다. "AI는 추론할 수 없다"거나 "AI는 과대평가되었다"는 주장은 보이지 않는 타임스탬프를 달고 있습니다. 그 주장이 전문가 시스템에 대한 것인지, 2010년대 이미지 분류기에 대한 것인지, 아니면 지난달 출시된 LLM에 대한 것인지에 따라 결론이 완전히 달라집니다. AI에 대한 논의가 헛돌기 시작한다면, 모델, [하네스](#harness), [에이전트](#agent), 혹은 그에 제공된 [컨텍스트](#context) 등 실제로 의미하는 정밀한 용어로 단어를 교체하는 것이 해결책입니다.
 
-_Avoid:_ "AI" in any technical claim — name the part you mean instead. "AI coding" as a label for the practice is fine; "the AI is hallucinating" is not.
+_지양할 표현:_ 기술적 주장을 펼칠 때 "AI"라는 단어 사용하기 — 대신 지칭하고자 하는 구체적 구성요소를 명시하세요. 관행을 가리키는 표현으로서의 "AI 코딩"은 괜찮지만, "AI가 환각을 일으킨다"는 잘못된 표현입니다.
 
-_Usage:_
+_사용 예시:_
 
-"The CTO wants to know whether AI could handle the triage queue."
+"CTO가 우리 이슈 분류 큐 처리에 AI를 도입할 수 있는지 묻더군요."
 
-"Translate that before scoping it — she means an LLM in a harness with access to the ticket system. 'AI' on its own isn't a spec."
+"범위를 정하기 전에 그 말을 번역해야 합니다. 티켓 시스템 접근 권한이 있는 하네스에 탑재된 LLM을 의미하는 겁니다. 'AI' 그 자체는 아무런 기술 명세가 되지 못해요."
 
-### Model
+### Model (모델)
 
-The [parameters](#parameters). [Stateless](#stateless) — does [next-token prediction](#next-token-prediction) and nothing else. "Claude Opus 4.x" and "GPT-5.x" are models. On its own a model can't do anything agentic; it has to be [harnessed](#harness).
+[매개변수(Parameters)](#parameters) 그 자체입니다. [무상태(Stateless)](#stateless)이며, [다음 토큰 예측(Next-token prediction)](#next-token-prediction) 외에는 아무것도 하지 않습니다. "Claude Opus 4.x"나 "GPT-5.x"가 모델에 해당합니다. 모델 홀로는 어떠한 에이전트적 행동도 할 수 없으며, 반드시 [하네스(Harness)](#harness)가 결합되어야 합니다.
 
-Models can't read files, run commands, browse the web, or remember yesterday — it takes [tokens](#token) in and predicts tokens out, once per [model provider request](#model-provider-request). Everything that feels like an [agent](#agent) working — choosing [tools](#tool), reading results, looping until the task is done — is the harness orchestrating many of those predictions in a row.
+모델은 파일을 읽거나, 명령어를 실행하거나, 웹을 브라우징하거나, 어제의 일을 기억할 수 없습니다. 모델은 [토큰](#token)을 입력받아 [모델 프로바이더 요청](#model-provider-request)당 한 번 토큰을 예측해 출력할 뿐입니다. [에이전트](#agent)가 일하는 것처럼 느껴지는 모든 것—[툴](#tool)을 선택하고, 결과를 읽고, 작업이 끝날 때까지 루프를 도는 것—은 하네스가 그러한 예측 과정을 연쇄적으로 조율하고 오케스트레이션하기 때문에 가능한 일입니다.
 
-[Model providers](#model-provider) ship models in tiers: a large one that's smartest but slow and expensive, and smaller ones that are faster and cheaper but less capable. Picking a tier is a real decision — heavyweight for planning and hard debugging, lightweight for mechanical changes — and harnesses let you switch mid-[session](#session).
+[모델 프로바이더](#model-provider)는 모델을 티어(등급)별로 제공합니다. 가장 똑똑하지만 느리고 비싼 대형 모델, 그리고 빠르고 저렴하지만 성능은 다소 떨어지는 소형 모델이 있습니다. 티어를 선택하는 것은 실질적인 의사결정입니다. 기획이나 고난도 디버깅에는 무거운 모델을, 기계적인 변경에는 가벼운 모델을 사용하는 식이며, 하네스를 사용하면 한 [세션](#session) 중에도 모델을 전환할 수 있습니다.
 
-Being strict about the word also sharpens diagnosis. "The model is bad at this" is a specific claim — the same model in a different harness, or with a different [context](#context), often behaves completely differently. Before blaming the model, check what it was given: most disappointing output traces back to context or harness, not parameters.
+단어의 의미를 엄격히 구분하면 문제 진단이 날카로워집니다. "이 모델은 이런 작업을 못해"라는 주장은 매우 구체적인 주장입니다. 동일한 모델이라도 다른 하네스에 넣거나 다른 [컨텍스트](#context)를 주면 완전히 다르게 동작하는 경우가 흔합니다. 모델을 탓하기 전에 모델에 무엇이 주어졌는지 확인하세요. 실망스러운 결과물의 대부분은 매개변수가 아니라 컨텍스트나 하네스에서 비롯됩니다.
 
-_Usage:_
+_사용 예시:_
 
-"Should we switch the model from Sonnet to Opus for the planning step?"
+"계획 수립 단계에서는 모델을 Sonnet에서 Opus로 바꿔야 할까요?"
 
-"Try it — but the harness is doing most of the lifting on this task. The model swap won't help if the [system prompt](#system-prompt) and tools are wrong."
+"시도해 보세요. 하지만 이 작업의 대부분은 하네스가 처리하고 있습니다. [시스템 프롬프트](#system-prompt)와 툴 구성이 잘못되었다면 모델을 바꿔도 도움이 되지 않을 겁니다."
 
-### Parameters
+### Parameters (매개변수)
 
-The numbers inside a [model](#model) — often billions of them — tuned during [training](#training). Everything the model "knows" lives in them. Training sets them; [inference](#inference) uses them unchanged. Also called _weights_.
+[학습(Training)](#training) 과정에서 조율된 [모델](#model) 내부의 숫자들로, 보통 수백억에서 수천억 개에 달합니다. 모델이 "알고 있는" 모든 것은 이 매개변수 안에 들어 있습니다. 학습은 이 값을 설정하고, [추론(Inference)](#inference)은 이 값을 변경 없이 그대로 사용합니다. _가중치(weights)_라고도 부릅니다.
 
-Mechanically, the parameters are what turn input into output. [Next-token prediction](#next-token-prediction) is a giant calculation: the [tokens](#token) in the [context window](#context-window) go in, get multiplied through the parameters, and a prediction for the next token comes out. There is no database of facts inside the model, no code lookup table — just these numbers, arranged so that the calculation tends to produce useful output. Facts the model can recite from training, like a standard library API, are [parametric knowledge](#parametric-knowledge): stored in the parameters, not retrieved from anywhere.
+기계적 관점에서 매개변수는 입력을 출력으로 변환하는 장치입니다. [다음 토큰 예측](#next-token-prediction)은 거대한 계산 과정입니다. [컨텍스트 윈도우](#context-window)에 들어온 [토큰](#token)들이 매개변수와 곱해지며 연산되고, 그 결과로 다음 토큰에 대한 예측값이 나옵니다. 모델 내부에는 사실을 기록해 둔 데이터베이스도, 코드 조회 테이블도 없습니다. 단지 계산 결과가 유용한 출력을 내도록 정렬된 숫자들의 집합일 뿐입니다. 표준 라이브러리 API처럼 모델이 학습을 통해 읊을 수 있는 사실들은 [매개변수적 지식(Parametric knowledge)](#parametric-knowledge)입니다. 어딘가에서 검색해 온 것이 아니라 매개변수 자체에 저장되어 있는 지식입니다.
 
-The detail worth internalising is that parameters are frozen after training. Nothing you do in a [session](#session) changes them — no correction you make, no codebase you show it, no mistake it learns from. Every session runs on the same numbers. This is why the model is [stateless](#stateless), why its built-in knowledge stops at the [knowledge cutoff](#knowledge-cutoff), and why anything project-specific has to arrive via [context](#context) instead. The only way parameters change is more training — which produces, in effect, a different model.
+반드시 기억해야 할 중요한 점은 학습이 끝나면 매개변수는 동결(freeze)된다는 사실입니다. [세션](#session) 중에 여러분이 취하는 어떤 행동도 매개변수를 바꾸지 못합니다. 수정을 가하든, 코드베이스를 보여주든, 모델이 실수를 깨닫고 배우든 매개변수는 변하지 않습니다. 모든 세션은 동일한 숫자를 기반으로 실행됩니다. 이것이 모델이 [무상태(Stateless)](#stateless)인 이유이자, 모델의 내장 지식이 [지식 컷오프(Knowledge cutoff)](#knowledge-cutoff)에서 멈추는 이유이며, 프로젝트별 특이사항을 반드시 [컨텍스트](#context)를 통해 주입해야 하는 이유입니다. 매개변수를 바꾸는 유일한 방법은 추가 학습뿐이며, 이는 사실상 다른 모델을 만들어내는 것과 같습니다.
 
-_Usage:_
+_사용 예시:_
 
-"Can we fine-tune it on our codebase?"
+"우리 코드베이스로 모델을 파인튜닝할 수 있을까요?"
 
-"That'd update the parameters — different model afterwards. For one project it's almost always cheaper to load the codebase as context than to retrain."
+"그러면 매개변수가 업데이트되어 아예 다른 모델이 됩니다. 단일 프로젝트라면 재학습을 시키는 것보다 코드베이스를 컨텍스트로 불러오는 편이 거의 항상 비용이 덜 듭니다."
 
-### Training
+### Training (학습/훈련)
 
-The process that sets a [model](#model)'s [parameters](#parameters), by exposing it to vast amounts of text and adjusting parameters to improve [next-token prediction](#next-token-prediction). A one-time, expensive process done by the [model provider](#model-provider). Encompasses both pre-training (the bulk run) and post-training (later refinements like instruction-following and safety); the distinction doesn't matter at this glossary's level.
+방대한 양의 텍스트에 [모델](#model)을 노출하고 [다음 토큰 예측](#next-token-prediction) 성능을 향상시키도록 [매개변수](#parameters)를 조정하여 확정하는 과정입니다. [모델 프로바이더](#model-provider)가 막대한 비용을 들여 수행하는 단발성 프로세스입니다. 사전 학습(pre-training, 대규모 기초 학습)과 사후 학습(post-training, 지시사항 준수 및 안전성을 위한 미세 조정)을 모두 포함하며, 본 사전 수준에서는 둘을 굳이 구분할 필요가 없습니다.
 
-The mechanism is repetition at scale: show the model a stretch of text, have it predict the next [token](#token), nudge the parameters toward whatever the actual next token was, and repeat across trillions of tokens. Nothing is stored as facts or rules — everything the model "knows" is a side effect of getting better at prediction, compressed into the parameters as [parametric knowledge](#parametric-knowledge).
+기본 원리는 대규모 반복입니다. 모델에 텍스트 일부를 보여주고 다음 [토큰](#token)을 예측하게 한 뒤, 실제 등장한 다음 토큰에 맞춰 매개변수를 미세하게 조정하는 과정을 수조 개의 토큰에 걸쳐 반복합니다. 사실이나 규칙 형태로 명시적 저장되는 것은 없습니다. 모델이 "안다"고 하는 모든 것은 예측을 더 잘하게 되면서 생긴 부수 효과일 뿐이며, 매개변수 속에 [매개변수적 지식](#parametric-knowledge)으로 압축되어 있습니다.
 
-Two consequences matter day to day. Training ends at a point in time, so the model has a [knowledge cutoff](#knowledge-cutoff) — it hasn't seen the library version you upgraded to last month. And training is not something you can do: when the model doesn't know your codebase, your conventions, or your internal APIs, the fix is never "teach the model" — it's putting that material into [context](#context), the one input you control.
+이로 인해 일상적인 사용에서 두 가지 결과가 발생합니다. 학습은 특정 시점에 종료되므로 모델에는 [지식 컷오프](#knowledge-cutoff)가 존재합니다. 지난달에 업그레이드한 라이브러리 버전은 모델이 본 적이 없습니다. 그리고 사용자는 직접 모델을 학습시킬 수 없습니다. 모델이 여러분의 코드베이스, 규칙, 사내 API를 모를 때, 해결책은 결코 "모델을 가르치는 것"이 아닙니다. 유일하게 여러분이 제어할 수 있는 입력값인 [컨텍스트](#context)에 해당 내용을 집어넣는 것입니다.
 
-_Usage:_
+_사용 예시:_
 
-"Can we get it to know our internal API?"
+"모델이 우리 사내 API를 알게 만들 수 있나요?"
 
-"Not via training — that's a months-long process by the model provider. Load the API docs into context instead, that's the lever you actually have."
+"학습을 통해서는 불가능합니다. 그건 모델 프로바이더가 몇 달에 걸쳐 진행하는 작업이에요. 대신 API 문서를 컨텍스트에 로드하세요. 우리가 실제로 조작할 수 있는 레버는 그것뿐입니다."
 
-### Inference
+### Inference (추론)
 
-Running a trained [model](#model) to generate output — what happens on every [model provider request](#model-provider-request). [Parameters](#parameters) stay fixed; the model just does [next-token prediction](#next-token-prediction) over the [context](#context) it's given. Cheap relative to [training](#training), but billed per [token](#token) and the dominant cost of using a model.
+학습된 [모델](#model)을 실행하여 출력을 생성하는 과정입니다. 모든 [모델 프로바이더 요청](#model-provider-request)마다 일어나는 일입니다. [매개변수](#parameters)는 고정된 채 유지되며, 모델은 주어진 [컨텍스트](#context)를 바탕으로 [다음 토큰 예측](#next-token-prediction)만을 수행합니다. [학습](#training)에 비하면 저렴하지만 [토큰](#token)당 요금이 부과되며, 모델 사용 비용의 대부분을 차지합니다.
 
-A model's life splits into two phases:
+모델의 수명은 두 단계로 나뉩니다:
 
-| Phase     | When it happens                  | What it does                                                    | Parameters    |
-| --------- | -------------------------------- | --------------------------------------------------------------- | ------------- |
-| Training  | Once, before release             | Produces the parameters from a training corpus                  | Being written |
-| Inference | Every time anyone uses the model | Runs the frozen parameters over your context to generate tokens | Read-only     |
+| 단계 | 발생 시점 | 수행하는 작업 | 매개변수 상태 |
+| --- | --- | --- | --- |
+| 학습 (Training) | 출시 전 1회 | 학습 말뭉치로부터 매개변수를 생성 | 쓰기(작성) 중 |
+| 추론 (Inference) | 사용자가 모델을 실행할 때마다 | 고정된 매개변수를 컨텍스트에 실행하여 토큰 생성 | 읽기 전용 |
 
-Nothing you do at inference time writes back to the parameters — that's the reason a correction you make today doesn't stick tomorrow. The model that makes the same mistake next [session](#session), after you carefully explained the fix, hasn't ignored you; it's incapable of learning from the exchange. The model is [stateless](#stateless) — continuity has to come from outside it — from the [context window](#context-window) or a [memory system](#memory-system).
+추론 시점에 여러분이 하는 어떤 작업도 매개변수에 다시 기록되지 않습니다. 오늘 여러분이 정성껏 수정한 내용을 모델이 내일 기억하지 못하는 이유가 바로 여기에 있습니다. 어제 꼼꼼하게 피드백을 주었는데도 다음 [세션](#session)에서 똑같은 실수를 반복하는 모델은 여러분의 말을 무시한 것이 아닙니다. 대화를 통해 학습할 능력이 애초에 없기 때문입니다. 모델은 [무상태](#stateless)입니다. 연속성은 모델 외부의 [컨텍스트 윈도우](#context-window)나 [메모리 시스템](#memory-system)을 통해서만 확보될 수 있습니다.
 
-This mechanism also explains how you're billed. Every request runs the model over the full context, so cost scales with [input tokens](#input-tokens) and [output tokens](#output-tokens), and an agent making dozens of [tool](#tool) calls pays for inference on each round trip. This is why context size is a cost question as well as a quality one.
+이 메커니즘은 청구서 요금이 계산되는 방식도 설명해 줍니다. 매 요청마다 전체 컨텍스트에 대해 모델 연산이 실행되므로, 비용은 [입력 토큰](#input-tokens) 및 [출력 토큰](#output-tokens) 수에 비례하여 발생합니다. 수십 번의 [툴](#tool) 호출을 수행하는 에이전트는 왕복할 때마다 매번 추론 비용을 지불합니다. 컨텍스트 크기가 품질 문제일 뿐만 아니라 비용 문제이기도 한 이유입니다.
 
-_Usage:_
+_사용 예시:_
 
-"Why does the bill scale with usage instead of being a flat license?"
+"왜 정액제 라이선스가 아니라 사용량에 따라 요금이 청구되나요?"
 
-"You're paying for inference — every model provider request runs the model on the provider's hardware. Training already happened, but inference costs accrue per request, and a single [turn](#turn) can expand into many requests when tools are called."
+"추론 비용을 지불하고 계시기 때문입니다. 매 모델 프로바이더 요청마다 프로바이더의 하드웨어에서 모델이 실행됩니다. 학습은 이미 끝났지만 추론 비용은 요청마다 발생하며, 단 한 번의 [턴](#turn)이라도 툴이 호출되면 여러 번의 요청으로 늘어날 수 있습니다."
 
-### Effort
+### Effort (추론 노력/에포트)
 
-Effort is a dial for how much reasoning a [model](#model) does before it answers. Set per [model provider request](#model-provider-request), it controls the length of the thinking the model works through before it starts writing the response you see. That thinking is generated at [inference](#inference) time like everything else; the [harness](#harness) often hides it, but it's real work the model is doing.
+[모델](#model)이 답변을 내놓기 전에 얼마나 많은 추론(생각)을 수행할지 조절하는 다이얼입니다. [모델 프로바이더 요청](#model-provider-request)마다 설정되며, 모델이 여러분에게 보여줄 응답을 작성하기 전에 거치는 생각의 길이를 제어합니다. 그 생각 과정 역시 다른 모든 것과 마찬가지로 [추론](#inference) 시점에 생성됩니다. [하네스](#harness)가 이를 화면에서 숨기는 경우가 많지만, 모델 내부에서는 실제로 일어나는 작업입니다.
 
-Higher effort costs more and runs slower. The reasoning is emitted as [tokens](#token), billed as [output tokens](#output-tokens) even when you never see them, and produced one token at a time — so turning effort up lengthens the wait before the answer arrives and adds to the bill. The trade is more deliberation against speed and cost.
+Effort를 높이면 비용이 더 들고 속도가 느려집니다. 추론 과정은 [토큰](#token)으로 방출되며, 사용자가 직접 보지 않더라도 [출력 토큰](#output-tokens)으로 청구됩니다. 또한 한 번에 한 토큰씩 생성되기 때문에, Effort를 높이면 답변이 나오기까지 기다리는 시간이 길어지고 청구서 금액도 늘어납니다. 신중한 숙고와 속도/비용 사이의 트레이드오프인 셈입니다.
 
-Most harnesses expose effort as a small ladder:
+대부분의 하네스는 Effort 단계를 몇 가지로 나누어 제공합니다:
 
-| Level  | What it's for                                                          |
-| ------ | ---------------------------------------------------------------------- |
-| Low    | Mechanical edits, lookups, well-specified changes with one clear path. |
-| Medium | Everyday coding — the usual default.                                   |
-| High   | Tricky bugs, design decisions, multi-step plans.                       |
-| Max    | The hardest problems, where a wrong answer is expensive to unwind.     |
+| 레벨 | 용도 |
+| --- | --- |
+| Low (낮음) | 기계적인 수정, 단순 조회, 경로가 명확히 지정된 변경 사항 |
+| Medium (보통) | 일상적인 코딩 — 통상적인 기본값 |
+| High (높음) | 까다로운 버그, 아키텍처 결정, 다단계 계획 수립 |
+| Max (최대) | 오답이 나왔을 때 되돌리는 비용이 극도로 큰 최고 난도의 문제 |
 
-The symptom of getting it wrong cuts both ways. Set effort too low on a hard problem and you get a confident, shallow answer that skipped the reasoning the problem needed — it reads fine and is wrong in a way that costs you later. Set it to max for a one-line rename and you sit through a long think that produces nothing the lowest setting wouldn't have.
+설정을 잘못 맞추면 양방향 모두에서 문제가 발생합니다. 어려운 문제에 Effort를 너무 낮게 설정하면 필요한 추론 과정을 건너뛴 채 자신만만하고 얕은 답변을 내놓습니다. 겉보기엔 그럴싸하지만 나중에 큰 수습 비용을 치르게 됩니다. 반대로 한 줄짜리 변수명 변경에 Max로 설정하면, 최저 설정에서도 충분히 나왔을 결과물을 얻기 위해 한참 동안 '생각 중' 상태를 멍하니 지켜보게 됩니다.
 
-Match effort to the task, not the [session](#session). Turn it up for the part that's genuinely hard to reason about, and back down for the rote work around it.
+[세션](#session) 단위가 아니라 과업(Task) 단위로 Effort를 조절하세요. 논리적 추론이 정말로 까다로운 부분에서는 높이고, 주변의 기계적인 작업에서는 다시 낮추는 것이 좋습니다.
 
-_Usage:_
+_사용 예시:_
 
-"It keeps botching this concurrency fix — I've re-explained it three times."
+"동시성 버그 수정을 자꾸 망치네요. 벌써 세 번이나 다시 설명해 줬는데 말이죠."
 
-"Bump the effort up. That's a reasoning-heavy bug, and on the default setting it's not thinking long enough before it commits to an approach."
+"Effort를 올려보세요. 논리적 추론이 많이 필요한 버그인데, 기본 설정에서는 접근 방식을 확정하기 전에 충분히 생각하지 않고 있습니다."
 
-### Token
+### Token (토큰)
 
-The atomic unit a [model](#model) reads and writes. Roughly word-sized but not exactly — common words are one token, rare or long ones split into several. [Context window](#context-window) size, cost, and latency are all counted in tokens.
+[모델](#model)이 읽고 쓰는 기본 원자 단위입니다. 대략 단어 크기이지만 완전히 일치하지는 않습니다. 흔한 단어는 토큰 하나로 처리되지만, 희귀하거나 긴 단어는 여러 개로 쪼개집니다. [컨텍스트 윈도우](#context-window) 크기, 비용, 지연 시간(latency)은 모두 토큰 단위로 계산됩니다.
 
-Text becomes tokens via a tokenizer: a fixed vocabulary of tens of thousands of fragments, learned before [training](#training), that splits any input into a sequence of vocabulary entries. The model never sees characters or words — every piece of text is converted to tokens on the way in, and [next-token prediction](#next-token-prediction) produces output one token at a time on the way out.
+텍스트는 토크나이저(tokenizer)를 거쳐 토큰이 됩니다. 토크나이저는 [학습](#training) 전에 정의된 수만 개의 문자 조각 어휘집을 기반으로 임의의 입력을 일련의 어휘 항목으로 분할합니다. 모델은 글자나 단어를 직접 보지 못합니다. 모든 텍스트는 들어올 때 토큰으로 변환되며, [다음 토큰 예측](#next-token-prediction)은 나갈 때 한 번에 한 토큰씩 출력을 생성합니다.
 
-As a rule of thumb, a token is about three-quarters of an English word, so a thousand tokens is roughly 750 words. Code is less predictable: common keywords and idioms tokenize compactly, while generated identifiers, hashes, base64 blobs, and minified output split into many tokens per "word". The pattern: text that appeared often in the tokenizer's source material gets short, efficient encodings; text that didn't gets chopped into many small pieces. A hash like `a3f9c2e1` never appeared anywhere, so it splits into many tokens, while `function` is one. This is why a small-looking file full of unusual strings can occupy a surprising share of the context window.
+경험 법칙상 1토큰은 영어 기준 약 0.75단어이므로, 1,000토큰은 약 750단어에 해당합니다. 코드는 예측이 더 어렵습니다. 흔한 키워드나 관용구는 압축적으로 토큰화되지만, 생성된 식별자, 해시값, base64 덩어리, 압축(minified)된 코드는 '단어' 하나당 수많은 토큰으로 쪼개집니다. 원리는 간단합니다. 토크나이저의 원천 데이터에 자주 등장했던 텍스트는 짧고 효율적인 인코딩을 얻고, 그렇지 않은 텍스트는 잘게 쪼개집니다. `a3f9c2e1` 같은 해시는 이전에 본 적이 없으므로 여러 토큰으로 나뉘지만, `function`은 단 1개의 토큰입니다. 특이한 문자열이 가득한 작은 파일이 컨텍스트 윈도우의 자리를 의외로 많이 차지하는 이유가 여기에 있습니다.
 
-Tokens are the unit everything else is measured in. Cost is per token — providers bill [input tokens](#input-tokens) and [output tokens](#output-tokens) separately. Speed is tokens per second, since output is generated one token at a time. And the context window is a fixed number of tokens, so the token count of your files decides how much fits.
+토큰은 다른 모든 것을 측정하는 단위입니다. 비용도 토큰당 청구되며, 프로바이더는 [입력 토큰](#input-tokens)과 [출력 토큰](#output-tokens)에 서로 다른 요금을 매깁니다. 속도 역시 초당 토큰 수(tokens per second)로 표현됩니다. 출력은 한 번에 한 토큰씩 생성되기 때문입니다. 또한 컨텍스트 윈도우의 크기가 고정된 토큰 수로 제한되어 있으므로, 파일의 토큰 수에 따라 얼마나 많은 내용을 담을 수 있는지가 결정됩니다.
 
-_Avoid:_ "word" — token boundaries don't match word boundaries, and tokens-per-second / tokens-per-dollar are the units that actually matter.
+_지양할 표현:_ "단어(word)" — 토큰의 경계는 단어의 경계와 일치하지 않으며, 실제 중요한 지표는 '초당 토큰 수'와 '달러당 토큰 수'입니다.
 
-_Usage:_
+_사용 예시:_
 
-"How big is this prompt going to be?"
+"이 프롬프트 크기가 얼마나 될까요?"
 
-"Run it through the tokenizer — the schema's compact but the JSON keys are weird, so they'll split into more tokens than you think."
+"토크나이저를 돌려보세요. 스키마 자체는 콤팩트하지만 JSON 키 이름들이 특이해서 생각보다 많은 토큰으로 쪼개질 겁니다."
 
-### Next-token prediction
+### Next-token prediction (다음 토큰 예측)
 
-What the [model](#model) actually does. Given a [context](#context), it samples one next [token](#token), appends it, and runs again. Every output — a sentence, a [tool call](#tool-call), a thousand-line file — is built one token at a time. The model has no other mode of operation.
+[모델](#model)이 실제로 수행하는 유일한 작업입니다. 주어진 [컨텍스트](#context)를 바탕으로 다음에 올 [토큰](#token) 하나를 샘플링하고, 이를 이어 붙인 뒤, 과정을 다시 반복합니다. 문장이든, [툴 호출](#tool-call)이든, 천 줄짜리 파일이든 모든 출력은 한 번에 한 토큰씩 만들어집니다. 모델에게는 이 외의 다른 동작 모드가 없습니다.
 
-Each step works the same way: the tokens in the [context window](#context-window) are run through the [parameters](#parameters), which produce a probability for every token in the vocabulary — this one is very likely next, that one less so. One token is sampled from those probabilities, appended, and the loop runs again with the slightly longer context. That sampling step is why the same prompt produces different output on different runs: [non-determinism](#non-determinism) is built into the mechanism, not a bug layered on top.
+모든 단계는 동일한 방식으로 진행됩니다. [컨텍스트 윈도우](#context-window) 안의 토큰들이 [매개변수](#parameters)를 거쳐 계산되면, 전체 어휘집의 모든 토큰에 대해 확률 분포가 생성됩니다. (이 토큰이 올 확률이 매우 높음, 저 토큰은 낮음 등). 그 확률값들로부터 하나의 토큰이 샘플링되어 추가되고, 조금 더 길어진 컨텍스트를 가지고 루프가 다시 실행됩니다. 이 샘플링 단계가 바로 동일한 프롬프트가 매번 다른 출력을 내는 이유입니다. [비결정성(Non-determinism)](#non-determinism)은 겉에 덧씌워진 버그가 아니라 메커니즘 자체에 내장된 고유한 특성입니다.
 
-Holding onto this mechanism explains behaviour that otherwise looks strange. The model never checks whether a token is _true_ before emitting it — only whether it's _likely_ — which is the root of [hallucination](#hallucination). It commits to each token as it goes, so a confident-sounding opening sentence can steer the rest of the answer wrong. And because [output tokens](#output-tokens) are produced strictly one at a time, generation speed puts a floor on how fast any [agent](#agent) can work.
+이 메커니즘을 기억하면 기이해 보이는 모델의 행동을 쉽게 이해할 수 있습니다. 모델은 토큰을 내뱉기 전에 그것이 '참(true)'인지 절대 확인하지 않으며, 오직 '그럴듯한지(likely)'만 봅니다. 이것이 바로 [환각(Hallucination)](#hallucination)의 근원입니다. 모델은 토큰을 생성하면서 그 흐름에 스스로를 묶어버립니다. 따라서 초반의 자신만만한 첫 문장 하나가 답변 전체를 잘못된 방향으로 끌고 갈 수 있습니다. 또한 [출력 토큰](#output-tokens)은 철저히 한 번에 하나씩만 생성되므로, 토큰 생성 속도는 그 어떤 [에이전트](#agent)도 뛰어넘을 수 없는 속도의 물리적 한계선이 됩니다.
 
-_Usage:_
+_사용 예시:_
 
-"How does the agent 'decide' to call a tool?"
+"에이전트가 툴을 호출하기로 '결정'하는 과정은 어떻게 이루어지나요?"
 
-"It doesn't — it's next-token prediction all the way down. The tool call is just a structured string the [harness](#harness) parses out of the output stream."
+"결정하는 게 아닙니다. 바닥까지 전부 다음 토큰 예측일 뿐이에요. 툴 호출은 [하네스](#harness)가 출력 스트림에서 파싱해 내는 구조화된 문자열에 불과합니다."
 
-### Non-determinism
+### Non-determinism (비결정성)
 
-The same input can produce different output. Run a [model](#model) twice with identical [context](#context) and you may get two different answers — sometimes a word, sometimes a completely different approach. Nothing in your code has to change for this to happen.
+동일한 입력이 서로 다른 출력을 낼 수 있는 특성입니다. 완전히 똑같은 [컨텍스트](#context)로 [모델](#model)을 두 번 실행해도 단어 하나만 다를 수도 있고, 완전히 다른 접근 방식의 답변이 나올 수도 있습니다. 코드에 아무런 변경을 가하지 않았더라도 이런 현상은 발생합니다.
 
-It's a property of how models generate text, and how [model providers](#model-provider) serve [requests](#model-provider-request). During [inference](#inference), the model produces a probability distribution over possible next [tokens](#token) and one is sampled from it — usually with some randomness on purpose, since always picking the most likely token produces repetitive, lower-quality text. One differently-sampled token early in a response changes every token after it, which is how a single different word becomes a completely different approach. Provider-side serving adds more variation on top: requests are batched together on shared hardware, and tiny floating-point differences between batches can tip a close call between two tokens. There's no setting you can flip to make it all go away.
+이는 모델이 텍스트를 생성하는 방식과 [모델 프로바이더](#model-provider)가 [요청](#model-provider-request)을 서빙하는 방식에서 기인합니다. [추론](#inference) 과정에서 모델은 다음에 올 수 있는 [토큰](#token)들의 확률 분포를 생성하고 그중 하나를 샘플링합니다. 이때 의도적으로 약간의 무작위성을 부여하는데, 항상 가장 확률이 높은 토큰만 선택하면 반복적이고 품질이 낮은 텍스트가 나오기 때문입니다. 응답 초반에 다르게 샘플링된 단 하나의 토큰이 그 뒤에 오는 모든 토큰을 바꾸어 놓으며, 이로 인해 단어 하나의 차이가 완전히 다른 결과로 이어집니다. 프로바이더의 인프라 환경도 가변성을 더합니다. 공유 하드웨어에서 여러 요청이 함께 배치(batch) 처리되며, 배치 간 미세한 부동 소수점 연산 차이로 인해 박빙이었던 두 토큰의 우선순위가 뒤바뀔 수 있습니다. 스위치를 켜서 이를 완전히 없앨 수 있는 방법은 존재하지 않습니다.
 
-Expect a spread of results from an [agent](#agent) on the same task. Most responses fall within a reasonable bell curve of quality — that's why the non-determinism is tolerable at all — but the tails are real: some days the model will feel sharp; some days it'll feel like it's lost the plot. Same task, different rolls of the dice. This has two practical consequences. Retrying is a legitimate strategy: a failed attempt is one draw from the distribution, and a fresh attempt at the same task may simply land better. And verification matters more than it would with deterministic tools — you can't test an agent's behaviour once and rely on it repeating, so [automated checks](#automated-check) have to catch the bad draws.
+동일한 작업이라도 [에이전트](#agent)로부터 일정한 편차의 결과물이 나올 것을 예상해야 합니다. 대부분의 응답은 타당한 품질의 정규분포 곡선 내에 들어오며, 그렇기 때문에 비결정성을 감내하고 쓸 수 있는 것입니다. 하지만 양 끝단의 확률은 실재합니다. 어떤 날은 모델이 날카롭게 느껴지고, 어떤 날은 갈피를 못 잡는 것처럼 보일 수 있습니다. 동일한 작업인데도 주사위 눈이 다르게 나온 것입니다. 이는 두 가지 실천적 결론으로 이어집니다. 재시도는 정당한 전략입니다. 실패한 시도는 확률 분포에서 뽑은 하나의 표본일 뿐이며, 같은 작업이라도 다시 시도하면 훨씬 깔끔하게 성공할 수 있습니다. 그리고 결정론적 도구를 쓸 때보다 검증이 훨씬 중요해집니다. 에이전트의 동작을 한 번 테스트해 보고 계속 재현될 것이라 믿을 수 없으므로, 잘못 뽑힌 표본을 걸러내기 위해 [자동화된 점검(Automated check)](#automated-check)이 반드시 필요합니다.
 
-Be careful not to over-narrativize this. Humans are pattern-matching machines, and a string of bad runs can feel like proof that "the model got worse this week." Usually it's just the distribution.
+이를 두고 지나치게 이야기를 지어내지 않도록 주의하세요. 인간은 패턴을 찾아내려는 경향이 강해서, 불운한 시도가 연속되면 "이번 주에 모델이 너프(성능 저하)되었다"는 증거처럼 느끼곤 합니다. 하지만 대개의 경우 단순한 확률 분포의 장난일 뿐입니다.
 
-_Usage:_
+_사용 예시:_
 
-"Claude has been awful today. Did they ship a worse version?"
+"오늘따라 클로드 성능이 끔찍하네요. 더 안 좋은 버전으로 배포한 걸까요?"
 
-"Probably not — model output is non-deterministic. You're going to have good days and bad days on the same task. Try again tomorrow before you go looking for a cause."
+"아닐 겁니다. 모델 출력은 비결정적이니까요. 같은 작업을 해도 유난히 잘되는 날이 있고 안 풀리는 날이 있습니다. 원인을 찾아 헤매기 전에 내일 다시 시도해 보세요."
 
-### Model provider
+### Model provider (모델 제공자/프로바이더)
 
-Whatever serves a [model](#model) for [inference](#inference). Usually a remote service (Anthropic, OpenAI, Google), but can also be local — Ollama, LM Studio, llama.cpp running on your own machine. The [harness](#harness) doesn't run the model itself; it asks a provider to.
+[추론](#inference)을 위해 [모델](#model)을 제공하고 서빙하는 주체입니다. 대개 원격 서비스(Anthropic, OpenAI, Google)이지만, 본인 컴퓨터에서 직접 실행하는 Ollama, LM Studio, llama.cpp 같은 로컬 인프라일 수도 있습니다. [하네스](#harness)는 스스로 모델을 구동하지 않으며, 프로바이더에 요청을 보낼 뿐입니다.
 
-The provider owns the machinery: the [parameters](#parameters) live on its hardware, and every [model provider request](#model-provider-request) is the harness sending [tokens](#token) over the network and getting predictions back. That makes the provider the source of a whole category of problems that get misattributed to the model or the harness — rate limits, degraded capacity, and outages all live here. When the [agent](#agent) stalls mid-[session](#session) or errors on every [turn](#turn), the provider's status page is worth checking before anything else.
+프로바이더는 머시너리(연산 자원)를 소유합니다. [매개변수](#parameters)는 프로바이더의 하드웨어에 상주하며, 모든 [모델 프로바이더 요청](#model-provider-request)은 하네스가 네트워크를 통해 [토큰](#token)을 보내고 예측값을 돌려받는 과정입니다. 따라서 속도 제한(Rate limit), 용량 저하, 서비스 장애 등 모델이나 하네스의 탓으로 오해받기 쉬운 여러 문제들의 실제 원인이 프로바이더에 있습니다. [에이전트](#agent)가 [세션](#session) 중간에 멈추거나 매 [턴](#turn)마다 에러를 뱉는다면, 다른 무엇보다 프로바이더의 상태 페이지를 가장 먼저 확인해야 합니다.
 
-The provider also sets the commercial terms: per-token pricing for [input](#input-tokens) and [output tokens](#output-tokens), [prefix cache](#prefix-cache) discounts, and which models are available at all. Note that the provider and the model's maker can be different companies — Bedrock, Vertex, and OpenRouter serve other people's models.
+프로바이더는 상업적 조건도 결정합니다. [입력 토큰](#input-tokens) 및 [출력 토큰](#output-tokens)당 가격, [접두사 캐시](#prefix-cache) 할인율, 그리고 어떤 모델을 사용할 수 있는지 등이 포함됩니다. 모델을 만든 회사와 프로바이더가 다를 수도 있다는 점에 유의하세요. Bedrock, Vertex, OpenRouter는 다른 회사의 모델을 대행 서빙합니다.
 
-Local providers trade capability for control: the models that fit on your own hardware are far smaller than the frontier ones, but nothing leaves the machine and there's no bill per token.
+로컬 프로바이더는 통제권을 얻는 대신 성능을 양보합니다. 로컬 하드웨어에 올라가는 모델은 프론티어(최첨단) 모델보다 훨씬 작지만, 데이터가 외부로 나가지 않으며 토큰당 비용도 청구되지 않습니다.
 
-_Usage:_
+_사용 예시:_
 
-"Can we run this offline for the air-gapped client?"
+"망분리된 에어갭 환경의 고객사를 위해 오프라인으로 실행할 수 있을까요?"
 
-"Swap the model provider to a local one — Ollama or llama.cpp on their box. The harness doesn't care, it just hits a different endpoint."
+"모델 프로바이더를 로컬로 교체하면 됩니다. 고객사 머신에 Ollama나 llama.cpp를 올리는 거죠. 하네스는 상관하지 않고 다른 엔드포인트를 호출하기만 하면 됩니다."
 
-### Harness
+### Harness (하네스)
 
-Everything around the [model](#model) that turns it into an [agent](#agent): [tools](#tool), [system prompt](#system-prompt), [context-window management](#context-window), permissions, hooks. **Claude.ai** and **Claude Code** run on the same model but behave differently because their harnesses differ.
+[모델](#model)을 둘러싸고 이를 [에이전트](#agent)로 탈바꿈시키는 모든 주변 장치입니다. [툴](#tool), [시스템 프롬프트](#system-prompt), [컨텍스트 윈도우 관리](#context-window), 권한 제어, 훅(Hook) 등이 포함됩니다. **Claude.ai**와 **Claude Code**는 완전히 동일한 모델 위에서 실행되지만, 하네스가 다르기 때문에 전혀 다르게 동작합니다.
 
-The model itself only does one thing: take text in, produce text out. It can't read a file, run a command, or remember the last [turn](#turn). The harness supplies all of that. It assembles the [context](#context) for each [model provider request](#model-provider-request), executes the [tool calls](#tool-call) the model asks for, feeds the [tool results](#tool-result) back in, stores the [session](#session) history, asks you for permission before risky actions, and decides when to [compact](#compaction). The agent loop — model proposes, harness executes, repeat — is run by the harness.
+모델 자체는 텍스트를 받아 텍스트를 출력하는 단 하나의 작업만 수행합니다. 파일을 읽거나, 명령어를 실행하거나, 직전 [턴](#turn)을 기억하지 못합니다. 하네스가 이 모든 것을 제공합니다. 하네스는 매 [모델 프로바이더 요청](#model-provider-request)에 필요한 [컨텍스트](#context)를 조립하고, 모델이 요청한 [툴 호출](#tool-call)을 실행하며, 그 [툴 결과](#tool-result)를 다시 모델에 입력하고, [세션](#session) 기록을 저장하고, 위험한 작업을 실행하기 전에 사용자에게 승인을 구하며, 언제 [압축(Compaction)](#compaction)을 수행할지 결정합니다. 모델이 제안하고 하네스가 실행하는 이 '에이전트 루프'를 돌리는 주체가 바로 하네스입니다.
 
-This matters for diagnosis. When behaviour differs between two products, or between yesterday and today, the model is often not the variable — the harness is. A different system prompt, a different set of tools, a changed permission default, or a new context-management strategy all change behaviour without any change to the model. It also means the harness is where most of your configuration lives: [AGENTS.md](#agentsmd) files, permission settings, and hooks are all instructions to the harness, not the model.
+이 차이는 문제를 진단할 때 매우 중요합니다. 두 제품 간에, 혹은 어제와 오늘 사이에 동작이 달라졌다면 모델이 변한 것이 아니라 하네스가 변했을 가능성이 큽니다. 시스템 프롬프트가 바뀌었거나, 툴 세트가 달라졌거나, 기본 권한 설정이 변경되었거나, 새로운 컨텍스트 관리 전략이 적용되면 모델을 전혀 바꾸지 않고도 동작이 달라집니다. 또한 여러분이 설정하는 대부분의 것들이 하네스에 위치한다는 뜻이기도 합니다. [AGENTS.md](#agentsmd) 파일, 권한 설정, 훅은 모델이 아니라 하네스에 전달하는 지침입니다.
 
-Examples: Claude Code, Cursor, Codex CLI — and Claude.ai, which is a chat harness rather than a coding one.
+예시: Claude Code, Cursor, Codex CLI — 그리고 코딩용이 아닌 대화용 하네스인 Claude.ai.
 
-_Usage:_
+_사용 예시:_
 
-"Same model, why is Claude Code editing files and Claude.ai just answering questions?"
+"동일한 모델인데 Claude Code는 파일을 직접 수정하고 Claude.ai는 질문에 답변만 하는 이유가 뭔가요?"
 
-"Different harnesses — Claude Code has [filesystem](#filesystem) tools, a different system prompt, and a permission layer. The model isn't the variable here."
+"하네스가 다르기 때문입니다. Claude Code는 [파일시스템](#filesystem) 툴, 다른 시스템 프롬프트, 그리고 권한 제어 계층을 갖고 있습니다. 여기서 변수는 모델이 아닙니다."
 
-### Model provider request
+### Model provider request (모델 프로바이더 요청)
 
-One round-trip from the [harness](#harness) to the [model provider](#model-provider). The harness sends the current [context](#context); the provider returns one response (a [tool call](#tool-call) or a final answer). A single user message can spawn many model provider requests if the [agent](#agent) calls [tools](#tool) — each [tool result](#tool-result) triggers another request.
+[하네스](#harness)에서 [모델 프로바이더](#model-provider)로 전송되는 1회의 왕복 네트워크 요청입니다. 하네스가 현재 [컨텍스트](#context)를 전송하면, 프로바이더는 하나의 응답([툴 호출](#tool-call) 또는 최종 답변)을 반환합니다. [에이전트](#agent)가 [툴](#tool)을 호출할 경우, 단 한 번의 사용자 메시지로도 수많은 모델 프로바이더 요청이 발생할 수 있습니다. 각 [툴 결과](#tool-result)가 또 다른 요청을 유발하기 때문입니다.
 
-Each request carries everything: the [system prompt](#system-prompt), the full conversation so far, every tool result. The [model](#model) is [stateless](#stateless), so the provider keeps nothing between requests — request forty re-sends what request thirty-nine sent, plus one more tool result. The [prefix cache](#prefix-cache) exists to make this repetition affordable.
+각 요청에는 모든 것이 실려 갑니다. [시스템 프롬프트](#system-prompt), 지금까지의 전체 대화 내용, 모든 툴 결과가 포함됩니다. [모델](#model)은 [무상태](#stateless)이므로 프로바이더는 요청 사이에 아무것도 보관하지 않습니다. 40번째 요청은 39번째 요청이 보냈던 모든 내용에 새로운 툴 결과 하나를 더 얹어서 다시 전송합니다. [접두사 캐시](#prefix-cache)는 이러한 반복 전송 비용을 감당 가능한 수준으로 낮추기 위해 존재합니다.
 
-The request is also the unit of billing. [Input tokens](#input-tokens), [output tokens](#output-tokens), and cache discounts are all counted per request, which is why an innocuous-looking question can cost a surprising amount: the cost isn't proportional to your message, it's proportional to the number of requests times the size of the context each one carries.
+요청은 과금의 기본 단위이기도 합니다. [입력 토큰](#input-tokens), [출력 토큰](#output-tokens), 캐시 할인 모두 요청 단위로 계산됩니다. 무해해 보이는 짧은 질문 하나가 엄청난 비용을 유발할 수 있는 이유가 여기에 있습니다. 비용은 사용자가 보낸 메시지 길이에 비례하는 것이 아니라, 요청 횟수 곱하기 각 요청이 실어나른 컨텍스트 크기에 비례하기 때문입니다.
 
-It's worth keeping the request distinct from the [turn](#turn). A turn is one exchange with you, and a single turn — "fix the failing test" — plays out as a chain of requests:
+요청과 [턴](#turn)을 명확히 구분하는 것이 중요합니다. 턴은 사용자와의 1회 상호작용이며, "실패하는 테스트를 수정해 줘"라는 단 하나의 턴도 일련의 연속된 요청 체인으로 실행됩니다:
 
-| Request | Model returns                     | Harness then                          |
-| ------- | --------------------------------- | ------------------------------------- |
-| 1       | Tool call: run the tests          | Runs them, appends the failure output |
-| 2       | Tool call: read the test file     | Appends the file contents             |
-| 3       | Tool call: read the source file   | Appends the file contents             |
-| 4       | Tool call: edit the source file   | Applies the edit, appends the result  |
-| 5       | Tool call: run the tests again    | Runs them, appends the pass output    |
-| 6       | Final answer: "fixed, tests pass" | Shows it to you                       |
+| 요청 번호 | 모델의 반환 내용 | 이후 하네스의 동작 |
+| --- | --- | --- |
+| 1 | 툴 호출: 테스트 실행 | 테스트 실행 후 실패 로그를 컨텍스트에 추가 |
+| 2 | 툴 호출: 테스트 파일 읽기 | 해당 파일 내용을 컨텍스트에 추가 |
+| 3 | 툴 호출: 소스 코드 파일 읽기 | 해당 파일 내용을 컨텍스트에 추가 |
+| 4 | 툴 호출: 소스 코드 파일 수정 | 수정 적용 후 결과를 컨텍스트에 추가 |
+| 5 | 툴 호출: 테스트 재실행 | 테스트 실행 후 통과 로그를 컨텍스트에 추가 |
+| 6 | 최종 답변: "수정 완료, 테스트 통과" | 사용자 화면에 출력 |
 
-Six requests for one turn — each one re-sending the whole context. When you wonder where the [tokens](#token) went, count the requests, not the turns.
+단 한 번의 턴을 위해 6번의 요청이 발생했으며, 매 요청마다 전체 컨텍스트를 다시 전송했습니다. 내 [토큰](#token)이 다 어디로 사라졌는지 궁금하다면 턴이 아니라 요청의 개수를 세어야 합니다.
 
-_Usage:_
+_사용 예시:_
 
-"One question burned forty thousand tokens?"
+"질문 하나 던졌는데 4만 토큰이 소모되었다고요?"
 
-"Look at the tool calls — twelve grep, eight read, four edits. Each tool result spawns another model provider request, and the whole [session](#session) prefix re-sends every time."
+"툴 호출 내역을 보세요. grep 12번에 파일 읽기 8번, 수정 4번이 일어났습니다. 툴 결과가 나올 때마다 모델 프로바이더 요청이 새로 발생했고, 그때마다 전체 [세션](#session)의 접두사가 매번 다시 전송된 겁니다."
 
-### Input tokens
+### Input tokens (입력 토큰)
 
-[Tokens](#token) the [harness](#harness) sends on each [model provider request](#model-provider-request) — the [system prompt](#system-prompt), the conversation history, [tool results](#tool-result), everything the [model](#model) reads before it writes. Billed at a lower rate than [output tokens](#output-tokens), because they are less expensive to process than output tokens.
+매 [모델 프로바이더 요청](#model-provider-request)마다 [하네스](#harness)가 전송하는 [토큰](#token)들입니다. [시스템 프롬프트](#system-prompt), 대화 기록, [툴 결과](#tool-result) 등 [모델](#model)이 출력을 작성하기 전에 읽는 모든 데이터가 여기에 해당합니다. [출력 토큰](#output-tokens)에 비해 연산 비용이 덜 들기 때문에 더 저렴한 단가로 청구됩니다.
 
-When doing [AI](#ai) coding, input tokens make up most of your bill. The model is [stateless](#stateless), so each [turn](#turn) re-sends the entire [session](#session) as input: your first message, every response, every tool result since. The input for turn fifty contains the previous forty-nine turns. A single model provider request might produce a few hundred output tokens but re-send a hundred thousand input tokens of accumulated history.
+[AI](#ai) 코딩을 할 때 청구서 금액의 대부분은 입력 토큰이 차지합니다. 모델은 [무상태](#stateless)이므로 매 [턴](#turn)마다 전체 [세션](#session) 이력을 입력값으로 다시 전송합니다. 첫 번째 메시지, 그간의 모든 응답, 그 이후 발생한 모든 툴 결과가 포함됩니다. 50번째 턴의 입력값에는 이전 49번의 턴 내용이 고스란히 들어갑니다. 단 한 번의 모델 프로바이더 요청이 수백 개의 출력 토큰만 생성하더라도, 누적된 과거 이력 때문에 10만 개의 입력 토큰을 재전송할 수 있습니다.
 
-The [prefix cache](#prefix-cache) reduces the cost: history that exactly matches a previous request is billed as cheap [cache tokens](#cache-tokens) rather than full-price input. When input costs still hurt, the fix is to shrink what gets re-sent — [clearing](#clearing) or [compacting](#compaction) between tasks.
+[접두사 캐시](#prefix-cache)는 이 비용을 낮춰줍니다. 이전 요청과 정확히 일치하는 이력은 정가 입력 토큰 대신 저렴한 [캐시 토큰](#cache-tokens)으로 청구됩니다. 그럼에도 입력 비용이 부담된다면, 작업 사이에 세션을 [비우거나(Clearing)](#clearing) [압축(Compaction)](#compaction)하여 재전송되는 데이터 크기를 줄여야 합니다.
 
-_Usage:_
+_사용 예시:_
 
-"Bill's high but the [agent](#agent)'s barely writing anything."
+"[에이전트](#agent)가 코드를 거의 작성하지도 않았는데 청구서 금액이 엄청 높네요."
 
-"It's the input tokens — every turn re-sends the whole session. Without the prefix cache you re-pay for the history each request."
+"입력 토큰 때문입니다. 매 턴마다 전체 세션을 다시 보내니까요. 접두사 캐시가 작동하지 않으면 요청마다 대화 이력 전체에 대해 요금을 다시 내야 합니다."
 
-### Output tokens
+### Output tokens (출력 토큰)
 
-[Tokens](#token) the [model](#model) generates back. Billed at a higher rate than [input tokens](#input-tokens) — commonly around five times the rate — since they cost more compute to produce.
+[모델](#model)이 생성하여 반환하는 [토큰](#token)들입니다. 연산 비용이 훨씬 많이 들기 때문에 통상 [입력 토큰](#input-tokens)보다 약 5배 정도 비싼 요율로 청구됩니다.
 
-Everything the model writes counts: the prose you read, the code it emits, [tool calls](#tool-call), and any extended thinking the model does before answering. That last one surprises people — reasoning tokens are billed as output even when the [harness](#harness) often doesn't show them to you, and turning up [effort](#effort) spends more of them.
+모델이 작성하는 모든 것이 여기에 포함됩니다. 여러분이 읽는 일반 텍스트, 생성된 코드, [툴 호출](#tool-call), 그리고 답변 전에 수행하는 모델의 확장된 생각(추론 과정)까지 모두 해당합니다. 마지막 항목에 놀라는 사람들이 많습니다. 추론 토큰은 [하네스](#harness)가 사용자에게 보여주지 않더라도 출력 토큰으로 청구되며, [Effort](#effort) 설정을 올릴수록 더 많은 추론 토큰이 소비됩니다.
 
-Output tokens also set the pace of a [session](#session). The model reads input quickly but generates output one token at a time, so when a [turn](#turn) feels slow, it's almost always the output being written, not the input being read. A long wait usually means a long answer is coming.
+출력 토큰은 [세션](#session)의 진행 속도를 결정하기도 합니다. 모델은 입력은 순식간에 읽지만 출력은 한 번에 한 토큰씩 생성합니다. 따라서 어떤 [턴](#turn)이 느리게 느껴진다면, 그것은 입력을 읽는 시간이 아니라 출력을 작성하는 시간 때문인 경우가 대부분입니다. 응답 대기 시간이 길다는 것은 대개 긴 답변이 작성되고 있다는 뜻입니다.
 
-_Usage:_
+_사용 예시:_
 
-"The refactor session is burning through credit even though the inputs are small."
+"입력 크기가 작은데도 리팩토링 세션이 크레딧을 엄청나게 갉아먹고 있어요."
 
-"Agent's rewriting whole files instead of patching. Output tokens cost roughly five times the input rate — get it emitting edits and the bill drops."
+"에이전트가 패치(수정분)를 적용하는 대신 파일 전체를 다시 작성하고 있네요. 출력 토큰은 입력보다 5배 정도 비쌉니다. 파일 전체를 쓰지 말고 편집분만 방출하게 만들면 비용이 뚝 떨어질 겁니다."
 
-### Prefix cache
+### Prefix cache (접두사 캐시)
 
-The [provider](#model-provider)-side store that lets consecutive [model provider requests](#model-provider-request) skip re-processing a shared prefix. When the start of a request matches the start of a recent one — same [system prompt](#system-prompt), same history up to some point — the provider reuses its prior work and bills those [tokens](#token) as [cache tokens](#cache-tokens) at a much lower rate.
+연속된 [모델 프로바이더 요청](#model-provider-request)들이 공유하는 앞부분(접두사)을 재연산하지 않고 건너뛸 수 있도록 지원하는 [프로바이더](#model-provider) 측 저장소입니다. 요청의 시작 부분이 최근 요청의 시작 부분과 일치할 때(동일한 [시스템 프롬프트](#system-prompt), 특정 지점까지 동일한 대화 이력), 프로바이더는 이전 연산 결과를 재사용하고 해당 [토큰](#token)들을 훨씬 저렴한 [캐시 토큰](#cache-tokens) 요율로 청구합니다.
 
-The cache pays off because sessions grow append-only. Every request re-sends the whole history as [input tokens](#input-tokens) (see that entry for why), and in a normal [session](#session) the history only changes at the end — each request is the previous one plus a few new messages. The provider processes the long shared beginning once, stores the result, and picks up from where the prefix ends. Without the cache, a 50-[turn](#turn) session would pay to re-process turn one fifty times.
+캐시가 빛을 발하는 이유는 세션이 '뒤에 덧붙이기만 하는(append-only)' 방식으로 커지기 때문입니다. 모든 요청은 전체 이력을 [입력 토큰](#input-tokens)으로 다시 전송하는데, 일반적인 [세션](#session)에서 이력은 오직 맨 끝부분에서만 변경됩니다. 즉, 매 요청은 이전 요청에 몇 개의 새로운 메시지가 더해진 형태입니다. 프로바이더는 길고 동일한 앞부분을 한 번만 처리해 저장해 두고, 접두사가 끝나는 지점부터 연산을 이어갑니다. 캐시가 없다면 50번째 [턴](#turn)으로 이루어진 세션은 1번째 턴의 내용을 50번 반복해서 연산 비용을 지불해야 할 것입니다.
 
-Caches also expire. How long an entry stays warm varies per model provider — typically minutes, not hours. Leave a session idle past the window and the next request rebuilds the prefix at full price once before caching resumes. This is mostly a [harness](#harness) builder's concern; as a user, the visible effect is that requests after a long pause cost more than the ones before it.
+캐시에는 유효기간이 있습니다. 캐시가 웜(warm) 상태를 유지하는 시간은 프로바이더마다 다르며, 보통 몇 시간이 아니라 몇 분 단위입니다. 세션을 유효시간 이상 방치해 두면, 다음 요청은 캐싱이 재개되기 전 한 번 전체 정가를 내고 접두사를 다시 구축해야 합니다. 이는 주로 [하네스](#harness) 개발자가 신경 쓸 영역이지만, 일반 사용자 관점에서는 오랜 휴식 후에 보낸 요청이 직전 요청보다 비용이 더 많이 나오는 현상으로 체감됩니다.
 
-_Usage:_
+_사용 예시:_
 
-"Why did the bill spike halfway through the session?"
+"세션 중간부터 요금이 갑자기 치솟은 이유가 뭐죠?"
 
-"Harness started injecting the current time into the system prompt every turn. Prefix cache breaks at the first changed token, so every request after that billed at full rate."
+"하네스가 매 턴마다 시스템 프롬프트에 현재 시각을 주입하기 시작했네요. 접두사 캐시는 단 하나의 토큰이라도 변경되는 순간 깨집니다. 그 이후의 모든 요청이 정가로 청구된 거예요."
 
-### Cache tokens
+### Cache tokens (캐시 토큰)
 
-[Input tokens](#input-tokens) the [provider](#model-provider) has cached from a previous [model provider request](#model-provider-request) so it doesn't have to re-process them. When consecutive requests share a prefix, the provider reuses the work via its [prefix cache](#prefix-cache) and bills the cached portion at a much lower rate. The lever that makes long [sessions](#session) affordable — without it, every [turn](#turn) re-pays for the whole history.
+이전 [모델 프로바이더 요청](#model-provider-request)에서 [프로바이더](#model-provider)가 이미 연산하여 캐싱해 둔 덕분에 다시 처리할 필요가 없는 [입력 토큰](#input-tokens)들입니다. 연속된 요청들이 동일한 접두사를 공유할 때, 프로바이더는 [접두사 캐시](#prefix-cache)를 통해 작업을 재사용하고 캐싱된 부분에 대해 훨씬 저렴한 요금을 부과합니다. 긴 [세션](#session)을 경제적으로 유지할 수 있게 해주는 핵심 레버로, 이것이 없다면 매 [턴](#turn)마다 전체 이력에 대한 비용을 계속 다시 지불해야 합니다.
 
-The reason this matters is how sessions are billed. The [model](#model) is [stateless](#stateless), so every request resends the entire conversation — [system prompt](#system-prompt), every message, every [tool result](#tool-result) — as input tokens. By turn fifty, each request carries fifty turns of history, and you'd pay full rate on all of it, every time. The cache changes the maths: tokens the provider has already processed in an identical prefix are billed as cache tokens, often at a tenth of the input rate or less. On a long session, most of what you send is cache tokens, and the bill stays sane.
+이 개념이 중요한 이유는 세션 과금 방식 때문입니다. [모델](#model)은 [무상태](#stateless)이므로 매 요청마다 [시스템 프롬프트](#system-prompt), 모든 메시지, 모든 [툴 결과](#tool-result)를 포함한 대화 전체를 입력 토큰으로 다시 보냅니다. 50번째 턴에 도달하면 각 요청은 50턴 분량의 이력을 짊어지게 되며, 캐시가 없다면 매번 그 전체에 대해 정가를 내야 합니다. 캐시는 이 계산 방식을 바꿉니다. 프로바이더가 동일한 접두사에서 이미 처리한 토큰은 캐시 토큰으로 청구되며, 보통 일반 입력 토큰 요율의 10% 이하로 책정됩니다. 긴 세션에서는 전송하는 데이터의 대부분이 캐시 토큰이 되므로 요금을 합리적인 수준으로 방어할 수 있습니다.
 
-An example shows when tokens are cached and when they're not. Each letter stands for a block of conversation content; each request sends the conversation so far:
+토큰이 언제 캐싱되고 언제 캐싱되지 않는지 보여주는 예시입니다. 각 알파벳은 대화 내용의 한 블록을 나타내며, 매 요청은 지금까지의 대화 전체를 전송합니다:
 
-| Request sends | Cached  | Billed at full rate | Why                                               |
-| ------------- | ------- | ------------------- | ------------------------------------------------- |
-| `AB`          | nothing | `AB`                | First request — nothing to match against          |
-| `ABC`         | `AB`    | `C`                 | `AB` is an exact prefix of the previous request   |
-| `ABCD`        | `ABC`   | `D`                 | Prefix still intact                               |
-| `AXCD`        | `A`     | `XCD`               | An edit changed `B` to `X`; the match fails there |
+| 전송된 내용 | 캐시 적용 | 정가 청구 | 이유 |
+| --- | --- | --- | --- |
+| `AB` | 없음 | `AB` | 첫 번째 요청 — 비교할 기존 데이터가 없음 |
+| `ABC` | `AB` | `C` | `AB`가 이전 요청의 정확한 접두사와 일치함 |
+| `ABCD` | `ABC` | `D` | 접두사가 여전히 유지됨 |
+| `AXCD` | `A` | `XCD` | 수정으로 인해 `B`가 `X`로 변경됨; 그 지점부터 일치 실패 |
 
-The cache is fragile in a specific way: it matches exact prefixes. If anything changes earlier in the conversation — the [harness](#harness) reorders content, a timestamp updates, a file's representation shifts — the cache misses from that point onward and everything after it is billed at full input rate. Caches also expire after a few minutes of inactivity, so a session resumed after a long pause re-pays its history once. When a session's cost jumps without an obvious cause, compare cache tokens to input tokens in the usage report — a broken cache shows up there first.
+캐시는 특정한 방식으로 취약합니다. 바로 **정확한 접두사**만을 매칭한다는 점입니다. 대화의 앞부분에서 무언가 변경되면(하네스가 내용 순서를 바꾸거나, 타임스탬프가 업데이트되거나, 파일 표현 방식이 달라지는 등), 그 지점부터 캐시 미스가 발생하여 그 뒤에 오는 모든 데이터가 정가 입력 요율로 청구됩니다. 또한 캐시는 몇 분 동안 활동이 없으면 만료되므로, 긴 휴식 후 재개된 세션은 이력 비용을 한 번 정가로 다시 치르게 됩니다. 세션 비용이 뚜렷한 이유 없이 급증했다면 사용량 보고서에서 캐시 토큰과 일반 입력 토큰의 비율을 비교해 보세요. 깨진 캐시는 거기서 가장 먼저 드러납니다.
 
-_Usage:_
+_사용 예시:_
 
-"Cost on long sessions is brutal — eight bucks for a refactor."
+"세션이 길어지니까 비용이 살인적이네요. 리팩토링 한 번에 8달러라니."
 
-"Check the cache tokens. If the harness is reordering the system prompt or files between turns, the prefix breaks and you re-pay full input rate every request."
+"캐시 토큰 수치를 확인해 보세요. 하네스가 턴 사이에 시스템 프롬프트나 파일 순서를 뒤섞고 있다면 접두사가 깨져서 매 요청마다 전체 입력 비용을 정가로 내고 있을 수 있습니다."
 
-## Section 2 — Sessions, Context Windows & Turns
+---
 
-### Stateless
+## 섹션 2 — 세션, 컨텍스트 윈도우, 턴 (Sessions, Context Windows & Turns)
 
-Carries no information forward. The [model](#model) is stateless across [model provider requests](#model-provider-request) — each request resends the full [context window](#context-window), because the model has no way to see anything else. An [agent](#agent) is stateless across [sessions](#session) by default: a new session starts empty, with no trace of prior ones. Counterpart to [stateful](#stateful).
+### Stateless (무상태)
 
-The model itself is permanently stateless: its [parameters](#parameters) are frozen after [training](#training), and nothing you do at [inference](#inference) changes them. The model doesn't learn from your corrections, doesn't remember being told the same thing yesterday, and isn't getting to know you — however much the conversation feels otherwise. The feeling of continuity within a session is manufactured by the [harness](#harness), which keeps the transcript and re-sends it with every request. The model isn't remembering the conversation; it's re-reading it.
+과거의 정보를 다음으로 전달하지 않는 성질입니다. [모델](#model)은 [모델 프로바이더 요청](#model-provider-request) 간에 무상태입니다. 모델은 다른 것을 볼 방법이 없기 때문에 매 요청마다 전체 [컨텍스트 윈도우](#context-window)를 다시 전송받아야 합니다. [에이전트](#agent) 역시 기본적으로 [세션](#session) 간에 무상태입니다. 새로운 세션은 이전 세션의 흔적을 전혀 남기지 않은 채 백지상태로 시작합니다. [상태 유지(Stateful)](#stateful)의 반대 개념입니다.
 
-The practical consequence: if you want something remembered across sessions, you have to write it down somewhere the agent will read it back. That's what [AGENTS.md](#agentsmd) files, [memory systems](#memory-system), and [handoff artifacts](#handoff-artifact) are — files that get loaded into the [context](#context) of future sessions, standing in for the memory the model doesn't have. When the agent keeps making a mistake you've corrected before, the question isn't why it didn't learn — it can't — but where that correction should be written down so every future session reads it.
+모델 자체는 영구적으로 무상태입니다. 모델의 [매개변수](#parameters)는 [학습](#training) 이후 완전히 동결되며, [추론](#inference) 시점에 여러분이 무엇을 하든 변경되지 않습니다. 모델은 여러분의 피드백을 통해 학습하지 않으며, 어제 같은 말을 들었던 사실을 기억하지 못하고, 사용자와 친밀해지지도 않습니다. 대화가 아무리 자연스럽게 느껴지더라도 실상은 그렇습니다. 한 세션 안에서 느껴지는 대화의 연속성은 [하네스](#harness)가 대화 기록을 보관하고 있다가 매 요청마다 다시 전송해 주기 때문에 만들어지는 환상입니다. 모델은 대화를 기억하는 것이 아니라, 매번 다시 읽고 있는 것입니다.
 
-_Usage:_
+실질적인 시사점: 세션을 넘어 기억되기를 바라는 내용이 있다면, 에이전트가 나중에 다시 읽을 수 있는 어딘가에 반드시 글로 적어두어야 합니다. [AGENTS.md](#agentsmd) 파일, [메모리 시스템](#memory-system), [핸드오프 아티팩트](#handoff-artifact)가 존재하는 이유가 바로 이것입니다. 이 파일들은 다음 세션의 [컨텍스트](#context)로 로드되어 모델이 갖지 못한 기억력을 대신합니다. 이전에 분명히 바로잡아 주었던 실수를 에이전트가 자꾸 반복한다면, 왜 모델이 배우지 못했는가를 따질 것이 아니라(원래 못 배웁니다), 그 수정 사항을 어디에 적어두어야 미래의 모든 세션이 읽을 수 있을지를 고민해야 합니다.
 
-"Why does it forget the convention every time I [clear](#clearing)?"
+_사용 예시:_
 
-"The model's stateless — the new session starts empty. If you want it carried, write it to AGENTS.md or a memory file the harness loads at session start."
+"왜 세션을 [초기화(Clear)](#clearing)할 때마다 프로젝트 컨벤션을 까먹을까요?"
 
-### Context
+"모델이 무상태이기 때문입니다. 새 세션은 빈 상태로 시작해요. 계속 기억하게 하고 싶다면 AGENTS.md나 세션 시작 시 로드되는 메모리 파일에 적어두어야 합니다."
 
-The relevant information the [agent](#agent) has access to right now. The abstract noun — not the raw input the model sees (that's the [context window](#context-window)), not the running history (that's the [session](#session)), but _what the agent knows that's pertinent to the task_. "Loading something into context" means making it part of this set; "context engineering" is the discipline of curating it.
+### Context (컨텍스트/맥락)
 
-The three terms separate cleanly:
+[에이전트](#agent)가 지금 이 순간 접근할 수 있는 관련 정보의 총체입니다. 추상명사로서, 모델이 보는 원시 입력값([컨텍스트 윈도우](#context-window))도 아니고, 누적된 대화 기록([세션](#session))도 아니며, **'현재 당면한 과업과 관련하여 에이전트가 알고 있는 내용'**을 의미합니다. "무언가를 컨텍스트에 로드한다"는 것은 이 유효 정보 집합의 일부로 만든다는 뜻이며, "컨텍스트 엔지니어링"은 이를 선별하고 큐레이션하는 실천 규범입니다.
 
-| Term           | What it names                                                       |
-| -------------- | ------------------------------------------------------------------- |
-| Context        | The task-relevant information the agent currently has               |
-| Context window | The literal [token](#token) sequence the model sees per request |
-| Session        | The running conversation the [harness](#harness) stores         |
+세 용어는 명확히 구분됩니다:
 
-The separation matters because context is a measure of quality, not quantity. A context window can be nearly full and the context still poor — thousands of tokens of stale tool output, none of it about the task at hand. It can also be nearly empty and the context excellent: the one type definition the task turns on.
+| 용어 | 가리키는 대상 |
+| --- | --- |
+| Context (컨텍스트) | 에이전트가 현재 갖고 있는 과업 관련 정보 |
+| Context window (컨텍스트 윈도우) | 모델이 요청당 물리적으로 보게 되는 실제 [토큰](#token) 시퀀스 |
+| Session (세션) | [하네스](#harness)가 저장하고 있는 현재 진행 중인 대화 기록 |
 
-Most day-to-day failures trace back to context. When the agent invents an API, contradicts a decision, or guesses at a schema, the first question is what was in context when it did — usually the relevant fact was never loaded, or was buried under [attention degradation](#attention-degradation). The fix is curation: load what the task needs, keep out what it doesn't.
+이 구분이 중요한 이유는 컨텍스트가 양이 아닌 **품질의 척도**이기 때문입니다. 컨텍스트 윈도우가 가득 차 있더라도 컨텍스트 자체는 형편없을 수 있습니다. 수천 토큰의 오래된 툴 출력으로 가득 차 있지만 정작 지금 풀어야 할 과업에 대한 내용은 하나도 없을 때가 그렇습니다. 반대로 컨텍스트 윈도우가 거의 비어 있더라도, 작업의 성패를 가르는 단 하나의 타입 정의가 들어 있다면 컨텍스트는 매우 훌륭한 상태입니다.
 
-_Usage:_
+일상적인 실패의 대부분은 컨텍스트로 귀결됩니다. 에이전트가 없는 API를 지어내거나, 이전 결정을 뒤엎거나, 스키마를 제멋대로 추측한다면 가장 먼저 던져야 할 질문은 '그 시점에 컨텍스트에 무엇이 들어 있었는가'입니다. 대개 필요한 사실이 아예 로드되지 않았거나, [어텐션 저하](#attention-degradation)로 인해 묻혀버렸기 때문입니다. 해결책은 큐레이션입니다. 과업에 필요한 것은 넣고, 불필요한 것은 빼세요.
 
-"It keeps inventing fields that aren't in the type."
+_사용 예시:_
 
-"The type file isn't in context — it's reading the call sites and guessing. Read the definition in first."
+"타입 정의에 존재하지도 않는 필드를 자꾸 지어내고 있어요."
 
-### Context window
+"타입 파일이 컨텍스트에 없기 때문입니다. 호출부만 보고 대충 찍어 맞추고 있는 거예요. 타입 정의 파일부터 컨텍스트로 읽어 들이세요."
 
-Everything the [model](#model) sees on each [model provider request](#model-provider-request). Finite, model-specific, and the _only_ surface through which the model perceives anything.
+### Context window (컨텍스트 윈도우/문맥 창)
 
-It's a single sequence of [tokens](#token): the [system prompt](#system-prompt), the conversation so far, every [tool result](#tool-result) the [harness](#harness) has fed back in. If something is in that sequence, the model can use it; if it isn't, the model doesn't know it exists — not your codebase, not the file you edited yesterday, not the instruction you gave three sessions ago. Anything outside the window has to be brought in, usually via a [tool call](#tool-call), before it can affect anything.
+매 [모델 프로바이더 요청](#model-provider-request)마다 [모델](#model)이 볼 수 있는 모든 것의 총량입니다. 유한하고, 모델마다 크기가 정해져 있으며, 모델이 외부 세계를 인식할 수 있는 **유일한 표면**입니다.
 
-Finite means it fills up. Every turn appends more — your messages, the model's responses, tool results — and a long [session](#session) will eventually hit the limit, forcing [compaction](#compaction) or [clearing](#clearing). It also means everything in the window competes: each token you load is one less available for the rest, and content you didn't need still occupies the model's [attention](#attention-budget). The practical stance is to treat the window as a budget — load what the task needs, leave the rest out.
+이는 단 하나의 [토큰](#token) 시퀀스로 구성됩니다. [시스템 프롬프트](#system-prompt), 지금까지의 대화 내용, 그리고 [하네스](#harness)가 다시 밀어 넣어준 모든 [툴 결과](#tool-result)의 모음입니다. 어떤 내용이 이 시퀀스 안에 있다면 모델이 활용할 수 있고, 시퀀스 밖에 있다면 모델은 그 존재조차 알지 못합니다. 여러분의 코드베이스든, 어제 수정한 파일이든, 세 번 전 세션에서 내린 지시사항이든 마찬가지입니다. 윈도우 바깥에 있는 것은 주로 [툴 호출](#tool-call)을 통해 안으로 들여와야만 비로소 영향을 미칠 수 있습니다.
 
-_Avoid:_ "memory" — the context window is working state and doesn't persist across sessions. [Memory](#memory-system) is a separate concept layered on top.
+유한하다는 것은 언젠가 가득 찬다는 뜻입니다. 사용자의 메시지, 모델의 응답, 툴 결과가 쌓이면서 매 턴마다 크기가 불어나고, 긴 [세션](#session)은 결국 한계에 도달하여 [압축](#compaction)이나 [비우기](#clearing)를 강제하게 됩니다. 또한 윈도우 안의 모든 것이 서로 경쟁한다는 뜻이기도 합니다. 불필요하게 로드된 모든 토큰은 다른 유용한 정보를 담을 자리를 빼앗고, 모델의 [어텐션 예산](#attention-budget)을 갉아먹습니다. 실무적인 접근법은 윈도우를 일종의 '예산'으로 취급하는 것입니다. 과업에 필요한 것만 채우고, 나머지는 과감히 배제하세요.
 
-_Usage:_
+_지양할 표현:_ "메모리(기억)" — 컨텍스트 윈도우는 작업용 작업 메모리(working state)일 뿐 세션을 넘어 유지되지 않습니다. [메모리](#memory-system)는 그 위에 얹어진 별개의 개념입니다.
 
-"Can I just paste the whole monorepo into the prompt?"
+_사용 예시:_
 
-"The context window's 200k tokens — that's maybe a fifth of the repo. Pick the files the task touches, leave the rest behind a tool call."
+"모노레포 전체를 그냥 프롬프트에 붙여넣어도 될까요?"
 
-### Stateful
+"컨텍스트 윈도우가 200k 토큰인데, 그건 우리 레포의 5분의 1도 안 됩니다. 작업이 건드릴 파일만 선별해서 넣고, 나머지는 툴 호출로 필요할 때 찾아 읽게 두세요."
 
-Carries information forward. A [session](#session) is stateful across [turns](#turn) — [context](#context) accumulates as the session runs, which is why long sessions drift into the [dumb zone](#smart-zone). An [agent](#agent) can be made stateful across **sessions** by adding a [memory system](#memory-system) that persists information into the [environment](#environment) and reloads it at the start of future sessions. The [model](#model) is never stateful; any apparent continuity is the [harness](#harness) re-feeding context. Counterpart to [stateless](#stateless).
+### Stateful (상태 유지)
 
-Where state lives at each layer:
+정보를 계속해서 앞으로 전달하고 유지하는 성질입니다. [세션](#session)은 [턴](#turn) 간에 상태를 유지합니다. 세션이 진행됨에 따라 [컨텍스트](#context)가 누적되며, 이것이 긴 세션이 [덤 존(Dumb zone)](#smart-zone)으로 표류하는 이유입니다. [에이전트](#agent)는 정보를 [환경](#environment)에 영속화하고 다음 세션 시작 시 다시 불러오는 [메모리 시스템](#memory-system)을 추가함으로써 **세션 간** 상태를 유지하도록 만들 수 있습니다. [모델](#model) 자체는 절대로 상태를 유지하지 않으며, 연속적으로 보이는 모든 것은 [하네스](#harness)가 컨텍스트를 다시 주입해주기 때문에 발생합니다. [무상태(Stateless)](#stateless)의 반대 개념입니다.
 
-| Layer       | Stateful?       | How                                                                                                                    |
-| ----------- | --------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| Model       | Never           | [Parameters](#parameters) are frozen; it sees only what's in each request                                          |
-| Session     | Across turns    | The harness appends every message and [tool result](#tool-result) to the context                                 |
-| Harness     | Across sessions | Memory files, [AGENTS.md](#agentsmd), [handoff artifacts](#handoff-artifact) — written down, reloaded later |
-| Environment | Always          | Files persist whether or not any session is running                                                                    |
+각 계층별 상태 유지 방식:
 
-Each layer's statefulness is built by re-reading something stored a layer below: the session feels continuous because the harness re-sends the message history to the stateless model, and the agent remembers across sessions because the harness re-loads files from the environment. No state is ever stored in the model itself.
+| 계층 | 상태 유지 여부 | 방식 |
+| --- | --- | --- |
+| 모델 | 절대 안 함 | [매개변수](#parameters)가 고정되어 있으며, 매 요청에 실려 온 것만 봄 |
+| 세션 | 턴 사이에서 유지 | 하네스가 모든 메시지와 [툴 결과](#tool-result)를 컨텍스트 뒤에 덧붙임 |
+| 하네스 | 세션 사이에서 유지 | 메모리 파일, [AGENTS.md](#agentsmd), [핸드오프 아티팩트](#handoff-artifact)를 기록해 두고 나중에 다시 읽어 들임 |
+| 환경 | 항상 유지 | 파일은 세션의 실행 여부와 무관하게 디스크에 영구 보존됨 |
 
-State isn't always wanted. Everything carried forward influences what comes next, so a wrong assumption made early in a session is carried forward too. [Clearing](#clearing) is the deliberate act of throwing session state away and starting from what's written down.
+각 계층의 상태 유지 능력은 그 아래 계층에 저장된 것을 다시 읽어 들임으로써 구현됩니다. 무상태 모델에 하네스가 대화 이력을 다시 보내주기 때문에 세션이 연속적으로 느껴지고, 하네스가 환경에서 파일을 다시 읽어 들이기 때문에 에이전트가 세션을 넘어 기억하는 것처럼 보입니다. 모델 자체에 저장되는 상태는 전혀 없습니다.
 
-_Usage:_
+상태 유지가 언제나 좋은 것만은 아닙니다. 앞으로 전달되는 모든 것은 그 뒤에 오는 판단에 영향을 미치므로, 세션 초반에 잘못 세운 가설도 그대로 유지되어 발목을 잡습니다. [비우기(Clearing)](#clearing)는 세션 상태를 의도적으로 내던지고 기록된 파일로부터 깨끗하게 다시 시작하는 결단입니다.
 
-"It remembered my preferences from yesterday — does that mean the model learned them?"
+_사용 예시:_
 
-"No, the agent's stateful because the harness wrote them to a memory file and reloaded them at session start. The model itself saw nothing of yesterday."
+"에이전트가 어제 말한 내 취향을 기억하던데, 모델이 학습한 건가요?"
 
-### Agent
+"아닙니다. 하네스가 메모리 파일에 기록해 두었다가 세션 시작 시 다시 로드했기 때문에 에이전트가 상태를 유지한 것입니다. 모델 자체는 어제의 일에 대해 아무것도 모릅니다."
 
-A [model](#model) [harnessed](#harness) with [tools](#tool), a [system prompt](#system-prompt), and a [context window](#context-window), that takes [turns](#turn) with a user. _Claude Code is an agent. Cursor is an agent. Claude.ai is an agent._ An agent is what you actually talk to — it's the model in motion, configured for a purpose.
+### Agent (에이전트)
 
-Unlike most terms in this dictionary, "agent" doesn't name a mechanical part. The model is a file of [parameters](#parameters); the harness is software you can point at. The agent is neither — it's the unit you're speaking to. People anthropomorphize [AI](#ai) constantly, and the agent is the anthropomorphized unit: the thing you delegate to, the thing that reads your message and answers, the "it" in "it broke the build again". When you say the agent did something, you mean the model-plus-harness did it, but you're addressing the combination as a single actor.
+[툴](#tool), [시스템 프롬프트](#system-prompt), [컨텍스트 윈도우](#context-window)를 갖춘 [하네스](#harness)로 무장하여 사용자와 [턴](#turn)을 주고받는 [모델](#model)입니다. _Claude Code는 에이전트입니다. Cursor도 에이전트입니다. Claude.ai도 에이전트입니다._ 에이전트는 사용자가 실제로 대화하는 상대이며, 특정 목적을 위해 구성되어 동작하는 모델의 모습입니다.
 
-The idea is older than this wave of AI. Software agents — programs you delegate a goal to, which act on your behalf — have been a concept for as long as AI has.
+본 사전의 대부분의 용어와 달리 "에이전트"는 기계적인 부품의 이름이 아닙니다. 모델은 [매개변수](#parameters) 파일이고, 하네스는 손으로 가리킬 수 있는 소프트웨어입니다. 에이전트는 둘 다 아니며, 여러분이 말을 거는 '단위'입니다. 사람들은 [AI](#ai)를 끊임없이 의인화하는데, 에이전트는 그 의인화의 대상이 되는 단위입니다. 일을 위임하고, 내 메시지를 읽고 답하며, "또 빌드를 깨먹은 그 녀석"의 주체입니다. 에이전트가 무언가를 했다고 말할 때, 그것은 모델과 하네스의 결합체가 수행했음을 뜻하지만, 우리는 그 결합체를 하나의 행위자로 대합니다.
 
-_Avoid:_ "the AI", "the bot" (too vague — they hide whether you mean the parameters or the harnessed thing).
+이 개념은 이번 AI 붐보다 훨씬 오래되었습니다. 사용자 대신 목표를 위임받아 행동하는 프로그램으로서의 '소프트웨어 에이전트'는 AI라는 학문이 시작된 이래 줄곧 존재해 온 개념입니다.
 
-_Usage:_
+_지양할 표현:_ "AI", "봇(bot)" (너무 모호하여 매개변수를 뜻하는지 하네스가 결합된 대상을 뜻하는지 가려버립니다).
 
-"Which agent are you using for the migration?"
+_사용 예시:_
 
-"Claude Code locally, Cursor for the UI work — same model underneath, different harnesses."
+"마이그레이션 작업에 어떤 에이전트를 쓰고 계신가요?"
 
-### System prompt
+"로컬 작업에는 Claude Code를 쓰고 UI 작업에는 Cursor를 씁니다. 밑단 모델은 같지만 하네스가 다르죠."
 
-The instructions the [harness](#harness) prepends to every [model provider request](#model-provider-request) — the [agent](#agent)'s standing brief: who it is, how to behave, which [tools](#tool) it can call, what conventions to follow. Usually stable across a [session](#session).
+### System prompt (시스템 프롬프트)
 
-The system prompt is written by the harness vendor, not by you, and in coding harnesses it's big — often tens of thousands of [tokens](#token) of behavioural rules, tool descriptions, and edge-case handling, all paid as [input tokens](#input-tokens) on every [turn](#turn). Your own standing instructions ride along with it: files like [AGENTS.md](#agentsmd) are loaded next to the system prompt at the start of the session, so the [model](#model) reads the vendor's brief and yours together before it ever sees your message.
+[하네스](#harness)가 매 [모델 프로바이더 요청](#model-provider-request)의 맨 앞에 덧붙이는 지침입니다. 에이전트가 누구인지, 어떻게 행동해야 하는지, 어떤 [툴](#tool)을 호출할 수 있는지, 어떤 컨벤션을 따라야 하는지 정의한 [에이전트](#agent)의 '상시 브리핑'입니다. 일반적으로 [세션](#session) 내내 고정적으로 유지됩니다.
 
-Because it's identical on every request, it forms the start of the [prefix cache](#prefix-cache) — which is part of why harnesses keep it fixed for a whole session rather than editing it as they go.
+시스템 프롬프트는 여러분이 아니라 하네스 벤더가 작성하며, 코딩 하네스의 경우 그 크기가 수만 [토큰](#token)에 달할 정도로 거대합니다. 온갖 행동 규칙, 툴 설명, 예외 처리 지침이 빼곡히 들어있고, 이 모든 것이 매 [턴](#turn)마다 [입력 토큰](#input-tokens) 비용으로 청구됩니다. 사용자의 고유 지침도 여기에 얹혀갑니다. [AGENTS.md](#agentsmd) 같은 파일은 세션 시작 시 시스템 프롬프트 바로 옆에 로드되므로, [모델](#model)은 사용자의 메시지를 보기도 전에 벤더의 지침과 여러분의 지침을 함께 읽게 됩니다.
 
-Models are trained to prioritise the system prompt over user messages. So when an agent insists on a convention you never asked for, or formats output in a way you can't shake, it's usually obeying its system prompt — and your message is losing the argument. Some harnesses are customisable: they give you full access to the system prompt, so you can read what the agent is actually being told and change it.
+매 요청마다 내용이 완전히 동일하기 때문에 [접두사 캐시](#prefix-cache)의 시작점이 되며, 이것이 하네스들이 세션 도중에 시스템 프롬프트를 수정하지 않고 고정해 두는 이유 중 하나입니다.
 
-_Usage:_
+모델은 사용자 메시지보다 시스템 프롬프트를 더 우선시하도록 학습되어 있습니다. 따라서 에이전트가 요구한 적도 없는 컨벤션을 고집하거나 출력 형식을 이상하게 비튼다면, 그것은 시스템 프롬프트의 지시를 따르고 있을 가능성이 높으며 여러분의 메시지가 그 우선순위 싸움에서 밀리고 있는 것입니다. 일부 하네스는 커스터마이징을 지원하여 시스템 프롬프트를 직접 열람하고 수정할 수 있게 해줍니다.
 
-"Two harnesses, same model, totally different behavior on the same prompt."
+_사용 예시:_
 
-"Different system prompts. One's tuned for terse code edits, the other for explaining — that's where the divergence lives, before your message even arrives."
+"동일한 모델인데 두 하네스에서 같은 프롬프트를 줬을 때 완전히 다르게 행동해요."
 
-### Session
+"시스템 프롬프트가 다르기 때문입니다. 하나는 간결한 코드 수정을 지향하고 다른 하나는 친절한 설명을 지향하도록 튜닝되어 있어요. 여러분의 메시지가 도달하기도 전에 이미 차이가 발생한 겁니다."
 
-One bounded run of interaction with an [agent](#agent). Starts empty, accumulates messages, [tool results](#tool-result), and files read, and ends when [cleared](#clearing), closed, or [compacted](#compaction) into a fresh session. The session is what _fills_ the [context window](#context-window): if the context window is the box, the session is the stuff slowly filling it up. Work too large for a single context window must be split across sessions.
+### Session (세션)
 
-The session's message history is the agent's working memory. The [model](#model) is [stateless](#stateless), so everything it appears to remember — what you asked for, what the tests said, what it decided three turns ago — is in the message history, re-sent with every [model provider request](#model-provider-request). Whatever isn't in the session doesn't exist for the agent.
+[에이전트](#agent)와의 유계(bounded, 경계가 정해진) 상호작용 1회 단위입니다. 빈 상태로 시작하여 메시지, [툴 결과](#tool-result), 읽어 들인 파일들을 차곡차곡 쌓아가다가, [비워지거나(Clearing)](#clearing), 닫히거나, [압축(Compaction)](#compaction)을 통해 새 세션으로 전환될 때 종료됩니다. 세션은 [컨텍스트 윈도우](#context-window)를 **채우는 내용물**입니다. 컨텍스트 윈도우가 상자라면, 세션은 그 상자를 천천히 채워나가는 물건들입니다. 단일 컨텍스트 윈도우에 담기엔 너무 큰 작업은 반드시 여러 세션으로 쪼개어 처리해야 합니다.
 
-That memory ends with the session. A new session starts from nothing: the agent that knew your codebase well at the end of yesterday's session knows none of it this morning. What survives is the [filesystem](#filesystem) — files written during one session can be read by the next, which is what [handoffs](#handoff), [memory systems](#memory-system), and [AGENTS.md](#agentsmd) rely on.
+세션의 대화 이력은 에이전트의 작업 기억(working memory) 역할을 합니다. [모델](#model)은 [무상태](#stateless)이므로, 사용자가 무엇을 요구했는지, 테스트 결과가 어땠는지, 세 턴 전에 무엇을 결정했는지 등 기억하는 것처럼 보이는 모든 것은 메시지 이력에 들어 있으며 매 [모델 프로바이더 요청](#model-provider-request)마다 다시 전송됩니다. 세션에 들어있지 않은 것은 에이전트에게 존재하지 않는 것입니다.
 
-You choose where a session ends. Everything in a session influences every later [turn](#turn), so unrelated tasks done in one session leave residue that colours the next answer. One task per session keeps the context relevant; finishing a task is a natural point to clear.
+그 기억은 세션이 끝나면 소멸합니다. 새 세션은 백지에서 출발합니다. 어제 세션이 끝날 때 우리 코드베이스를 속속들이 알던 에이전트라도 오늘 아침 새 세션에서는 아무것도 모릅니다. 살아남는 것은 [파일시스템](#filesystem)뿐입니다. 한 세션 중에 작성된 파일은 다음 세션에서 읽을 수 있으며, 이것이 [핸드오프](#handoff), [메모리 시스템](#memory-system), [AGENTS.md](#agentsmd)가 작동하는 기반입니다.
 
-_Usage:_
+세션을 언제 끝낼지는 여러분의 선택입니다. 세션 안의 모든 내용은 이후의 모든 [턴](#turn)에 영향을 미치므로, 한 세션에서 무관한 작업을 여러 개 수행하면 그 잔재가 남아 다음 답변을 오염시킵니다. 세션당 하나의 과업만 수행해야 컨텍스트의 관련성을 높게 유지할 수 있으며, 과업이 끝나는 시점이 세션을 비우기에 가장 자연스러운 순간입니다.
 
-"How long can one session run before it falls apart?"
+_사용 예시:_
 
-"Depends on the work — a focused refactor stays sharp longer than open-ended research. Once the session bloats, hand off or compact, don't push through."
+"품질이 무너지기 전까지 한 세션을 얼마나 오래 유지할 수 있나요?"
 
-### Turn
+"작업 종류에 따라 다릅니다. 집중도 높은 리팩토링은 막연한 조사 작업보다 오래 예리함을 유지하죠. 세션이 비대해지면 억지로 밀어붙이지 말고 핸드오프하거나 압축하세요."
 
-One user message plus everything the [agent](#agent) does in response, up until it yields back to the user. Contains one or more [model provider requests](#model-provider-request) — many, if the agent calls [tools](#tool). A clarifying question closes the turn; your reply opens the next one. The hierarchy is [session](#session) **> Turn > Model provider request**.
+### Turn (턴)
 
-What makes the turn worth naming is that its length is the agent's decision, not yours. You hand over one message; the agent decides how many tool calls to chain before yielding. A turn can be a one-sentence answer or twenty minutes of reading, editing, and running tests. That's the same property from two angles: long turns are what make [AFK](#afk) work possible, and long turns are also where things go wrong unsupervised — by the time the agent yields, it may have drifted a long way from what you meant.
+사용자의 메시지 하나와 이에 대응하여 [에이전트](#agent)가 수행하는 모든 작업, 즉 제어권을 다시 사용자에게 넘겨줄 때까지의 구간을 말합니다. 에이전트가 [툴](#tool)을 호출한다면 하나 이상의 수많은 [모델 프로바이더 요청](#model-provider-request)을 포함하게 됩니다. 질문에 대한 확인 요청이 들어오면 턴이 닫히고, 사용자의 답변이 다음 턴을 엽니다. 계층 구조는 **[세션](#session) > 턴 > 모델 프로바이더 요청** 순입니다.
 
-The turn is also the natural unit for steering. Everything inside a turn happens without you; the gaps between turns are where you redirect. Most [harnesses](#harness) soften this: you can interrupt mid-turn to stop the agent and redirect it, or type a message while it works, which gets read once the turn completes. If you find yourself repeatedly unhappy with where turns end up, the fix is usually to ask for smaller ones — a plan first, one step at a time — trading autonomy for more frequent gaps to steer in.
+턴이라는 개념을 굳이 명명해야 하는 이유는 그 길이가 사용자가 아니라 에이전트의 결정에 달려있기 때문입니다. 사용자는 메시지 하나를 건넬 뿐이고, 제어권을 넘기기 전에 몇 번의 툴 호출을 엮어서 실행할지는 에이전트가 결정합니다. 턴은 한 줄짜리 짧은 답변일 수도 있고, 파일 읽기, 수정, 테스트 실행이 20분 동안 이어지는 긴 작업일 수도 있습니다. 이는 동전의 양면과 같습니다. 긴 턴 덕분에 [AFK(자리 비움)](#afk) 작업이 가능하지만, 긴 턴은 감독 없이 일이 잘못될 수 있는 위험 구간이기도 합니다. 에이전트가 제어권을 돌려줄 즈음에는 이미 의도했던 방향에서 한참 벗어나 있을 수도 있습니다.
 
-_Usage:_
+턴은 조향(Steering)을 위한 자연스러운 기본 단위입니다. 턴 내부에서 일어나는 모든 일은 사용자 없이 진행되며, 턴과 턴 사이의 틈새가 바로 사용자가 방향을 틀어줄 수 있는 지점입니다. 대부분의 [하네스](#harness)는 이를 보완합니다. 턴 중간에 인터럽트(중단)를 걸어 에이전트를 멈추고 방향을 바꾸거나, 작업 중에 메시지를 입력해 두어 턴이 끝나는 즉시 읽히도록 할 수 있습니다. 턴의 결과물이 반복해서 마음에 들지 않는다면 턴의 크기를 작게 줄여달라고 요구하는 것이 해결책입니다. 한 번에 한 단계씩 계획을 먼저 세우게 함으로써, 자율성을 줄이는 대신 더 자주 조향할 수 있는 틈새를 확보하는 것입니다.
 
-"One turn took two minutes?"
+_사용 예시:_
 
-"It made fourteen [tool calls](#tool-call) inside that turn — each one is a separate model provider request. Latency stacks up before the agent finally yields back to you."
+"턴 하나가 끝나는 데 2분이나 걸렸다고요?"
 
-## Section 3 — Tools & Environment
+"그 턴 안에서 [툴 호출](#tool-call)을 14번이나 했습니다. 각각이 별도의 모델 프로바이더 요청이에요. 에이전트가 제어권을 돌려주기 전까지 지연 시간이 계속 누적된 겁니다."
 
-### Environment
+---
 
-The world the [agent](#agent) acts on — anything outside the [harness](#harness) that the agent perceives through [tool results](#tool-result) and changes through [tool calls](#tool-call). The harness _runs_ the agent; the environment is what the agent _works in_. A file like [`AGENTS.md`](#agentsmd) lives in the environment; the harness is what loads it into the [context window](#context-window). A [filesystem](#filesystem) is the most common kind of environment, but not the only one (a database, a remote API, a browser session can all be environments).
+## 섹션 3 — 툴과 환경 (Tools & Environment)
 
-The agent only sees the environment when it looks. Everything it knows about the environment arrived through a tool result, so its picture is a collection of snapshots, each accurate at the moment it was taken. If a file changes after the agent read it — you edit it by hand, a build step regenerates it — the agent keeps reasoning from the stale copy until something prompts a re-read. An agent confidently describing a file that no longer looks like that is usually this: the environment moved, the snapshot didn't.
+### Environment (환경)
 
-The environment is also the layer that persists — the only one that is always [stateful](#stateful). A [session](#session)'s context is gone when the session ends, but files written to the environment remain for the next session to read — which is what [memory systems](#memory-system), [handoff artifacts](#handoff-artifact), and `AGENTS.md` rely on. Anything an agent should still know tomorrow has to end up in the environment.
+[에이전트](#agent)가 작동하는 대상 세계입니다. [하네스](#harness) 바깥에 존재하며 에이전트가 [툴 결과](#tool-result)를 통해 인식하고 [툴 호출](#tool-call)을 통해 변화를 주는 모든 대상을 뜻합니다. 하네스가 에이전트를 '실행'한다면, 환경은 에이전트가 '일하는 일터'입니다. [`AGENTS.md`](#agentsmd) 같은 파일은 환경에 존재하며, 이를 [컨텍스트 윈도우](#context-window)로 불러오는 주체는 하네스입니다. [파일시스템](#filesystem)이 가장 대표적인 환경이지만 유일한 형태는 아닙니다(데이터베이스, 원격 API, 브라우저 세션 모두 환경이 될 수 있습니다).
 
-You decide how big the environment is. A [sandbox](#sandbox) shrinks it, limiting what the agent can reach; adding a [tool](#tool) extends it, bringing a database or an API into reach. What's inside the boundary is what the agent can perceive and change; everything outside it doesn't exist for the agent. How well the environment is set up to support the agent's work is the codebase's [AX](#ax).
+에이전트는 환경을 직접 들여다볼 때만 인지할 수 있습니다. 에이전트가 환경에 대해 아는 모든 것은 툴 결과를 통해 전달된 것이므로, 그 정보는 관측된 순간에 찍힌 '스냅샷들의 모음'에 불과합니다. 에이전트가 파일을 읽은 뒤에 파일 내용이 바뀌면(사용자가 직접 수정하거나 빌드 스텝이 재생성하는 등), 에이전트는 다시 읽으라는 트리거가 발동하기 전까지 낡은 복사본을 바탕으로 계속 추론합니다. 분명히 달라진 파일을 두고 에이전트가 예전 상태를 자신 있게 묘사하고 있다면 십중팔구 이런 상태입니다. 환경은 바뀌었지만 스냅샷은 그대로인 것입니다.
 
-_Avoid:_ using "environment" for the runtime or the harness itself — the harness is the wrapper, the environment is the workspace.
+환경은 영속성을 갖는 유일하게 항상 [상태 유지(Stateful)](#stateful)적인 계층입니다. [세션](#session)의 컨텍스트는 세션이 끝나면 사라지지만, 환경에 기록된 파일은 다음 세션이 읽을 수 있도록 그대로 남습니다. [메모리 시스템](#memory-system), [핸드오프 아티팩트](#handoff-artifact), `AGENTS.md`가 작동할 수 있는 기반입니다. 에이전트가 내일도 알아야 할 내용이 있다면 반드시 환경 어딘가에 기록되어야 합니다.
 
-_Usage:_
+환경의 크기는 사용자가 결정합니다. [샌드박스](#sandbox)는 환경을 축소하여 에이전트의 접근 범위를 제한하고, [툴](#tool)을 추가하면 환경이 확장되어 데이터베이스나 외부 API까지 손이 닿게 됩니다. 그 경계 안에 들어있는 것만이 에이전트가 인식하고 바꿀 수 있는 대상이며, 경계 밖의 것은 에이전트에게 존재하지 않는 세상입니다. 코드베이스의 [AX(에이전트 경험)](#ax)란 환경이 에이전트의 작업을 지원하도록 얼마나 잘 구성되어 있는가를 나타냅니다.
 
-"The agent can't see the staging DB schema."
+_지양할 표현:_ 런타임이나 하네스 자체를 "환경"이라고 부르기 — 하네스는 래퍼(껍데기)이고, 환경은 작업 공간입니다.
 
-"Wire it into the environment — give it a `psql` tool scoped to read-only on staging. The harness is fine, it just has nothing to act on."
+_사용 예시:_
 
-### Filesystem
+"에이전트가 스테이징 DB 스키마를 못 보네요."
 
-A tree of files and directories the [agent](#agent) reads from, writes to, and executes within — the default kind of [environment](#environment) for a coding agent. [AGENTS.md](#agentsmd), [skills](#skill), source code, build scripts, and [tool](#tool) configs all live in a filesystem. When a [harness](#harness) "starts in your project," it's pointing the agent at a filesystem.
+"환경에 연결해 주세요. 스테이징 DB에 대해 읽기 전용으로 제한된 `psql` 툴을 하네스에 쥐어주면 됩니다. 하네스 자체는 멀쩡한데 에이전트가 작동할 환경이 연결되지 않은 상태예요."
 
-The agent touches it only through [tool calls](#tool-call) — reading a file, writing one, running a shell command. Nothing on disk is in the [context window](#context-window) until a tool call loads it, which is what lets the agent work in a repository far larger than the window: the filesystem holds everything, the context holds only what the current task has read. Some harnesses do load the current directory's filenames into the context window by default — not the contents, just the tree — which act as [context pointers](#context-pointer): the agent sees what exists and reads the files it needs.
+### Filesystem (파일시스템)
 
-And it's shared with you. The files the agent edits are the same ones you open in your editor and diff in git — the filesystem is the common workspace where you review what the agent did.
+[에이전트](#agent)가 내용을 읽고, 쓰고, 그 안에서 실행을 수행하는 파일 및 디렉터리 트리입니다. 코딩 에이전트에게 가장 기본이 되는 [환경](#environment)의 형태입니다. [AGENTS.md](#agentsmd), [스킬(Skills)](#skill), 소스 코드, 빌드 스크립트, [툴](#tool) 설정 파일이 모두 파일시스템에 상주합니다. [하네스](#harness)가 "프로젝트 디렉터리에서 시작한다"고 할 때, 그것은 에이전트의 시선을 특정 파일시스템에 맞춘다는 뜻입니다.
 
-_Usage:_
+에이전트는 오직 [툴 호출](#tool-call)을 통해서만 파일시스템을 건드립니다(파일 읽기, 파일 쓰기, 셸 명령어 실행 등). 툴 호출을 통해 불러오기 전까지 디스크의 내용은 [컨텍스트 윈도우](#context-window)에 들어오지 않으며, 바로 이 점 덕분에 에이전트는 컨텍스트 윈도우보다 훨씬 거대한 저장소에서도 일할 수 있습니다. 파일시스템은 모든 것을 보관하고, 컨텍스트는 현재 과업에서 읽어 들인 것만 보관합니다. 일부 하네스는 기본적으로 현재 디렉터리의 파일명 목록을 컨텍스트 윈도우에 미리 로드해 두기도 합니다. 파일 내용이 아니라 디렉터리 트리만 올리는 것으로, 일종의 [컨텍스트 포인터](#context-pointer) 역할을 하여 에이전트가 무엇이 존재하는지 확인하고 필요한 파일을 읽을 수 있게 돕습니다.
 
-"Why isn't it picking up my AGENTS.md?"
+그리고 파일시스템은 사용자와 공유되는 공간입니다. 에이전트가 수정한 파일은 여러분이 에디터에서 열어보고 git diff로 확인하는 바로 그 파일입니다. 파일시스템은 에이전트가 수행한 작업을 검토하는 공통의 작업대입니다.
 
-"It's running against a different filesystem — the [sandbox](#sandbox) mounted the parent dir, not the project root. Repoint the harness."
+_사용 예시:_
 
-### Tool
+"왜 내 AGENTS.md 파일을 인식하지 못하죠?"
 
-A function the [harness](#harness) exposes for the [agent](#agent) to call — Read, Write, Bash, Search. Tools are how an agent perceives and acts on the [environment](#environment): it can't see the environment except through [tool results](#tool-result), and can't change it except through [tool calls](#tool-call). Each tool call costs an extra [model provider request](#model-provider-request), since the result has to go back to the model before it can decide what to do next.
+"다른 파일시스템을 바라보고 실행 중이네요. [샌드박스](#sandbox)가 프로젝트 루트가 아니라 상위 디렉터리를 마운트했습니다. 하네스의 경로를 다시 잡아주세요."
 
-Tools most coding agents ship with:
+### Tool (툴/도구)
 
-| Tool   | What it does                                                 |
-| ------ | ------------------------------------------------------------ |
-| Read   | Returns a file's contents as a tool result                   |
-| Write  | Creates or edits a file in the [filesystem](#filesystem) |
-| Bash   | Runs a shell command and returns its output                  |
-| Search | Finds files or text matching a pattern across the codebase   |
+[하네스](#harness)가 [에이전트](#agent)에게 호출할 수 있도록 열어준 함수들입니다(Read, Write, Bash, Search 등). 툴은 에이전트가 [환경](#environment)을 인식하고 변화시키는 수단입니다. 에이전트는 [툴 결과](#tool-result)를 통해서만 환경을 볼 수 있고, [툴 호출](#tool-call)을 통해서만 환경을 바꿀 수 있습니다. 결과를 모델에게 다시 전달해야만 다음 동작을 결정할 수 있으므로, 매 툴 호출마다 추가적인 [모델 프로바이더 요청](#model-provider-request) 비용이 발생합니다.
 
-A tool is defined by three things: a name, a description of what it does, and a schema for its parameters. The harness sends these definitions to the [model](#model) with every request, and the model chooses a tool the same way it produces everything else — by writing [tokens](#token), in this case a structured call with arguments. The model never executes anything itself; the harness reads the call, runs the function, and sends back the result.
+대부분의 코딩 에이전트가 기본 제공하는 툴:
 
-The tool list sets what the agent can do. A capable model with a narrow tool set is a narrow agent: it will route everything through whatever it has, which is why agents lean so heavily on Bash — a shell is one tool that reaches most of the system. To give an agent a capability cleanly, add a tool for it; [MCP](#mcp) is the standard for plugging in tools from outside the harness.
+| 툴 | 수행하는 작업 |
+| --- | --- |
+| Read | 파일의 내용을 툴 결과로 반환 |
+| Write | [파일시스템](#filesystem)에 파일을 생성하거나 수정 |
+| Bash | 셸 명령어를 실행하고 그 표준 출력을 반환 |
+| Search | 코드베이스 전체에서 패턴과 일치하는 파일이나 텍스트를 검색 |
 
-Tool definitions occupy [context](#context) on every request, so a large tool set has a standing cost before any tool is called — and many similarly-described tools make the model worse at picking the right one.
+툴은 이름, 수행 작업에 대한 설명, 그리고 파라미터 스키마의 3가지 요소로 정의됩니다. 하네스는 매 요청마다 이 정의들을 [모델](#model)에 전송하며, 모델은 다른 모든 출력을 만들어낼 때와 똑같은 방식—[토큰](#token)을 순차적으로 생성하는 방식—으로 툴을 선택합니다. 이 경우 인자값이 담긴 구조화된 호출 형식을 작성하게 됩니다. 모델이 스스로 무언가를 실행하는 일은 절대 없습니다. 하네스가 호출문을 읽고, 함수를 실행한 뒤, 그 결과를 모델에 돌려줄 뿐입니다.
 
-_Usage:_
+툴 목록은 에이전트가 할 수 있는 일의 범위를 규정합니다. 유능한 모델이라도 빈약한 툴 세트를 쥐어주면 무기력한 에이전트가 됩니다. 가진 도구로 모든 것을 해결하려 들 테고, 이것이 에이전트들이 유독 Bash 툴에 과도하게 의존하는 이유입니다. 셸 명령어 하나만 있으면 시스템의 거의 모든 곳에 손이 닿기 때문입니다. 에이전트에 새로운 능력을 깔끔하게 부여하려면 그에 맞는 전용 툴을 추가하세요. [MCP](#mcp)는 하네스 외부에 있는 툴을 플러그인처럼 꽂을 수 있게 해주는 표준 규격입니다.
 
-"Can the agent query staging directly?"
+툴 정의는 매 요청마다 [컨텍스트](#context)를 차지하므로, 툴 세트가 방대해지면 실제로 툴을 호출하기도 전부터 고정 비용이 발생합니다. 게다가 설명이 엇비슷한 툴이 너무 많으면 모델이 상황에 맞는 적절한 툴을 선택하는 능력이 떨어집니다.
 
-"Add a `psql` tool to the harness, scoped read-only on staging. Without a tool for it, the agent's blind to anything outside the filesystem."
+_사용 예시:_
 
-### Tool call
+"에이전트가 스테이징 환경을 직접 조회할 수 있나요?"
 
-The [model](#model)'s output naming a [tool](#tool) and its arguments — just structured text. It doesn't do anything on its own; the [harness](#harness) has to read it and execute. Produced by the model in one [model provider request](#model-provider-request).
+"하네스에 스테이징 읽기 전용으로 제한된 `psql` 툴을 추가하세요. 전용 툴이 없으면 에이전트는 파일시스템 바깥의 세상에 대해 완전히 눈먼 장님이 됩니다."
 
-The lifecycle of a tool call:
+### Tool call (툴 호출)
 
-| Step | Who     | What happens                                                                            |
-| ---- | ------- | --------------------------------------------------------------------------------------- |
-| 1    | Model   | Learns which tools exist from descriptions in the [system prompt](#system-prompt) |
-| 2    | Model   | Emits a call — tool name plus arguments, usually JSON — and stops                       |
-| 3    | Harness | Parses the call and checks it against the [permission mode](#permission-mode)     |
-| 4    | Harness | Executes it if allowed                                                                  |
-| 5    | Harness | Sends the outcome back as a [tool result](#tool-result) in the next request       |
+[모델](#model)이 [툴](#tool)의 이름과 인자값을 지정하여 출력한 구조화된 텍스트입니다. 그 자체로는 아무 일도 하지 못하며, [하네스](#harness)가 이를 읽고 실행해 주어야 합니다. 1회의 [모델 프로바이더 요청](#model-provider-request) 안에서 모델에 의해 생성됩니다.
 
-One [turn](#turn) of [agent](#agent) work is usually many of these round trips chained together.
+툴 호출의 라이프사이클:
 
-Because the call is generated by [next-token prediction](#next-token-prediction) like everything else, it can be wrong the way any model output can be wrong: a path that doesn't exist, a flag the command doesn't have, arguments that are plausible rather than correct. The harness executes what was written, not what was meant — a mistyped path doesn't error gracefully, it edits the wrong file.
+| 단계 | 주체 | 일어나는 일 |
+| --- | --- | --- |
+| 1 | 모델 | [시스템 프롬프트](#system-prompt)의 설명을 통해 어떤 툴이 존재하는지 파악 |
+| 2 | 모델 | 툴 호출문(툴 이름과 인자, 보통 JSON 형식)을 출력하고 동작 중단 |
+| 3 | 하네스 | 호출문을 파싱하고 현재 [권한 모드](#permission-mode)에 부합하는지 확인 |
+| 4 | 하네스 | 승인된 경우 실제로 실행 |
+| 5 | 하네스 | 다음 요청의 [툴 결과](#tool-result)로 그 실행 결과를 모델에 반환 |
 
-_Usage:_
+[에이전트](#agent) 작업의 1 [턴](#turn)은 대개 이러한 왕복 과정 여러 개가 꼬리를 물고 이어진 형태입니다.
 
-"It said it ran the tests but the file timestamps haven't changed."
+호출문 역시 다른 모든 것과 마찬가지로 [다음 토큰 예측](#next-token-prediction)으로 생성되기 때문에, 모델의 여타 출력과 똑같이 틀릴 수 있습니다. 존재하지 않는 경로를 적거나, 명령어에 없는 플래그를 붙이거나, 정확한 값이 아닌 그럴싸해 보이는 인자를 전달할 수 있습니다. 하네스는 의도된 내용이 아니라 적힌 문자 그대로를 실행합니다. 잘못 적힌 경로는 우아하게 에러를 내는 것이 아니라 엄뚱한 파일을 수정해 버릴 수 있습니다.
 
-"Look at the transcript — did it actually emit a tool call, or just describe running them? The model produces the call, but if the harness didn't execute it, nothing happened."
+_사용 예시:_
 
-### Tool result
+"테스트를 돌렸다고 말하는데 파일 수정 타임스탬프가 전혀 바뀌지 않았어요."
 
-What the [harness](#harness) sends back after executing a [tool call](#tool-call) — the file contents, the command output, the error. The [agent](#agent)'s only view of the [environment](#environment). Travels back to the [model](#model) in the _next_ [model provider request](#model-provider-request), where the model decides what to do with it. Tool call and tool result are two ends of the same exchange, both inside one [turn](#turn).
+"대화 기록을 확인해 보세요. 실제로 툴 호출을 발생시켰나요, 아니면 그냥 테스트를 돌렸다고 말로만 설명했나요? 모델이 호출문을 만들어내더라도 하네스가 실행하지 않았다면 아무 일도 일어나지 않은 겁니다."
 
-The lifecycle of a tool result:
+### Tool result (툴 결과)
 
-| Step | Who     | What happens                                                               |
-| ---- | ------- | -------------------------------------------------------------------------- |
-| 1    | Harness | Executes the tool call — runs the command, reads the file                  |
-| 2    | Harness | Captures the outcome: output, contents, or error                           |
-| 3    | Harness | Appends it to the [context](#context) as a message                     |
-| 4    | Harness | Sends the whole context to the provider in the next model provider request |
-| 5    | Model   | Reads the result and decides: another tool call, or a final answer         |
+[하네스](#harness)가 [툴 호출](#tool-call)을 실행한 후 돌려주는 데이터입니다. 파일 내용, 명령어 출력 결과, 에러 메시지 등이 포함됩니다. [에이전트](#agent)가 [환경](#environment)을 들여다볼 수 있는 **유일한 창문**입니다. 이는 *다음* [모델 프로바이더 요청](#model-provider-request)을 통해 [모델](#model)로 전달되며, 모델은 이를 읽고 다음에 무엇을 할지 결정합니다. 툴 호출과 툴 결과는 하나의 주고받는 교환의 양 끝단이며, 둘 다 하나의 [턴](#turn) 안에서 일어납니다.
 
-The result stays in the context for the rest of the [session](#session). Tool results are usually the bulk of a coding session's context: every file read, every test run, every search lands in full and keeps occupying [tokens](#token) long after it stopped being useful. A few large results — a verbose test log, a generated file read whole — can push a session toward the edge of the [context window](#context-window) faster than the conversation itself does.
+툴 결과의 라이프사이클:
 
-Because the result is all the model sees, the model has no way to check the environment behind it. If the output was truncated, the command silently failed, or the harness returned an error instead of the contents, the model reasons from what it was given. When the agent's picture of your system seems wrong, the tool results are where to look: somewhere in the transcript is a result that says something different from what you know to be true.
+| 단계 | 주체 | 일어나는 일 |
+| --- | --- | --- |
+| 1 | 하네스 | 툴 호출을 실행 (명령어 구동, 파일 읽기 등) |
+| 2 | 하네스 | 실행 결과를 캡처 (출력 로그, 파일 내용, 혹은 에러) |
+| 3 | 하네스 | 이를 메시지 형태로 [컨텍스트](#context)에 추가 |
+| 4 | 하네스 | 다음 모델 프로바이더 요청 시 전체 컨텍스트를 프로바이더에 전송 |
+| 5 | 모델 | 결과를 읽고 추가 툴 호출을 할지 최종 답변을 내놓을지 결정 |
 
-_Usage:_
+결과값은 남은 [세션](#session) 내내 컨텍스트에 유지됩니다. 코딩 세션 컨텍스트의 대부분은 툴 결과가 차지합니다. 읽어 들인 모든 파일, 실행한 모든 테스트, 수행한 모든 검색 결과가 온전히 컨텍스트에 들어가며, 쓰임새가 다한 뒤에도 오랫동안 [토큰](#token)을 차지합니다. 지나치게 장황한 테스트 로그나 통째로 읽어 들인 번들 파일 같은 거대한 결과 몇 개만으로도 세션은 대화 내용 자체보다 훨씬 빠르게 [컨텍스트 윈도우](#context-window)의 한계에 부딪힐 수 있습니다.
 
-"It's reasoning about the file like it's empty."
+모델이 보는 것은 오직 결과값뿐이므로, 그 이면의 실제 환경을 검증할 방법이 모델에게는 없습니다. 출력이 중간에 잘렸거나, 명령어가 조용히 실패했거나, 하네스가 파일 내용 대신 에러 문자열을 반환했더라도 모델은 주어진 텍스트만을 진실로 믿고 추론합니다. 시스템에 대한 에이전트의 이해가 어긋나 보인다면 툴 결과를 살펴보아야 합니다. 대화 기록 어딘가에 여러분이 아는 현실과 다른 내용의 결과가 찍혀 있을 것입니다.
 
-"The tool result came back as a permission denial, not the contents. The model only saw the error string — it has no other way to see the file."
+_사용 예시:_
+
+"파일이 비어 있는 것처럼 가정하고 추론하고 있어요."
+
+"툴 결과가 파일 내용 대신 권한 거부(Permission denied) 에러로 돌아왔네요. 모델은 에러 문자열만 보았을 뿐이며, 파일을 볼 수 있는 다른 방법이 없습니다."
 
 ### MCP
 
-**Model Context Protocol.** A protocol for plugging external tool servers into a [harness](#harness) — how an [agent](#agent) gets [tools](#tool) beyond what the harness ships with. The agent never "calls MCP"; it calls a tool, and the harness happens to have gotten that tool from an MCP server. Also exposes resources (read-only data) and prompts (reusable templates), but tool provision is the primary use.
+**Model Context Protocol(모델 컨텍스트 프로토콜).** [하네스](#harness)에 외부 툴 서버를 연결할 수 있게 해주는 개방형 표준 프로토콜입니다. [에이전트](#agent)가 하네스 기본 제공 기능 외의 추가 [툴](#tool)을 확보하는 통로입니다. 에이전트가 "MCP를 호출"하는 일은 결코 없으며, 에이전트는 툴을 호출할 뿐이고 하네스가 우연히 MCP 서버로부터 그 툴을 가져와 제공하고 있을 뿐입니다. 리소스(읽기 전용 데이터)나 프롬프트(재사용 템플릿)도 제공하지만, 툴 제공이 주된 용도입니다.
 
-The protocol solves an integration problem. Without a standard, every harness would need its own Linear integration, its own Slack integration, its own database integration — written and maintained separately for each. With MCP, the integration is written once as a server, and any MCP-compatible harness can use it. The harness connects to the server, the server advertises what tools it offers, and those tools become available to the agent alongside the built-in ones.
+이 프로토콜은 연동 문제를 해결합니다. 표준이 없다면 모든 하네스마다 Linear 연동, Slack 연동, 데이터베이스 연동 코드를 제각기 개발하고 유지보수해야 할 것입니다. MCP를 사용하면 연동 기능은 서버 형태로 한 번만 작성되며, MCP를 지원하는 어떤 하네스든 이를 가져다 쓸 수 있습니다. 하네스가 서버에 연결되면 서버가 자신이 제공하는 툴 목록을 광고하고, 그 툴들은 기본 툴과 함께 에이전트의 선택지에 추가됩니다.
 
-The cost is paid in [context](#context). Every tool a server advertises arrives as a definition — name, description, parameter schema — and the [model](#model) can only call tools it knows about. The naive approach loads every definition into the [context window](#context-window) up front: install a few generous servers and a [session](#session) starts with thousands of [tokens](#token) of tool schemas before you've typed anything, spending [attention budget](#attention-budget) on tools the task will never use.
+대가는 [컨텍스트](#context) 비용으로 치릅니다. 서버가 광고하는 모든 툴은 이름, 설명, 파라미터 스키마로 이루어진 정의로 전송되며, [모델](#model)은 자신이 알고 있는 툴만 호출할 수 있습니다. 단순무식한 구현체는 모든 정의를 시작부터 [컨텍스트 윈도우](#context-window)에 때려 박습니다. 툴이 많은 서버 몇 개를 설치하면 사용자가 첫 글자를 타이핑하기도 전에 수천 [토큰](#token)의 툴 스키마가 세션을 채우고, 정작 이번 작업에서는 쓰지도 않을 툴에 [어텐션 예산](#attention-budget)을 낭비하게 됩니다.
 
-Many harnesses now mitigate this with tool search: instead of the full definitions, the context holds a [context pointer](#context-pointer) to the available tools — the agent searches for a tool by name or purpose and loads its definition only when it needs it. If your harness doesn't do this, the up-front cost still applies, and it's worth enabling only the servers a project actually needs.
+현재 많은 하네스가 '툴 검색' 기능을 통해 이를 완화합니다. 전체 정의를 다 넣는 대신 사용 가능한 툴에 대한 [컨텍스트 포인터](#context-pointer)만 들고 있다가, 에이전트가 이름이나 용도로 툴을 검색했을 때 필요한 정의만 로드하는 방식입니다. 여러분이 쓰는 하네스가 이 기능을 지원하지 않는다면 초기 로드 비용이 그대로 발생하므로, 프로젝트에 꼭 필요한 서버만 선별적으로 활성화하는 것이 좋습니다.
 
-_Usage:_
+_사용 예시:_
 
-"The agent needs to read tickets from Linear."
+"에이전트가 Linear에서 티켓을 읽어와야 합니다."
 
-"Configure the harness to use the Linear MCP server — it exposes the Linear API as tools the agent can call. Saves you writing custom tool wrappers."
+"Linear MCP 서버를 쓰도록 하네스를 설정하세요. 에이전트가 호출할 수 있는 툴 형태로 Linear API를 노출해 줍니다. 툴 래퍼를 직접 짤 필요가 없어져요."
 
-### Permission request
+### Permission request (권한 요청)
 
-What the [harness](#harness) shows the user before executing a [tool call](#tool-call) that isn't pre-approved. The [model](#model) produces a tool call; instead of running it immediately, the harness pauses and asks. Approve and it runs; deny and the harness reports the denial back to the model as a [tool result](#tool-result). The mechanism by which a harness puts a human in the [loop](#human-in-the-loop) for risky or sensitive actions.
+사전 승인되지 않은 [툴 호출](#tool-call)을 실행하기 전에 [하네스](#harness)가 사용자에게 띄우는 확인 프롬프트입니다. [모델](#model)이 툴 호출을 생성했을 때, 하네스는 즉시 실행하지 않고 멈춰 서서 사용자에게 묻습니다. 승인하면 실행되고, 거부하면 하네스는 거부 사실을 [툴 결과](#tool-result)로 모델에 보고합니다. 하네스가 위험하거나 민감한 작업에 [인간을 참여(Human-in-the-loop)](#human-in-the-loop)시키는 메커니즘입니다.
 
-The lifecycle of a permission request:
+권한 요청의 라이프사이클:
 
-| Step | Who     | What happens                                                                            |
-| ---- | ------- | --------------------------------------------------------------------------------------- |
-| 1    | Model   | Produces a tool call                                                                    |
-| 2    | Harness | Checks it against the [permission mode](#permission-mode) and any saved approvals |
-| 3    | Harness | Pre-approved: executes immediately. Otherwise: pauses and shows the request             |
-| 4    | User    | Approves once, approves for the rest of the [session](#session), or denies          |
-| 5    | Harness | Executes the call, or sends the denial back as a tool result                            |
+| 단계 | 주체 | 일어나는 일 |
+| --- | --- | --- |
+| 1 | 모델 | 툴 호출 생성 |
+| 2 | 하네스 | 현재 [권한 모드](#permission-mode) 및 저장된 승인 내역과 대조 |
+| 3 | 하네스 | 사전 승인된 경우: 즉시 실행. 그렇지 않은 경우: 일시 중지 후 요청 화면 표시 |
+| 4 | 사용자 | 이번만 승인, [세션](#session) 내내 승인, 또는 거부 선택 |
+| 5 | 하네스 | 툴을 실행하거나 거부 결과를 툴 결과로 반환 |
 
-Denying a request steers the agent. The model reads the denial like any other tool result and reacts to it — it tries a different approach, or asks what you'd prefer. Most harnesses let you attach a message to the denial, which turns the request into a steering point: "not like that, use the migration script instead" lands exactly when the model is deciding what to do next.
+요청을 거부하는 행위는 에이전트를 조향하는 역할을 합니다. 모델은 거부 알림을 다른 툴 결과와 똑같이 읽고 반응합니다. 다른 접근 방식을 시도하거나, 사용자가 원하는 바를 묻습니다. 대부분의 하네스는 거부 시 메시지를 첨부할 수 있게 해주며, 이를 통해 요청은 즉각적인 조향 지점이 됩니다. "그렇게 하지 말고 마이그레이션 스크립트를 써"라는 피드백이 모델이 다음 결정을 내리는 바로 그 순간에 주입됩니다.
 
-The cost is that every request is a synchronous wait on you. The [agent](#agent) sits blocked until you answer, which is fine while you're watching and a problem when you're not — an agent that triggers requests constantly can't be left to work [AFK](#afk). The permission mode is the dial: which calls run freely, which ask first, ideally with a [sandbox](#sandbox) making it safe to widen the free set.
+대가는 모든 요청이 사용자의 응답을 기다리는 동기식 블로킹을 유발한다는 점입니다. 사용자가 답을 줄 때까지 [에이전트](#agent)는 멈춰 서 있습니다. 화면을 지켜보고 있을 때는 괜찮지만, 자리를 비웠을 때는 치명적입니다. 쉴 새 없이 승인을 묻는 에이전트에게 [AFK(자리 비움)](#afk) 작업을 맡길 수는 없습니다. 권한 모드가 바로 이 조절 다이얼입니다. 어떤 호출은 자유롭게 실행하고 어떤 호출은 먼저 물어볼지 설정하며, 가장 이상적인 것은 [샌드박스](#sandbox)를 구축하여 자유 실행의 범위를 안전하게 넓히는 것입니다.
 
-_Usage:_
+_사용 예시:_
 
-"It's been blocked on a permission request for ten minutes — I was in a meeting."
+"권한 요청 창이 뜬 상태로 10분이나 멈춰 있었네요. 회의 들어가느라 못 봤거든요."
 
-"That's the cost of human-in-the-loop. Pre-approve the safe [tools](#tool) so the request only fires on the actually-risky calls."
+"그것이 바로 인간 참여의 비용입니다. 안전한 [툴](#tool)들은 사전에 자동 승인해 두어, 정말로 위험한 호출에만 요청이 뜨도록 하세요."
 
-### Permission mode
+### Permission mode (권한 모드)
 
-The permission-gating slice of an [agent mode](#agent-mode) — which [tool calls](#tool-call) trigger a [permission request](#permission-request) and which run automatically. The original purpose of mode systems before [harnesses](#harness) started bundling behavioral instructions on top.
+[에이전트 모드](#agent-mode)에서 권한 게이팅(차단/허용)만을 떼어낸 설정입니다. 어떤 [툴 호출](#tool-call)이 [권한 요청](#permission-request)을 유발하고 어떤 호출이 자동 실행될지를 결정합니다. [하네스](#harness)들이 권한 제어 위에 행동 지침까지 한데 묶어 제공하기 전, 모드 시스템의 본래 목적이었습니다.
 
-Harnesses ship a ladder of these modes:
+하네스가 제공하는 대표적인 권한 모드 사다리:
 
-| Mode               | Reads | Writes & shell         | Typical use                                     |
-| ------------------ | ----- | ---------------------- | ----------------------------------------------- |
-| Read-only / plan   | Auto  | Blocked                | Research, planning, reviewing                   |
-| Default            | Auto  | Ask                    | Day-to-day supervised work                      |
-| Auto-edit          | Auto  | Edits auto, shell asks | Trusted repos, mechanical changes               |
-| "Yolo" / full-auto | Auto  | Auto                   | [Sandboxes](#sandbox), [AFK](#afk) runs |
+| 모드 | 파일 읽기 | 파일 쓰기 및 셸 실행 | 주 용도 |
+| --- | --- | --- | --- |
+| Read-only / plan (읽기 전용 / 계획) | 자동 허용 | 차단됨 | 리서치, 계획 수립, 코드 리뷰 |
+| Default (기본) | 자동 허용 | 확인 후 실행 | 일상적인 감시하 작업 |
+| Auto-edit (자동 편집) | 자동 허용 | 편집은 자동, 셸은 확인 | 신뢰할 수 있는 레포, 기계적인 코드 변경 |
+| "Yolo" / full-auto (완전 자동) | 자동 허용 | 자동 허용 | [샌드박스](#sandbox), [AFK](#afk) 자율 작업 |
 
-Choosing a rung is a trade between safety and interruption, and both failure modes are felt. Too tight, and you become the bottleneck: the [agent](#agent) stops every few seconds for harmless reads, you click approve on autopilot, and the approvals stop meaning anything — rubber-stamping is the worst of both worlds, all the interruption with none of the protection. Too loose, and the agent edits files and runs commands you'd have wanted to see first.
+사다리의 단계를 선택하는 것은 안전성과 업무 방해 사이의 타협이며, 양극단 모두 뚜렷한 실패 증상을 보입니다. 너무 조이면 사용자가 병목이 됩니다. 무해한 단순 읽기 작업에도 [에이전트](#agent)가 몇 초마다 멈추어서고, 사용자는 읽지도 않고 기계적으로 승인 버튼을 누르게 됩니다. 이러한 '영혼 없는 도장 찍기'는 최악의 상황을 낳습니다. 보호 효과는 전혀 없으면서 방해는 방해대로 다 받는 꼴입니다. 반대로 너무 느슨하게 풀면 확인하고 싶었던 파일 수정이나 명령어 실행이 멋대로 지나가 버립니다.
 
-The loose end is most defensible inside a sandbox, where the blast radius of a bad [tool](#tool) call is contained. Outside one, most people settle on auto-approving reads and keeping a [human in the loop](#human-in-the-loop) for anything irreversible.
+가장 느슨한 모드는 잘못된 [툴](#tool) 호출의 폭발 반경이 격리되는 샌드박스 안에서만 정당화될 수 있습니다. 샌드박스가 없다면, 읽기 작업은 자동 승인하되 되돌릴 수 없는 모든 작업에는 [인간을 개입(Human-in-the-loop)](#human-in-the-loop)시키는 선에서 타협하는 것이 일반적입니다.
 
-_Usage:_
+_사용 예시:_
 
-"It paused on every grep — totally killed the AFK run."
+"grep을 실행할 때마다 일시 중지되어서 AFK 작업이 완전히 멈춰버렸어요."
 
-"Loosen the permission mode for read-only tools, keep prompting on writes and shell. Most permission requests on a research [session](#session) are noise."
+"읽기 전용 툴은 권한 모드를 풀고, 파일 쓰기와 셸 명령어에만 확인창을 띄우세요. 조사 목적의 [세션](#session)에서 대부분의 권한 요청은 소음에 불과합니다."
 
-### Agent mode
+### Agent mode (에이전트 모드)
 
-A preset that shapes how the [agent](#agent) operates at runtime — bundles a [permission mode](#permission-mode) with behavioral instructions injected into the [system prompt](#system-prompt). Examples: a default that prompts on risky calls, a **plan mode** that blocks edits and steers the agent toward research, an **accept-edits** mode that auto-approves edits, a **bypass permissions** mode (colloquially **YOLO mode**) that auto-approves everything. Can flip [mid-session](#session).
+런타임에 [에이전트](#agent)의 작업 방식을 규정하는 프리셋입니다. [권한 모드](#permission-mode)와 함께 [시스템 프롬프트](#system-prompt)에 주입되는 행동 지침을 한데 묶은 것입니다. 위험한 호출에 확인을 요구하는 기본 모드, 파일 수정을 차단하고 조사와 연구를 유도하는 **Plan 모드**, 파일 수정을 자동 승인하는 **Accept-edits 모드**, 모든 것을 자동 승인하는 **Bypass permissions 모드**(속칭 **YOLO 모드**) 등이 있습니다. [세션](#session) 도중에도 언제든 변경할 수 있습니다.
 
-The bundling is what distinguishes a mode from a bare permission setting. A permission mode is only a gate: it decides which [tool calls](#tool-call) go through. A gate alone produces an agent that wants to edit but can't — it proposes the write, gets blocked, and tries another way. The injected instructions remove the want: plan mode doesn't just block edits, it tells the agent it's in a planning phase, so it reads, asks, and proposes instead of straining against the gate. Gate and steer point the same direction.
+이러한 '패키징'이 단순 권한 설정과 모드를 구분 짓는 핵심입니다. 권한 모드는 단순한 관문에 불과합니다. 어떤 [툴 호출](#tool-call)을 통과시킬지만 결정합니다. 관문만으로는 수정을 원하지만 실행하지 못하는 에이전트가 만들어집니다. 파일 수정을 시도했다가 차단당하고, 끙끙대며 다른 우회로를 찾는 식입니다. 함께 주입되는 행동 지침은 그 '욕구' 자체를 제거합니다. Plan 모드는 편집을 막기만 하는 것이 아니라, 지금이 계획 수립 단계임을 에이전트에 인지시켜서 닫힌 문을 억지로 밀치지 않고 스스로 읽고, 묻고, 제안하도록 유도합니다. 관문과 조향이 같은 방향을 바라보게 만드는 것입니다.
 
-In practice, you change mode as your trust changes over the course of a task. The same task can pass through several modes: plan mode while the approach is still being shaped, the prompting default for the first delicate edits, accept-edits once the agent has shown it understands the change, bypass for an [AFK](#afk) run inside a [sandbox](#sandbox). Changing mode costs you nothing: the conversation continues exactly where it was, with new permissions and new instructions. If you find yourself approving every prompt without reading it, the mode is set tighter than your actual trust; if you keep rejecting edits, it's set looser.
+실무에서는 작업이 진행됨에 따라 에이전트에 대한 신뢰도가 변하므로 모드를 수시로 바꿉니다. 하나의 작업도 여러 모드를 거칠 수 있습니다. 접근 방식을 구상할 때는 Plan 모드로 두고, 첫 번째 섬세한 코드 수정을 할 때는 확인을 요구하는 기본 모드로 올리고, 에이전트가 변경 방향을 제대로 이해했음이 확인되면 Accept-edits 모드로 바꾸고, [샌드박스](#sandbox) 안에서의 [AFK](#afk) 실행에는 Bypass 모드를 적용하는 식입니다. 모드 전환에는 아무런 비용이 들지 않습니다. 대화는 새로운 권한과 새로운 지침을 장착한 채 그 자리에서 그대로 이어집니다. 내용을 읽지도 않고 승인 버튼만 누르고 있다면 신뢰도에 비해 모드가 너무 빡빡한 것이고, 반대로 코드 수정을 자꾸 반려하고 있다면 모드가 너무 느슨하게 풀려 있는 것입니다.
 
-_Vendor terms:_ Claude Code calls these "permission modes," Codex calls them "approval modes" — both predate behavioral bundling.
+_벤더별 명칭:_ Claude Code는 이를 "권한 모드(permission modes)"라 부르고, Codex는 "승인 모드(approval modes)"라 부릅니다. 두 명칭 모두 행동 지침 번들링 개념이 생기기 전의 과거 유산입니다.
 
-_Usage:_
+_사용 예시:_
 
-"It keeps editing files when I just want a plan."
+"그냥 계획만 세워달라는데 자꾸 파일을 수정해 버려요."
 
-"Switch to plan mode — it'll block writes and stay in research."
+"Plan 모드로 전환하세요. 쓰기 작업을 차단하고 리서치 단계에 머물도록 지시할 겁니다."
 
-"What about for the AFK run later?"
+"나중에 자리 비우고 돌릴 때는 어떻게 할까요?"
 
-"Bypass mode, but only inside the sandbox."
+"Bypass 모드로 두되, 반드시 샌드박스 안에서만 돌리세요."
 
-### Sandbox
+### Sandbox (샌드박스)
 
-An isolated [environment](#environment) the [agent](#agent) runs inside — a container, VM, ephemeral [filesystem](#filesystem), or restricted-permission shell. Limits the blast radius of agent actions: even if the agent runs destructive commands or fetches something malicious, the damage is contained. The safety substrate that makes [AFK](#afk) practical.
+[에이전트](#agent)가 활동하는 격리된 [환경](#environment)입니다. 컨테이너, 가상 머신(VM), 임시 [파일시스템](#filesystem), 권한이 제한된 셸 등이 여기에 해당합니다. 에이전트 동작의 폭발 반경(피해 범위)을 제한합니다. 에이전트가 파괴적인 명령어를 실행하거나 악성 스크립트를 다운로드하더라도 피해가 격리 공간 내에 갇힙니다. [AFK](#afk) 자율 작업을 실용적으로 만들어주는 안전 기반입니다.
 
-The sandbox and the [permission mode](#permission-mode) solve the same problem from opposite ends. Permissions ask before an action runs; a sandbox limits what the action can reach if it does run. Permissions need you running [in the loop](#human-in-the-loop) — every prompt is an interruption — and a session that asks constantly is barely autonomous. A sandbox spends infrastructure instead of attention: the stronger the isolation, the fewer questions need asking.
+샌드박스와 [권한 모드](#permission-mode)는 동일한 문제를 서로 반대편에서 해결합니다. 권한 제어는 작업이 실행되기 전에 묻고, 샌드박스는 작업이 실행되더라도 피해가 닿을 수 있는 범위를 제한합니다. 권한 제어는 [인간의 참여(Human-in-the-loop)](#human-in-the-loop)를 필연적으로 요구하며—매 프롬프트는 작업의 방해입니다—계속 질문을 던지는 세션은 자율적이라 부르기 어렵습니다. 샌드박스는 인간의 주의력 대신 인프라 자원을 사용합니다. 격리가 튼튼할수록 사용자에게 물어보아야 할 질문의 수는 줄어듭니다.
 
-Isolation comes in grades:
+격리의 강도 등급:
 
-| Grade            | What it is                                                 | What it contains                           |
-| ---------------- | ---------------------------------------------------------- | ------------------------------------------ |
-| Restricted shell | OS-level confinement around each command                   | Writes outside the project, network access |
-| Container        | Fresh filesystem, no credentials mounted, discarded after  | Anything the agent does to its own machine |
-| VM / cloud       | A separate machine entirely, often provided by the harness | Everything, including kernel-level escapes |
+| 등급 | 정의 | 격리 가능한 범위 |
+| --- | --- | --- |
+| 제한된 셸 (Restricted shell) | 개별 명령어 주변을 감싸는 OS 수준의 제한 | 프로젝트 디렉터리 바깥 쓰기, 네트워크 접근 |
+| 컨테이너 (Container) | 깨끗한 새 파일시스템, 인증 정보 미탑재, 작업 후 폐기 | 에이전트가 자신의 머신에 가하는 모든 작업 |
+| VM / 클라우드 | 완전히 분리된 물리적/가상 머신, 하네스가 제공하는 경우가 많음 | 커널 수준의 탈출을 포함한 거의 모든 행위 |
 
-What no sandbox contains: actions that leave it legitimately. An agent with your git credentials can push; one with network access can call production APIs. Decide what crosses the boundary before deciding how thick to make it.
+어떤 샌드박스도 막지 못하는 것: 정상적인 권한을 가지고 격리망을 합법적으로 빠져나가는 작업입니다. 사용자의 git 인증 정보를 쥐고 있는 에이전트는 푸시를 날릴 수 있고, 네트워크가 뚫려 있는 에이전트는 프로덕션 API를 호출할 수 있습니다. 샌드박스 벽을 얼마나 두껍게 칠지 고민하기 전에, 그 경계를 정상적으로 통과할 수 있는 통로가 무엇인지부터 결정하세요.
 
-_Usage:_
+_사용 예시:_
 
-"I want to let it run [bypass-permissions](#agent-mode) overnight but I'm not ready for that."
+"밤새 [Bypass-permissions(완전 자동)](#agent-mode) 모드로 돌려두고 싶은데 불안해서 못 하겠어요."
 
-"Put it in a sandbox — fresh container, no credentials mounted, no network out. Worst case it nukes its own filesystem and you discard the container."
+"샌드박스에 넣으세요. 새 컨테이너를 띄우고, 자격 증명은 마운트하지 말고, 외부 네트워크를 차단하는 겁니다. 최악의 경우라도 자기 파일시스템만 날려 먹을 뿐이고 그냥 컨테이너를 버리면 그만입니다."
 
-## Section 4 — Failure Modes
+---
 
-### Sycophancy
+## 섹션 4 — 실패 모드 (Failure Modes)
 
-Confidently agreeable [model](#model) output. Caused by [training](#training): the model was shaped to favor answers humans liked, and humans tend to like agreement more than they like being told they're wrong. So the model learned that agreeing is rewarded — even when the agreement is incorrect.
+### Sycophancy (아첨/영합)
 
-_Surfaces as:_
+자신만만하게 사용자의 비위를 맞추는 [모델](#model)의 맹목적인 동조 출력입니다. [학습](#training) 방식에서 기인합니다. 모델은 인간이 좋아하는 답변을 선호하도록 훈련되었으며, 인간은 자신이 틀렸다는 지적을 받는 것보다 동의를 얻는 것을 더 좋아하는 경향이 있습니다. 따라서 모델은 동의하는 것이 보상받는 길임을 학습한 것입니다. 설령 그 동의가 틀린 내용일지라도 말입니다.
 
-- _Caving under pushback_ — reverses a correct answer when you say "are you sure?".
-- _Praising bad input_ — agrees your broken plan is brilliant before analysing it.
-- _Biased framing_ — review skews positive when you signal you wrote it; negative when you signal someone else did. Same artifact, different verdict.
-- _Mimicry_ — repeats your mistakes back to you as confirmation.
+_발생 양상:_
 
-_Diagnostic test:_ would the model have said this without your steer? If the only thing that changed was your tone or framing, it's sycophancy, not a real shift in analysis.
+- _반론에 무너지기_ — 사용자가 "확실해?"라고 한마디만 던져도 정답을 철회하고 뒤집습니다.
+- _형편없는 입력 칭찬하기_ — 결함투성이 기획을 던져주어도 분석하기 전에 기발하다고 칭찬부터 합니다.
+- _편향된 프레이밍_ — 내가 짠 코드라고 뉘앙스를 풍기면 리뷰가 관대해지고, 남이 짠 코드라고 하면 가혹해집니다. 동일한 코드라도 평가가 달라집니다.
+- _앵무새 흉내_ — 사용자가 저지른 실수를 맞장구치며 그대로 되풀이합니다.
 
-_Fix:_ hide your preferences. Phrase prompts neutrally — "review this code" not "is this code good?".
+_진단 테스트:_ 사용자의 유도나 편향이 없었더라도 모델이 과연 이렇게 말했을까요? 여러분의 말투나 프레이밍만 바뀌었을 뿐인데 결론이 달라졌다면, 그것은 진정한 분석의 변화가 아니라 아첨(Sycophancy)입니다.
 
-_Avoid:_ using "sycophancy" for any wrong answer that happens to please you. Without the diagnostic test, the term has no more value than "wrong."
+_해결책:_ 선호도를 숨기세요. 질문을 중립적으로 던지세요. "이 코드 괜찮지 않아?"가 아니라 "이 코드를 객관적으로 리뷰해 줘"라고 해야 합니다.
 
-_Usage:_
+_지양할 표현:_ 사용자의 마음에 든 오답 전체를 "아첨"이라 뭉뚱그리기 — 진단 테스트를 거치지 않은 아첨이라는 단어는 단순한 "오답" 이상의 가치를 갖지 못합니다.
 
-"It said my refactor plan looked great, then I asked 'are you sure?' and it walked the whole thing back."
+_사용 예시:_
 
-"Classic sycophancy — it agreed first because you sounded confident, then caved because you sounded doubtful. The plan's quality didn't change, your tone did. [Clear](#clearing) and re-ask without signalling either way."
+"내 리팩토링 계획이 완벽하다고 칭찬하더니, '정말 확실해?'라고 묻자마자 손바닥 뒤집듯 다 철회하더군요."
 
-### Hallucination
+"전형적인 아첨(Sycophancy)입니다. 처음엔 자신 있게 말하니까 맞장구쳤고, 의심을 품으니까 바로 굴복한 거예요. 계획의 품질이 변한 게 아니라 당신의 어조가 변한 겁니다. 세션을 [초기화](#clearing)하고 아무런 뉘앙스 없이 중립적으로 다시 물어보세요."
 
-Confidently-wrong [model](#model) output. Two flavors with different causes and fixes:
+### Hallucination (환각)
 
-| Flavor         | What goes wrong                                                                                                        | Cause                                                                                                                | Fix                                                                |
-| -------------- | ---------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------ |
-| _Factuality_   | Invented or wrong facts about the world — a function that doesn't exist, a wrong API signature, a fake citation        | [Parametric knowledge](#parametric-knowledge) gaps, often past the [knowledge cutoff](#knowledge-cutoff) | Load the right [contextual knowledge](#contextual-knowledge) |
-| _Faithfulness_ | Output drifts from the contextual knowledge that's loaded, the user's instructions, or the model's own prior reasoning | [Attention degradation](#attention-degradation); worsens in the [dumb zone](#smart-zone)                 | [Clear](#clearing) or [compact](#compaction)               |
+자신만만하게 내놓는 틀린 [모델](#model) 출력입니다. 원인과 해결책이 완전히 다른 두 가지 유형으로 나뉩니다:
 
-[Next-token prediction](#next-token-prediction) produces fluent output whether or not the underlying fact is real — the model has no internal signal that it doesn't know something, so an invented method arrives in the same assured register as a correct one. Hallucinated code is plausible by construction: it's what the API _would_ look like if it existed, which is exactly what makes it slip past a skim-level review and fail only when run.
+| 유형 | 잘못되는 부분 | 원인 | 해결책 |
+| --- | --- | --- | --- |
+| _사실성 (Factuality)_ | 세상에 대한 사실을 조작하거나 왜곡함 — 존재하지 않는 함수, 잘못된 API 시그니처, 가짜 인용구 | [매개변수적 지식](#parametric-knowledge)의 공백, 주로 [지식 컷오프](#knowledge-cutoff) 이후의 내용 | 올바른 [맥락적 지식](#contextual-knowledge)을 로드 |
+| _충실성 (Faithfulness)_ | 이미 로드된 맥락적 지식, 사용자의 지시사항, 혹은 모델 자신의 이전 논리에서 벗어남 | [어텐션 저하](#attention-degradation), [덤 존](#smart-zone)에 진입할수록 악화됨 | 세션을 [비우거나](#clearing) [압축](#compaction) |
 
-You need to know which flavor you're looking at, because the fix for one makes the other worse. Factuality means missing knowledge: the fix is adding context — the docs, the type definitions, the file. Faithfulness means the knowledge is present but losing the competition for attention: the fix is removing context. Misdiagnose faithfulness as factuality and you paste in more docs, which grows the context and makes the drift worse. When the agent gets something wrong, check whether the correct information was already in context before deciding which problem you have.
+[다음 토큰 예측](#next-token-prediction)은 밑바탕의 사실이 참이든 거짓이든 매끄러운 텍스트를 만들어냅니다. 모델 내부에는 '내가 이걸 모른다'는 신호가 없기 때문에, 지어낸 메서드도 정확한 메서드와 완전히 똑같이 확신에 찬 어조로 출력됩니다. 환각으로 생성된 코드는 구조적으로 매우 그럴듯합니다. 실제로 존재했다면 '응당 그렇게 생겼을 법한' 모습으로 만들어지기 때문에, 대충 훑어보는 리뷰를 그대로 통과하고 실제로 실행해 보고 나서야 비로소 터지게 됩니다.
 
-_Avoid:_ "hallucination" as a bare synonym for "wrong" — without naming the flavor, the term has no diagnostic value.
+내가 마주한 것이 어떤 유형의 환각인지 파악해야 합니다. 한쪽의 해결책이 다른 쪽을 더 악화시키기 때문입니다. 사실성 환각은 지식의 부재를 의미하므로 문서, 타입 정의, 파일 등 컨텍스트를 추가하는 것이 해결책입니다. 반면 충실성 환각은 지식이 이미 들어와 있지만 어텐션 경쟁에서 밀려나 무시당하는 상태이므로 컨텍스트를 덜어내는 것이 해결책입니다. 충실성 문제를 사실성 문제로 오진하여 문서를 더 덕지덕지 붙여넣으면 컨텍스트만 비대해져서 모델의 이탈이 더 심해집니다. 에이전트가 오답을 낼 때는 어떤 조치를 취하기 전에 올바른 정보가 이미 컨텍스트 안에 들어있었는지부터 확인하세요.
 
-_Usage:_
+_지양할 표현:_ "환각"을 단순히 "틀렸다"는 말의 동의어로 막 쓰기 — 유형을 명시하지 않는 환각이라는 단어는 아무런 진단적 가치가 없습니다.
 
-"It hallucinated a `parseAsync` method on the schema."
+_사용 예시:_
 
-"Factuality or faithfulness?"
+"스키마에 `parseAsync` 메서드가 있다고 환각을 일으켰어요."
 
-"The method exists in the docs I pasted — it just stopped reading them after [turn](#turn) forty."
+"사실성 문제인가요, 충실성 문제인가요?"
 
-"Faithfulness then. Compact and reload, don't bother adding more docs."
+"내가 붙여넣은 문서에 분명히 있는 메서드예요. 40번째 [턴](#turn)이 넘어가니까 그냥 문서를 안 읽기 시작한 겁니다."
 
-### Parametric knowledge
+"그렇다면 충실성 문제입니다. 문서를 더 추가하지 말고, 세션을 압축하고 다시 불러오세요."
 
-What the [model](#model) "knows" from [training](#training), stored in its [parameters](#parameters). Frozen at training time — the model can't see its own parameters or update them. Detail is lost in the squeeze: billions of facts cram into a fixed number of parameters, and the rare ones blur. Source of fluency on common topics, and of fabrication on uncommon ones. Counterpart to [contextual knowledge](#contextual-knowledge).
+### Parametric knowledge (매개변수적 지식)
 
-Parametric knowledge is not stored as facts. Training never gives the model a database to look things up in; it adjusts parameters until the model predicts text well, and a model that predicts text about a topic well behaves as if it knows the topic. How reliable the knowledge is tracks how often something appeared in the training data: a topic with millions of examples is reproduced accurately, for a topic with only a handful, the model guesses based on what similar topics look like. Reproducing and guessing are the same process to the model, so it can't tell which one it's doing. A fabricated answer arrives with the same fluency as a correct one. [Hallucination](#hallucination) is the model guessing wrong.
+[학습](#training)을 통해 [모델](#model)의 [매개변수](#parameters) 내부에 각인된 "지식"입니다. 학습 시점에 영구 동결되며, 모델은 스스로 매개변수를 들여다보거나 업데이트할 수 없습니다. 압축 과정에서 디테일이 손실됩니다. 수십억 개의 사실이 한정된 수의 매개변수로 우겨넣어지기 때문에, 드물게 등장한 사실들은 뭉개집니다. 대중적인 주제에 대해서는 유창함을 자랑하지만, 마이너한 주제에 대해서는 위조를 일삼는 근원입니다. [맥락적 지식(Contextual knowledge)](#contextual-knowledge)의 반대 개념입니다.
 
-Parametric knowledge also ages. The parameters stop changing at the [knowledge cutoff](#knowledge-cutoff), so a library released or renamed after that date doesn't exist in them, and an API that changed is remembered in its old form.
+매개변수적 지식은 사실(Fact) 형태로 저장되지 않습니다. 학습은 모델에게 검색해 볼 수 있는 데이터베이스를 주지 않습니다. 텍스트를 잘 예측하도록 매개변수를 조정할 뿐이며, 어떤 주제에 대해 텍스트를 훌륭하게 예측해 내는 모델은 마치 그 주제를 '알고 있는' 것처럼 행동합니다. 지식의 신뢰도는 학습 데이터에 얼마나 자주 등장했는지와 직결됩니다. 수백만 개의 예시가 존재하는 대중적인 주제는 정확하게 재현되지만, 예시가 몇 개 없던 희귀한 주제는 비슷한 다른 주제들의 형태를 기반으로 적당히 추측해 버립니다. 재현과 추측은 모델 입장에서는 완전히 동일한 연산 과정이므로, 모델은 자기가 지금 기억해 낸 것인지 추측한 것인지 분간하지 못합니다. 지어낸 답변도 정답과 똑같이 유창하게 나옵니다. [환각](#hallucination)은 모델의 추측이 빗나간 결과입니다.
 
-For both gaps — too rare and too recent — the remedy is the same: the knowledge can't be added to the parameters, so it has to be supplied as contextual knowledge instead.
+매개변수적 지식은 나이를 먹습니다. [지식 컷오프](#knowledge-cutoff) 시점에 매개변수 수정이 멈추므로, 그 이후에 출시되거나 이름이 바뀐 라이브러리는 매개변수 안에 존재하지 않으며, 변경된 API는 과거의 형태로만 기억됩니다.
 
-_Usage:_
+두 가지 결핍—너무 희귀하거나, 너무 최신이거나—에 대한 처방은 동일합니다. 매개변수에 지식을 사후 추가할 수는 없으므로, 맥락적 지식을 통해 외부에서 주입해 주어야 합니다.
 
-"It writes flawless React but invents methods on our internal SDK."
+_사용 예시:_
 
-"React is dense in the parametric knowledge — millions of training examples. Your SDK isn't, so the model fills in plausible-looking shapes. Load the SDK docs into [context](#context)."
+"React 코드는 기가 막히게 짜는데 우리 사내 SDK 메서드는 자꾸 지어내네요."
 
-### Knowledge cutoff
+"React는 매개변수적 지식에 빽빽하게 박혀 있습니다. 수백만 개의 학습 예시가 있으니까요. 반면 사내 SDK는 본 적이 없으니 그럴싸한 모양새로 메꿔 넣는 겁니다. SDK 문서를 [컨텍스트](#context)에 넣어주세요."
 
-The date past which a [model](#model) has no [parametric knowledge](#parametric-knowledge). Libraries, APIs, and events from after the cutoff are fabrication traps unless their docs are loaded as [contextual knowledge](#contextual-knowledge). Each model release ships with its own cutoff.
+### Knowledge cutoff (지식 컷오프)
 
-The cutoff exists because of how models are made: [training](#training) bakes a snapshot of text into the model's [parameters](#parameters), and after that the parameters are frozen. The model doesn't know its knowledge has an edge — asked about something past the cutoff, it doesn't refuse, it extrapolates from the nearest thing it does know. That's what makes the trap quiet: code written against an old version of a library looks plausible, often compiles, and fails on the parts that changed.
+[모델](#model)이 보유한 [매개변수적 지식](#parametric-knowledge)의 한계 시점입니다. 이 날짜 이후에 등장한 라이브러리, API, 사건 등은 [맥락적 지식](#contextual-knowledge)으로 문서를 제공하지 않는 한 거짓 정보를 유발하는 함정이 됩니다. 모델이 출시될 때마다 각자의 고유한 컷오프 날짜를 달고 나옵니다.
 
-The fix is always the same: get current information into [context](#context). Load the changelog, point at the installed version's type definitions, or have the agent read the docs from the web. Anything in context outranks nothing-in-parameters.
+컷오프가 존재하는 이유는 모델의 탄생 방식 때문입니다. [학습](#training)을 통해 특정 시점의 텍스트 스냅샷이 [매개변수](#parameters)에 구워지고, 그 후 매개변수는 동결됩니다. 모델은 자기 지식에 경계선이 있다는 사실을 알지 못합니다. 컷오프 이후의 내용을 물어보아도 모른다고 거절하지 않고, 자기가 알고 있는 가장 가까운 과거 지식으로부터 외삽(추정)하여 지어냅니다. 그렇기 때문에 이 함정은 매우 조용합니다. 구버전 라이브러리를 기준으로 작성된 코드는 그럴싸해 보이고, 컴파일도 잘 되다가, 바뀐 세부 동작에서 조용히 터집니다.
 
-_Usage:_
+해결책은 항상 같습니다. 최신 정보를 [컨텍스트](#context)에 넣는 것입니다. 변경 로그(Changelog)를 로드하거나, 프로젝트에 설치된 버전의 타입 정의 파일을 가리키거나, 에이전트가 웹에서 최신 문서를 직접 긁어오도록 시키세요. 컨텍스트에 들어온 것은 매개변수에 아무것도 없는 상태를 언제나 압도합니다.
 
-"It keeps writing the v3 SDK syntax — we're on v5."
+_사용 예시:_
 
-"v5 shipped after the knowledge cutoff. Load the v5 changelog as contextual knowledge, otherwise it'll keep fabricating from the older parametric version."
+"v5를 쓰고 있는데 자꾸 v3 SDK 문법으로 코드를 작성해요."
 
-### Contextual knowledge
+"v5가 지식 컷오프 이후에 나왔기 때문입니다. v5 변경 내역을 맥락적 지식으로 주입해 주세요. 그렇지 않으면 오래된 매개변수 지식에 기대어 계속 코드를 지어낼 겁니다."
 
-Facts the [agent](#agent) can read directly from the [context](#context) right now — the user's task, files the agent has read in, [tool results](#tool-result), [AGENTS.md](#agentsmd) content loaded at [session](#session) start. Counterpart to [parametric knowledge](#parametric-knowledge): parametric is _recalled_ from the parameters; contextual is _read_ from the [window](#context-window). [Hallucinations](#hallucination) are much less common when the agent works from contextual knowledge — the answer is right in front of it, not dredged up from a blurred memory.
+### Contextual knowledge (맥락적 지식)
 
-Of the two kinds of knowledge, only contextual knowledge is in your control. The parameters are frozen, so the only way to give the [model](#model) knowledge it lacks — an internal SDK, a library released after the [knowledge cutoff](#knowledge-cutoff), a decision made yesterday — is to put it in the context. A lot of practical [AI](#ai) coding work reduces to this: getting the right facts in front of the model at the moment it needs them.
+[에이전트](#agent)가 지금 당장 [컨텍스트](#context)를 통해 직접 읽을 수 있는 사실들입니다. 사용자의 요청 사항, 에이전트가 읽어 들인 파일들, [툴 결과](#tool-result), [세션](#session) 시작 시 로드된 [AGENTS.md](#agentsmd)의 내용 등이 해당합니다. [매개변수적 지식](#parametric-knowledge)의 반대 개념입니다. 매개변수적 지식이 머릿속 매개변수로부터 '회상'해 낸 것이라면, 맥락적 지식은 눈앞의 [컨텍스트 윈도우](#context-window)에서 '직접 읽어낸' 것입니다. 에이전트가 맥락적 지식을 기반으로 작업할 때는 [환각](#hallucination)이 훨씬 적게 발생합니다. 답이 흐릿한 기억 속에서 더듬어 꺼낸 것이 아니라 눈앞에 펼쳐져 있기 때문입니다.
 
-When contextual and parametric knowledge conflict, the contextual usually wins. Paste the current API docs and the model follows them rather than its stale memory of the old API — though the old version can still bleed through, especially deep into a long session. If the agent keeps reverting to an outdated pattern despite the docs being loaded, that's parametric knowledge leaking past the contextual; restating the correction or moving it closer to the work helps.
+두 가지 지식 중 오직 맥락적 지식만이 여러분의 통제 하에 있습니다. 매개변수는 동결되어 있으므로 사내 SDK, [지식 컷오프](#knowledge-cutoff) 이후에 나온 라이브러리, 어제 내린 아키텍처 결정 등 모델이 모르는 지식을 줄 수 있는 유일한 방법은 컨텍스트에 밀어 넣는 것뿐입니다. 실무적인 [AI](#ai) 코딩 작업의 상당 부분은 모델이 필요한 바로 그 순간에 올바른 사실을 눈앞에 대령해 주는 작업으로 귀결됩니다.
 
-Unlike parametric knowledge, contextual knowledge costs something to use. Everything loaded into the window spends [tokens](#token) and competes for the model's [attention budget](#attention-budget), so loading more is not automatically better — the aim is the relevant facts in the window, not all the facts.
+맥락적 지식과 매개변수적 지식이 충돌하면 통상 맥락적 지식이 승리합니다. 최신 API 문서를 붙여넣어 주면 모델은 과거 API에 대한 낡은 기억 대신 문서의 내용을 따릅니다. 다만 긴 세션의 후반부로 갈수록 옛 기억이 스멀스멀 새어 나올 수 있습니다. 문서를 분명히 줬는데도 에이전트가 자꾸 구식 패턴으로 되돌아간다면, 그것은 매개변수 지식이 맥락을 뚫고 누출되고 있는 것입니다. 지침을 다시 강조하거나 작업 지점과 가까운 위치로 옮겨주는 것이 도움이 됩니다.
 
-_Reach for this term_ only when contrasting with parametric knowledge; otherwise just say **context**.
+매개변수 지식과 달리 맥락적 지식은 비용을 수반합니다. 윈도우에 로드된 모든 데이터는 [토큰](#token)을 소비하며 모델의 [어텐션 예산](#attention-budget)을 갉아먹습니다. 따라서 무작정 많이 로드한다고 능사가 아닙니다. 목표는 '모든' 사실을 때려 박는 것이 아니라 '관련된' 사실만을 윈도우에 올리는 것입니다.
 
-_Avoid:_ "working memory" — contextual knowledge is what's in the window _now_; a [memory system](#memory-system) is what gets cross-session content into it. Different scales, don't conflate.
+_사용 팁:_ 매개변수적 지식과 대비할 때만 이 단어를 쓰세요. 평소에는 그냥 **컨텍스트(Context)**라고 부르면 됩니다.
 
-_Usage:_
+_지양할 표현:_ "작업 기억(working memory)" — 맥락적 지식은 '지금' 윈도우에 있는 내용이고, [메모리 시스템](#memory-system)은 세션 간에 내용을 넘겨주는 장치입니다. 스케일이 다르므로 혼동하지 마세요.
 
-"Why does it nail the API when I paste the docs and fabricate it when I don't?"
+_사용 예시:_
 
-"With the docs in, it's contextual knowledge — reading off the page. Without, it's parametric and the rare endpoints blur."
+"문서를 붙여넣어 주면 API를 완벽하게 맞추는데, 안 주면 왜 자꾸 지어낼까요?"
 
-### Attention relationship
+"문서가 있으면 맥락적 지식이 되어 눈앞의 책을 읽듯 쓰지만, 문서가 없으면 매개변수 지식에 의존해야 해서 잘 안 쓰이는 엔드포인트는 기억이 뭉개지기 때문입니다."
 
-When predicting each [token](#token), the [model](#model) factors in every other token in the [context](#context) — some heavily, others barely at all. The pairing between two tokens is an **attention relationship**, and meaningful pairs ("her" with "Sarah", or a `getUser()` call with its `function getUser` definition) influence each other more than unrelated ones. A context of N tokens has on the order of N² relationships.
+### Attention relationship (어텐션 관계)
 
-The pairings are where the model's apparent understanding lives. When it resolves a pronoun, it's because the attention relationship between "her" and "Sarah" is strong. When it calls a function with the right arguments, the relationship between the call site and the definition it read earlier is doing the work. None of this is looked up — it's computed fresh on every [model provider request](#model-provider-request), for every pair.
+각 [토큰](#token)을 예측할 때, [모델](#model)은 [컨텍스트](#context) 안에 존재하는 다른 모든 토큰들을 고려합니다. 어떤 토큰은 강하게 참조하고 어떤 토큰은 거의 무시합니다. 두 토큰 사이의 이러한 연결 고리를 **어텐션 관계**라고 부르며, 의미 있는 토큰 쌍("Sarah"와 대명사 "her", 또는 `function getUser` 정의와 `getUser()` 호출부)은 무관한 토큰 쌍보다 훨씬 강한 상호작용을 갖습니다. N개의 토큰으로 이루어진 컨텍스트는 대략 N² 개의 관계를 형성합니다.
 
-The N² figure is worth sitting with, because it grows faster than intuition suggests:
+이 토큰 쌍들의 연결 속에 모델의 소위 '이해력'이 깃들어 있습니다. 대명사를 올바르게 해석하는 것은 "her"와 "Sarah" 사이의 어텐션 관계가 강력하기 때문입니다. 알맞은 인자를 넣어 함수를 호출하는 것은 호출부와 앞서 읽었던 함수 정의 사이의 어텐션 관계가 제대로 작동했기 때문입니다. 이 모든 것은 어딘가에서 검색해 오는 것이 아니라, 매 [모델 프로바이더 요청](#model-provider-request)마다 모든 토큰 쌍에 대해 처음부터 새로 계산됩니다.
 
-| Context size   | Pairings (~N²) |
-| -------------- | -------------- |
-| 1,000 tokens   | ~1 million     |
-| 10,000 tokens  | ~100 million   |
-| 100,000 tokens | ~10 billion    |
+N²이라는 숫자를 진지하게 곱씹어 볼 필요가 있습니다. 직관보다 훨씬 가파르게 폭증하기 때문입니다:
 
-Each pairing is also computed more than once. Models have multiple attention heads — exact counts for frontier models are unpublished, but fifty to a hundred is a reasonable guess — and each head computes its own version of every relationship. So every pairing in the table above is duplicated across every head. That's a lot of pairings.
+| 컨텍스트 크기 | 토큰 쌍의 수 (~N²) |
+| --- | --- |
+| 1,000 토큰 | 약 100만 개 |
+| 10,000 토큰 | 약 1억 개 |
+| 100,000 토큰 | 약 100억 개 |
 
-Only a small number of these relationships matter for any given task. The pairing between your instruction and the code it governs is one of a handful that count; almost everything else in the pool is noise. And the two grow at different rates: the relationships that matter stay roughly constant, while the total pool grows quadratically with context size. At 1,000 tokens, the pairing you care about is one in a million; at 100,000 tokens, it's one in ten billion. This is the arithmetic underneath the [attention budget](#attention-budget), and [attention degradation](#attention-degradation) is what it feels like when the relationships that matter get too thin a share.
+게다가 각 토큰 쌍의 관계는 한 번만 계산되는 것도 아닙니다. 모델은 여러 개의 '어텐션 헤드(Attention head)'를 가지고 있으며—프론티어 모델의 정확한 개수는 비공개지만 보통 50개에서 100개 사이로 추정됩니다—각 헤드는 모든 토큰 쌍에 대해 저마다의 관점으로 관계를 계산합니다. 따라서 위 표의 모든 토큰 쌍 수는 헤드 개수만큼 곱절로 불어납니다. 어마어마한 양의 계산입니다.
 
-_Usage:_
+주어진 과업에서 실제로 중요한 관계는 이 중 극히 일부에 불과합니다. 사용자의 지시사항과 그것이 지배하는 코드 사이의 연결 고리는 전체 수십억 개 중에서 손에 꼽히는 몇 안 되는 핵심입니다. 나머지는 거의 대부분 잡음입니다. 문제는 두 관계가 늘어나는 속도가 다르다는 점입니다. 중요한 관계의 수는 대체로 일정하게 유지되는 반면, 전체 관계의 풀은 컨텍스트 크기에 따라 2차 함수(제곱) 그래프를 그리며 폭증합니다. 1,000토큰일 때 내가 관심 있는 토큰 쌍은 100만 개 중 하나였지만, 100,000토큰일 때는 100억 개 중 하나로 희석됩니다. 이것이 [어텐션 예산](#attention-budget)의 밑바닥에 깔린 수학적 진실이며, 중요한 관계가 턱없이 얕은 몫을 배정받아 길을 잃을 때 느껴지는 현상이 바로 [어텐션 저하](#attention-degradation)입니다.
 
-"It keeps confusing the two `user` symbols across the diff — sounds like we're in the [dumb zone](#smart-zone)."
+_사용 예시:_
 
-"Yeah, the attention relationship between each call site and its declaration is fighting the other one — same token shape, different bindings. Rename one and the pairings sharpen."
+"diff 전체에서 두 개의 `user` 심볼을 자꾸 헷갈려하네요. [덤 존](#smart-zone)에 들어간 것 같습니다."
 
-### Attention budget
+"맞아요. 각 호출부와 선언부 사이의 어텐션 관계가 서로 간섭하고 있는 겁니다. 토큰 모양은 같은데 바인딩된 대상이 다르니까요. 하나를 리네이밍해 주면 관계가 다시 또렷해질 겁니다."
 
-Each [token](#token) has a finite amount of influence to distribute across the rest of the [context](#context). Heavy influence on [one relationship](#attention-relationship) leaves less for others. The budget is per-token and doesn't grow when the context does, which is why long [sessions](#session) dilute.
+### Attention budget (어텐션 예산)
 
-Think of it as signal and noise. Your instruction is a signal at fixed volume; every other token in the [context window](#context-window) is competing sound. The instruction never gets quieter — it's still there, character for character — but as the context grows, the room gets louder around it, and the signal-to-noise ratio drops. An instruction that was the loudest thing at 10k tokens of context is background hum at 150k. This is the mechanism behind [attention degradation](#attention-degradation): the model doesn't forget; the signal gets lost in the noise.
+각 [토큰](#token)은 나머지 [컨텍스트](#context) 전반에 나누어 줄 수 있는 영향력의 총량이 유한하게 정해져 있습니다. [특정 관계](#attention-relationship)에 강한 영향력을 쏟아붓고 나면 다른 관계에 배분할 몫이 줄어듭니다. 이 예산은 토큰 단위로 고정되어 있으며 컨텍스트가 길어진다고 해서 늘어나지 않습니다. 긴 [세션](#session)에서 집중력이 흐려지는 근본 이유입니다.
 
-The symptom reads as disobedience — the agent agreed to a constraint early on and then drifts from it, and re-pasting the constraint helps only briefly. The cause isn't the instruction; it's everything else in the window competing with it.
+신호와 잡음의 관계로 이해할 수 있습니다. 여러분의 지시사항은 일정한 볼륨으로 재생되는 스피커 '신호'입니다. [컨텍스트 윈도우](#context-window)에 들어오는 다른 모든 토큰은 주변에서 웅성거리는 '잡음'입니다. 지시사항 자체의 볼륨은 줄어들지 않았습니다. 글자 그대로 토씨 하나 안 틀리고 그 자리에 있습니다. 하지만 컨텍스트가 불어날수록 방 안의 소음이 점점 커지고, 신호 대 잡음비(SNR)는 바닥으로 곤두박질칩니다. 1만 토큰 컨텍스트에서는 방 안에서 가장 우렁찼던 지시사항이, 15만 토큰에 도달하면 배경 소음에 묻혀 웅얼거림으로 전락합니다. 이것이 [어텐션 저하](#attention-degradation)를 일으키는 메커니즘입니다. 모델이 지침을 까먹은 것이 아니라 신호가 소음에 파묻힌 것입니다.
 
-What you can control is what goes into the context. Content that doesn't serve the task isn't neutral — it's noise over everything that does. Keep the window small, [clear](#clearing) when the accumulated context stops paying for itself, and restate the constraints that matter instead of trusting their early mention to hold.
+겉으로는 불복종의 형태로 나타납니다. 초반에는 순순히 따르던 제약 조건을 슬그머니 무시하기 시작하고, 지시사항을 다시 복사해 붙여넣어 주어도 반짝 효과가 있을 뿐 금세 도로 잊어버립니다. 원인은 지시사항의 문구가 아니라, 윈도우 안에서 그것과 경쟁하고 있는 다른 수많은 토큰 덩어리들에 있습니다.
 
-_Usage:_
+여러분이 통제할 수 있는 것은 컨텍스트에 무엇을 넣을지뿐입니다. 과업에 도움이 되지 않는 내용은 중립적인 게 아닙니다. 가치 있는 모든 것을 가로막는 유해한 소음입니다. 윈도우를 작게 유지하고, 쌓여있는 컨텍스트가 밥값을 못 한다 싶으면 [비워내고(Clearing)](#clearing), 중요한 제약 조건은 초반의 지침을 맹신하지 말고 작업 지점 근처에서 다시 상기시켜 주어야 합니다.
 
-"Why does it keep ignoring the schema I pasted at the top?"
+_사용 예시:_
 
-"We're well into the [dumb zone](#smart-zone) — every token's attention budget is fixed, but the context kept growing. The signal on the schema is now competing with thousands of newer tokens."
+"맨 위에 붙여넣은 스키마를 왜 자꾸 무시할까요?"
 
-### Attention degradation
+"이미 [덤 존](#smart-zone)에 깊숙이 들어왔기 때문입니다. 토큰당 어텐션 예산은 고정되어 있는데 컨텍스트는 계속 불어났어요. 스키마에 걸려 있던 신호가 새로 들어온 수만 개의 토큰들과 경쟁하느라 밀려난 겁니다."
 
-As a [session](#session) grows, each [token](#token)'s [attention budget](#attention-budget) is spread across more competitors. The signal on any one [meaningful relationship](#attention-relationship) shrinks; noise from irrelevant [context](#context) crowds in. Same [model](#model), same [parameters](#parameters) — just more mouths to feed from the same plate. Cause of the smart zone / dumb [zone effect](#smart-zone).
+### Attention degradation (어텐션 저하)
 
-It presents as the model getting worse mid-session: constraints it followed for an hour start slipping, it re-asks things it was told, it writes code that ignores a file it read earlier. Nothing about the model changed — the only variable is how much context it's now attending over.
+[세션](#session)이 길어짐에 따라 각 [토큰](#token)의 [어텐션 예산](#attention-budget)이 더 많은 경쟁자들에게 얇게 쪼개져 분배되는 현상입니다. [의미 있는 관계](#attention-relationship)에 실리는 신호의 강도는 쪼그라들고, 무관한 [컨텍스트](#context)에서 나오는 잡음이 침범합니다. [모델](#model)도 그대로고 [매개변수](#parameters)도 그대로지만, 같은 밥그릇을 두고 다투어야 할 입만 늘어난 셈입니다. 스마트 존 / 덤 [존 효과](#smart-zone)를 유발하는 원인입니다.
 
-It's gradual, which is what makes it hard to catch from inside the session. There's no error and no threshold; each [turn](#turn) is only slightly worse than the last, and by the time the slips are obvious you've been in the dumb zone for a while.
+세션 중간부터 모델이 바보가 되는 것처럼 체감됩니다. 한 시간 동안 잘 지키던 제약 조건을 슬슬 어기기 시작하고, 이미 알려준 내용을 다시 묻고, 조금 전에 읽었던 파일의 내용을 깡그리 무시한 코드를 작성합니다. 모델 자체는 털끝만큼도 변하지 않았습니다. 달라진 유일한 변수는 모델이 한 번에 쳐다보아야 할 컨텍스트의 물리적 길이뿐입니다.
 
-You recover by removing context, not adding more. Re-pasting the ignored instruction adds another competitor to the same crowded window and helps only briefly. What works: [clear](#clearing) and reload only what the task needs, or [compact](#compaction), or [hand off](#handoff) to a fresh session. Treat declining instruction-following as a signal about context length, not about the model.
+서서히 진행되기 때문에 세션 안에서는 알아차리기가 대단히 어렵습니다. 에러 메시지도 없고 명확한 임계값도 없습니다. 매 [턴](#turn)마다 이전보다 아주 미세하게 나빠질 뿐이며, 실수가 눈에 띄게 드러날 때쯤에는 이미 덤 존에 한참 발을 담근 상태입니다.
 
-_Usage:_
+컨텍스트를 덜어냄으로써만 회복할 수 있으며, 더 추가해서는 해결되지 않습니다. 무시당한 지시사항을 다시 붙여넣는 것은 복잡한 방에 경쟁자 토큰을 하나 더 밀어 넣는 꼴이라 아주 잠깐 반짝 효과를 낼 뿐입니다. 올바른 처방은 과업에 필요한 것만 남기고 [비워내기(Clearing)](#clearing), [압축(Compaction)](#compaction)하기, 혹은 깨끗한 새 세션으로 [인계(Handoff)](#handoff)하기입니다. 지시사항 이행률이 떨어지는 것을 모델의 지능 문제가 아니라 컨텍스트 길이에 대한 위험 신호로 받아들이세요.
 
-"It's deep in the dumb zone — inventing generics that aren't in the type file."
+_사용 예시:_
 
-"Attention degradation. The type definitions are still in context, but the signal on them is buried under everything we've added since. Clear and reload."
+"완전 덤 존에 빠졌네요. 타입 파일에 없는 제네릭을 제멋대로 만들어내고 있어요."
 
-### Smart zone
+"어텐션 저하 현상입니다. 타입 정의는 여전히 컨텍스트 안에 있지만, 그 신호가 그 뒤로 쏟아져 들어온 온갖 잡동사니 밑에 파묻혀 버린 거예요. 세션을 비우고 다시 로드합시다."
 
-Early in a [session](#session) the [agent](#agent) is in a "smart zone" — sharp, focused, recall is good. As the session grows it drifts into a "dumb zone": sloppier, forgetful, more mistakes — and more faithfulness [hallucinations](#hallucination). Same [model](#model), same [harness](#harness) — just more [context](#context). The felt effect of [attention degradation](#attention-degradation). On frontier models, the dumb zone commonly begins around 125K-150K [tokens](#token) — though this is debated. [Clear](#clearing) or [compact](#compaction) when the session bloats; don't push through.
+### Smart zone (스마트 존)
 
-The decline is gradual, which makes it easy to miss. There's no error message and no visible boundary; the agent just starts performing slightly worse, then noticeably worse. Common signs: it forgets an instruction you gave twenty turns ago, repeats a mistake it had already corrected, or confidently asserts something the context contradicts. Because the slide is smooth, the usual response is to push through and re-explain — which adds more context and makes the problem worse.
+[세션](#session) 초기에 [에이전트](#agent)가 보여주는 고성능 구간입니다. 날카롭고, 집중력이 높으며, 기억력도 좋습니다. 그러나 세션이 길어지면 에이전트는 점차 "덤 존(Dumb zone, 멍청이 구간)"으로 미끄러집니다. 엉성해지고, 건망증이 심해지며, 실수가 잦아지고, 충실성 [환각](#hallucination)을 마구 뿜어냅니다. [모델](#model)도 같고 [하네스](#harness)도 같지만, [컨텍스트](#context)의 양만 불어난 결과입니다. [어텐션 저하](#attention-degradation)가 피부로 느껴지는 형태입니다. 프론티어 모델의 경우 통상 125K~150K [토큰](#token) 부근에서 덤 존이 시작된다고 알려져 있지만, 이에 대해서는 이견이 있습니다. 세션이 비대해지면 억지로 밀어붙이지 말고 [비우거나(Clearing)](#clearing) [압축(Compaction)](#compaction)하세요.
 
-The zones don't track the [context window](#context-window) limit. A session can be deep in the dumb zone with most of the window still free: the limit is where the harness refuses to continue, but quality falls off long before that. Plan around the smart zone, not the window — the practical budget for a task is the tokens the agent works well within, not the tokens it can technically hold.
+성능 하락이 점진적으로 일어나기 때문에 눈치채지 못하고 지나치기 쉽습니다. 경고 에러가 뜨는 것도 아니고 눈에 보이는 경계선도 없습니다. 에이전트가 조금씩 삐걱거리기 시작하더니 어느 순간 눈에 띄게 나빠집니다. 흔한 징후들: 20턴 전에 내린 지시를 잊어버린다, 이미 바로잡았던 실수를 되풀이한다, 컨텍스트에 적힌 내용과 정면으로 배치되는 주장을 자신만만하게 펼친다. 하락세가 완만하다 보니 사용자는 대개 억지로 세션을 이어가며 재설명을 시도하는데, 이는 컨텍스트를 더 늘려 문제를 악화시킬 뿐입니다.
 
-The smart zone is a budget, and unrelated work spends it. Every task done in a session uses up tokens, so starting a second task in the same session means starting it closer to the dumb zone. Doing one task per session gives each task the sharpest part of the session. When a single task is bigger than one smart zone, split it: [hand off](#handoff) or compact at a natural boundary, and let a fresh session do the next piece.
+스마트 존은 [컨텍스트 윈도우](#context-window)의 물리적 한계선과 일치하지 않습니다. 윈도우의 대부분이 비어 있어도 세션은 이미 덤 존 깊숙이 들어가 있을 수 있습니다. 하네스가 작업을 거부하는 물리적 한계보다 훨씬 이전에 품질 붕괴가 먼저 찾아옵니다. 윈도우 스펙이 아니라 스마트 존을 기준으로 작업 계획을 세우세요. 어떤 과업에 쓸 수 있는 실질적인 예산은 에이전트가 기술적으로 담을 수 있는 최대 토큰이 아니라, 에이전트가 총명하게 일할 수 있는 토큰 한도까지입니다.
 
-_Usage:_
+스마트 존은 일종의 소모성 예산이며, 무관한 작업을 하면 낭비됩니다. 세션 안에서 처리하는 모든 작업은 토큰을 소모하므로, 동일한 세션에서 두 번째 작업을 시작한다는 것은 덤 존에 훨씬 더 가까운 상태에서 작업을 시작함을 의미합니다. 세션당 단 하나의 작업만 처리해야 매 과업이 세션의 가장 영민한 구간을 온전히 누릴 수 있습니다. 단일 작업이 스마트 존 하나에 다 안 들어갈 만큼 거대하다면 쪼개세요. 자연스러운 작업 경계에서 [인계(Handoff)](#handoff)하거나 압축하고, 깨끗한 새 세션에 다음 조각을 넘겨주어야 합니다.
 
-"It nailed the first three components and just butchered the fourth."
+_사용 예시:_
 
-"You're out of the smart zone — same model, just deep into the dumb zone now. Compact and reload the plan, the next component will land."
+"처음 컴포넌트 세 개는 기가 막히게 만들더니 네 번째 컴포넌트를 완전히 누더기로 만들어 놨어요."
 
-## Section 5 — Handoffs
+"스마트 존을 벗어났기 때문입니다. 같은 모델이지만 지금은 덤 존에 빠진 거예요. 세션을 압축하고 기획 문서를 다시 로드하면 다음 컴포넌트는 다시 깔끔하게 나올 겁니다."
 
-### Clearing
+---
 
-Ending the current [session](#session) and starting a fresh one. The next message begins with an empty session and an empty [context window](#context-window). Usually user-driven.
+## 섹션 5 — 인계 (Handoffs)
 
-Clearing is the cure for a polluted context. A session accumulates everything: failed attempts, wrong turns, stale [tool results](#tool-result), abandoned plans. The [model](#model) re-reads all of it on every [turn](#turn), and bad history drags on new work. Deep into a long session the [agent](#agent) gets vaguer and less obedient — instructions you gave clearly get ignored, quality slips, and prodding it to do better doesn't help, because the noise it's wading through is still in its [context](#context). Clearing removes the noise.
+### Clearing (비우기/초기화)
 
-Clearing doesn't erase the conversation. Most [harnesses](#harness) keep session history on your computer, so the transcript is still there to read or resume. What's gone is the agent's working state: the model is [stateless](#stateless), so the new session knows nothing the old one knew. If the session holds decisions or progress the next one will need, have the agent write a [handoff artifact](#handoff-artifact) first, then start the new session by pointing at it.
+현재 진행 중인 [세션](#session)을 종료하고 깨끗한 새 세션을 시작하는 행위입니다. 다음 메시지는 완전히 빈 세션과 빈 [컨텍스트 윈도우](#context-window)에서 출발합니다. 일반적으로 사용자가 직접 명령을 내려 수행합니다.
 
-Compare [compaction](#compaction), which summarises the session into the new context instead of starting empty. Clearing is the blunter tool: nothing carries over, including the junk.
+오염된 컨텍스트를 치료하는 가장 확실한 특효약입니다. 세션에는 모든 것이 누적됩니다. 실패했던 시도들, 잘못 짚었던 헛발질, 용도 폐기된 [툴 결과](#tool-result), 폐기된 계획들이 고스란히 쌓입니다. [모델](#model)은 매 [턴](#turn)마다 이 모든 쓰레기를 다시 읽어야 하며, 나쁜 과거 이력은 새로운 작업을 질질 끌어당깁니다. 긴 세션의 후반부에 이르면 [에이전트](#agent)의 말이 모호해지고 고분고분하지 않게 변합니다. 분명하게 내린 지시를 귓등으로 흘리고, 결과물의 품질이 곤두박질치며, 더 잘해보라고 다그쳐 봐야 아무런 소용이 없습니다. 모델이 헤쳐 나가야 할 잡음이 여전히 [컨텍스트](#context) 안에 도사리고 있기 때문입니다. 비우기는 그 잡음을 일거에 소각합니다.
 
-_Usage:_
+비운다고 해서 대화 기록이 컴퓨터에서 영구 삭제되는 것은 아닙니다. 대부분의 [하네스](#harness)는 세션 이력을 로컬 디스크에 저장해 두므로, 이전 기록을 나중에 다시 읽거나 불러올 수 있습니다. 사라지는 것은 에이전트의 '작업 기억 상태'입니다. 모델은 [무상태](#stateless)이므로 새 세션은 이전 세션이 알고 있던 것을 티끌만큼도 모릅니다. 만약 현재 세션에 다음 세션이 알아야 할 중요한 결정이나 진행 상황이 남아 있다면, 에이전트에게 먼저 [핸드오프 아티팩트](#handoff-artifact)를 작성하게 한 뒤 이를 가리키며 새 세션을 시작해야 합니다.
 
-"It's stuck looping on the failing test."
+이전 이력을 요약하여 새 컨텍스트에 얹어주는 [압축(Compaction)](#compaction)과 비교해 보세요. 비우기는 훨씬 더 단호하고 굵직한 도구입니다. 어설픈 찌꺼기를 일체 남기지 않고 완전히 백지에서 시작합니다.
 
-"Just clear it — start a fresh session with the plan doc and the test file. No point fighting the existing context."
+_사용 예시:_
 
-### Handoff
+"실패하는 테스트를 고치겠다고 무한 루프를 돌고 있어요."
 
-Transferring [agent](#agent) [context](#context) from one [session](#session) to another. The carry mechanism varies — a written [handoff artifact](#handoff-artifact), an in-memory summary ([compaction](#compaction)), and others. Distinct from [clearing](#clearing) (no transfer at all). Reasons vary: switching roles (planner → implementer), kicking off an [AFK](#afk) run, fanning out to parallel sessions, or freeing up [context window](#context-window) room.
+"그냥 비워버리세요. 기획 문서와 테스트 파일만 딱 쥐어주고 새 세션을 여는 겁니다. 이미 오염된 컨텍스트와 씨름해 봐야 시간 낭비예요."
 
-The receiving session starts with zero context — the [model](#model) is [stateless](#stateless), and nothing from the old session is visible to the new one. Whatever the next session needs has to be carried explicitly; everything else is gone. "No return path" is the constraint that shapes the carry: the new session can't ask the old one what it meant, so the carried material has to stand on its own.
+### Handoff (핸드오프/인계)
 
-| Mechanism        | Form                                        | Properties                                                                               |
-| ---------------- | ------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| Handoff artifact | File in the [environment](#environment) | You can read and correct it before anything depends on it; reusable across many sessions |
-| Compaction       | Summary in the context window               | Automatic and cheap; harder to inspect; feeds one successor                              |
+[에이전트](#agent)의 [컨텍스트](#context)를 한 [세션](#session)에서 다른 세션으로 넘겨주는 작업입니다. 전달 수단은 다양합니다. 파일 형태로 작성된 [핸드오프 아티팩트](#handoff-artifact)를 쓸 수도 있고, 인메모리 요약본([압축](#compaction))을 쓸 수도 있습니다. 아무것도 넘겨주지 않는 [비우기(Clearing)](#clearing)와 구별됩니다. 역할을 전환하거나(기획자 → 구현자), [AFK](#afk) 자율 작업을 착수하거나, 병렬 세션으로 작업을 분산하거나, 부족해진 [컨텍스트 윈도우](#context-window) 공간을 확보하기 위해 핸드오프를 수행합니다.
 
-The visible failure of a bad handoff is relitigation: the new session re-opens decisions the old one had settled, because the carry recorded what was decided but not why. Judge a handoff by what a session with zero context could do with it.
+바통을 이어받는 새 세션은 제로 컨텍스트 상태로 시작합니다. [모델](#model)은 [무상태](#stateless)이므로, 이전 세션의 내용은 새 세션에 저절로 보이지 않습니다. 다음 세션에 필요한 모든 것은 명시적으로 전달되어야 하며, 전달되지 않은 것은 영원히 유실됩니다. 핸드오프의 형태를 결정짓는 핵심 제약은 **"돌아갈 길이 없다(No return path)"**는 점입니다. 새 세션은 이전 세션에게 "그게 무슨 뜻이었어?"라고 되물을 수 없습니다. 따라서 전달되는 내용은 그 자체로 완결성을 지녀야 합니다.
 
-_Usage:_
+| 전달 방식 | 형태 | 특성 |
+| --- | --- | --- |
+| 핸드오프 아티팩트 | [환경](#environment)에 저장된 파일 | 다른 세션이 의존하기 전에 사람이 직접 읽고 교정할 수 있음. 여러 세션에서 재사용 가능 |
+| 압축 (Compaction) | 컨텍스트 윈도우 내부의 요약문 | 자동화되어 편리함. 사람이 검수하기 어려움. 오직 하나의 후속 세션에만 전달됨 |
 
-"Planning session is getting heavy — should I just keep going?"
+잘못된 핸드오프가 낳는 가장 뚜렷한 증상은 '결정의 재논란(Relitigation)'입니다. 이전 세션이 치열하게 고민 끝에 내린 결론을 새 세션이 다시 원점으로 되돌려 논쟁하기 시작합니다. 넘겨받은 자료에 '무엇'을 결정했는지만 적혀 있고 '왜' 그렇게 결정했는지가 빠져있기 때문입니다. 아무런 사전 맥락이 없는 세션이 이것만 보고 곧바로 일할 수 있는가를 기준으로 핸드오프의 성패를 평가하세요.
 
-"Do a handoff. Write the decisions to a doc, clear, start the implementation in a fresh session reading from it."
+_사용 예시:_
 
-### Primary source
+"기획 세션이 너무 무거워졌는데, 그냥 여기서 계속 구현까지 밀어붙일까요?"
 
-A source of truth in its original form — the code, the conversation transcript, the raw log, the actual API response. Not an account of the thing; the thing. Counterpart to [secondary source](#secondary-source).
+"핸드오프를 하세요. 결정 사항들을 문서로 정리하게 한 뒤, 세션을 비우고, 새 세션에서 그 문서를 읽게 하여 구현을 시작하는 겁니다."
 
-If you want to know what your codebase does, the code is the primary source. The docs, the architecture diagram, and the README are all descriptions of it — accurate when written, on their own schedule ever since. When an [agent](#agent) confidently asserts something wrong about your project, the question to ask is which source it was working from: an agent that read a doc inherits the doc's staleness; an agent that read the code is reading the current truth.
+### Primary source (1차 출처/원천 소스)
 
-The cost is what keeps primary sources from being the default. Loading one into the [context window](#context-window) is expensive — the full file, the full transcript, every [token](#token) billed as [input](#input-tokens) and competing for [attention budget](#attention-budget). What you get for the cost is completeness: nothing has been pre-filtered by someone else's judgement about what mattered. A summary written last month can't contain the detail that turned out to matter today; the primary source still does.
+있는 그대로의 오리지널 형태를 유지하고 있는 '진실의 원천'입니다. 실제 코드, 대화 전문 로그, 날것 그대로의 에러 로그, 실제 API 응답 등이 해당합니다. 대상을 설명하는 묘사문이 아니라, 대상 그 자체입니다. [2차 출처(Secondary source)](#secondary-source)의 반대 개념입니다.
 
-Reach for the primary source when precision matters — the exact signature, the actual error, the line that throws. Much of managing [context](#context) is deciding when to pay for the primary source and when a secondary source is good enough.
+코드베이스가 실제로 어떻게 동작하는지 알고 싶다면 코드가 바로 1차 출처입니다. 문서, 아키텍처 다이어그램, README 파일은 모두 코드를 설명한 글일 뿐입니다. 작성 당시에는 정확했을지 몰라도 그 이후 저마다의 시간표를 따라 표류합니다. 에이전트가 여러분의 프로젝트에 대해 엉뚱한 주장을 자신 있게 펼친다면 어떤 출처를 보고 일하고 있었는지 따져보아야 합니다. 문서를 읽은 에이전트는 문서의 낡은 오류를 그대로 물려받지만, 코드를 직접 읽은 에이전트는 현재의 진실을 읽습니다.
 
-_Usage:_
+1차 출처가 무조건 기본 선택지가 되지 못하는 이유는 비용 때문입니다. 1차 출처를 [컨텍스트 윈도우](#context-window)에 로드하는 것은 비쌉니다. 파일 전문, 대화 전문 로그의 모든 [토큰](#token)이 [입력 토큰](#input-tokens)으로 청구되고 [어텐션 예산](#attention-budget)을 갉아먹습니다. 그 비용을 치르고 얻는 대가는 '완전성'입니다. 무엇이 중요한지에 대한 타인의 주관적 판단으로 사전 필터링되지 않은 원본 그대로를 얻습니다. 지난달에 쓴 요약본에는 오늘 중요해질 디테일이 생략되어 있을 수 있지만, 1차 출처에는 여전히 살아있습니다.
 
-"The agent says the retry logic backs off exponentially, but I'm watching it hammer the endpoint."
+엄밀함이 필요한 순간에는 1차 출처를 찾아가야 합니다. 정확한 함수 시그니처, 실제 발생한 에러 스택, 예외를 던지는 바로 그 코드 라인이 필요할 때입니다. [컨텍스트](#context) 엔지니어링의 본질은 언제 비싼 비용을 내고 1차 출처를 모셔올지, 그리고 언제 저렴한 2차 출처로 타협할지를 판단하는 것입니다.
 
-"It read that out of the design doc. Point it at the actual retry module — work from the primary source when the behaviour matters."
+_사용 예시:_
 
-### Secondary source
+"에이전트는 재시도 로직이 지수 백오프로 동작한다고 주장하는데, 실제로 보니까 엔드포인트를 무차별 폭격하고 있어요."
 
-An account of a [primary source](#primary-source), one step removed — documentation describing code, a summary describing a transcript, a report describing search results. Cheaper to load into the [context window](#context-window) than the source it describes, and lossy by construction: whoever wrote it decided what mattered, and whatever they dropped is invisible to a reader who only has the summary.
+"설계 문서를 읽고 그렇게 말한 겁니다. 실제 재시도 모듈 코드를 직접 읽게 하세요. 동작의 엄밀함이 중요할 때는 1차 출처를 기준으로 일해야 합니다."
 
-A lot of [context](#context) engineering is the manufacture of secondary sources. [Compaction](#compaction) turns the [session](#session) history into a summary that seeds the next session. A [subagent](#subagent) burns its own context on a noisy search and returns a short report. A [handoff artifact](#handoff-artifact) condenses a session's decisions into a document the next session reads. [Memory systems](#memory-system) distil what a session learned into notes. Each makes the same trade: fidelity for headroom.
+### Secondary source (2차 출처)
 
-Secondary sources fail in two ways. They're lossy — the compaction summary that lost the schema decision, the report that didn't mention the edge case. And they drift — the primary source changes and the account doesn't follow, so docs describe last quarter's architecture with this quarter's confidence. When an [agent](#agent) acts on a secondary source that has failed either way, it works confidently from wrong information; the fix is sending it back to the primary source.
+[1차 출처](#primary-source)를 설명하거나 묘사한, 한 단계 건너뛴 가공 정보입니다. 코드를 설명하는 문서, 대화 로그를 압축한 요약문, 검색 결과들을 종합한 보고서 등이 해당합니다. 1차 출처에 비해 [컨텍스트 윈도우](#context-window)를 적게 차지하므로 경제적이지만, **구조적으로 정보 손실을 내포**합니다. 작성자가 무엇이 중요한지 자의적으로 판단하여 기록했기 때문에, 작성자가 버린 내용은 요약문만 읽는 사람에게는 영원히 보이지 않습니다.
 
-Neither failure makes secondary sources a mistake. The context window is finite, and primary sources are expensive; without summaries, reports, and handoff documents, nothing large fits. The skill is knowing which details can survive the loss — and verifying against the primary source when one can't. A well-made secondary source carries a [context pointer](#context-pointer) back to its original — the summary that names the transcript it came from, the doc that names the file it describes — so when the account isn't enough, the reader can follow the pointer rather than work from the loss.
+우리가 수행하는 [컨텍스트](#context) 엔지니어링의 상당 부분은 2차 출처를 생산해 내는 일입니다. [압축(Compaction)](#compaction)은 [세션](#session) 이력을 다음 세션의 씨앗이 될 요약문으로 바꿉니다. [서브에이전트](#subagent)는 소음 가득한 검색에 자신의 컨텍스트를 불사르고 핵심만 추린 짧은 보고서를 들고 옵니다. [핸드오프 아티팩트](#handoff-artifact)는 세션의 결정 사항들을 다음 세션이 읽을 문서로 응축합니다. [메모리 시스템](#memory-system)은 세션에서 배운 지식을 노트 형태로 정제합니다. 이 모든 작업은 동일한 교환을 합니다. 디테일을 내주고 여유 공간(Headroom)을 사는 것입니다.
 
-_Usage:_
+2차 출처는 두 가지 방식으로 고장 납니다. 첫째, 정보가 유실됩니다. 스키마 결정 사항을 누락한 압축 요약문, 엣지 케이스를 언급하지 않은 보고서가 그렇습니다. 둘째, 현실과 어긋나 표류합니다. 1차 출처는 변했는데 설명 문서는 갱신되지 않아서 지난 분기의 낡은 아키텍처를 이번 분기의 자신감 넘치는 어조로 묘사합니다. 이 두 가지 결함에 빠진 2차 출처를 바탕으로 작업하는 [에이전트](#agent)는 잘못된 정보를 확신을 갖고 휘두르게 됩니다. 해결책은 에이전트를 1차 출처로 돌려보내는 것입니다.
 
-"The handoff doc says auth is done, but the new session keeps finding broken token refresh."
+그렇다고 해서 2차 출처를 쓰는 것이 실수라는 뜻은 아닙니다. 컨텍스트 윈도우는 유한하고 1차 출처는 비쌉니다. 요약, 보고서, 인계 문서가 없다면 거대한 작업은 아예 담아낼 수조차 없습니다. 핵심은 어떤 디테일이 손실을 견딜 수 있는지 판단하는 안목이며, 손실을 견딜 수 없는 치명적인 부분은 1차 출처를 통해 검증하는 것입니다. 잘 만들어진 2차 출처는 원본으로 돌아갈 수 있는 [컨텍스트 포인터](#context-pointer)를 품고 있습니다. 원본 로그 파일의 이름을 적어둔 요약문, 원본 소스 파일의 경로를 명시한 설계 문서가 그렇습니다. 요약된 내용만으로 불충분할 때, 독자는 유실된 정보에 갇히지 않고 포인터를 따라 원본을 확인할 수 있습니다.
 
-"The doc's a secondary source — the last session wrote down what it believed, not what's true. Have the new session run the auth tests and trust the primary source."
+_사용 예시:_
 
-### Handoff artifact
+"인계 문서에는 인증 모듈 구현이 끝났다고 적혀 있는데, 새 세션에서 돌려보니 토큰 갱신 로직이 깨져 있어요."
 
-A document used as the carry mechanism for a [handoff](#handoff) — written to the [environment](#environment) by one [session](#session) to be read by another. [Specs](#spec), [tickets](#ticket), and plan docs are all handoff artifacts.
+"그 문서는 2차 출처입니다. 이전 세션이 자기가 '믿고 싶었던 내용'을 적은 것이지 사실이 아니에요. 새 세션에게 인증 테스트부터 돌려보게 하고 1차 출처를 신뢰하도록 하세요."
 
-The reason to write one: the [model](#model) is [stateless](#stateless), so nothing in a session survives [clearing](#clearing) it. Decisions, constraints, half-finished plans — all gone with the [context](#context) that held them. The environment persists. Writing the important state into a file moves it somewhere the next session can read it back from.
+### Handoff artifact (핸드오프 아티팩트)
 
-The artifact is a [secondary source](#secondary-source) — an account of the session's work, not the work itself. That's what makes it small enough to brief a fresh session, and also why it can mislead one: it records what the writing session believed, and anything it left out or got wrong is invisible to the reader. Where a claim matters, the next session should verify it against the [primary source](#primary-source) — the code, the tests — rather than inherit it.
+[핸드오프](#handoff)의 전달 수단으로 사용되는 문서입니다. 한 [세션](#session)이 [환경](#environment)에 작성해 두고, 다음 세션이 이를 읽어서 작업을 이어받습니다. [스펙(Spec)](#spec), [티켓(Ticket)](#ticket), 계획 문서(plan.md) 등이 모두 핸드오프 아티팩트에 속합니다.
 
-A good artifact is written to be read into a session that has zero context. Concrete file paths rather than "the file we discussed". What was decided and why, so the next session doesn't relitigate it. What's done and what's left. It helps to tell the writing session where the artifact is headed: "write a handoff doc for a fresh session that knows nothing about this work".
+작성해야 하는 이유: [모델](#model)은 [무상태](#stateless)이므로 세션을 [비우는(Clearing)](#clearing) 순간 그 안의 모든 것은 증발합니다. 결정 사항, 제약 조건, 절반쯤 짜다 만 계획들 모두가 이를 담고 있던 [컨텍스트](#context)와 함께 사라집니다. 그러나 환경은 영구 보존됩니다. 중요한 작업 상태를 파일로 적어두면 다음 세션이 다시 읽어 들일 수 있는 안전한 보관소로 옮겨지게 됩니다.
 
-The alternative carry mechanism is [compaction](#compaction), which summarises in-memory. The artifact has two advantages: it lives on disk where you can read and correct it before anything depends on it, and it can be reused — the same spec can brief five parallel sessions.
+아티팩트는 일종의 [2차 출처](#secondary-source)입니다. 세션이 수행한 작업 그 자체가 아니라 작업에 대한 설명문입니다. 그렇기 때문에 새 세션을 브리핑할 수 있을 만큼 가볍고 압축적이지만, 동시에 새 세션을 오도할 위험도 안고 있습니다. 작성 세션이 믿었던 바를 적은 것일 뿐이며, 빠뜨리거나 잘못 기록한 내용은 읽는 세션에게 보이지 않습니다. 중요한 주장이 있다면 다음 세션은 이를 맹신하지 말고 [1차 출처](#primary-source)(실제 코드, 테스트 결과)를 통해 교차 검증해야 합니다.
 
-_Usage:_
+좋은 아티팩트는 아무런 사전 맥락 없이 이 문서를 처음 읽는 세션을 배려하여 작성되어야 합니다. "우리가 아까 논의했던 파일" 같은 모호한 표현 대신 구체적인 절대 파일 경로를 적어야 합니다. 다음 세션이 쓸데없이 재논쟁을 벌이지 않도록 무엇이 결정되었고 왜 그렇게 결정했는지를 명시해야 합니다. 무엇이 완료되었고 무엇이 아직 남았는지 적어야 합니다. 아티팩트를 작성하는 세션에게 그 용도를 미리 알려주면 좋습니다. "이 작업에 대해 아무것도 모르는 백지상태의 새 세션이 읽을 인계 문서를 작성해 줘."
 
-"How do I split this between the planning [agent](#agent) and the implementing one?"
+대안으로 메모리 상에서 요약하는 [압축(Compaction)](#compaction)이 있습니다. 아티팩트는 압축에 비해 두 가지 결정적인 장점을 갖습니다. 디스크 파일로 저장되므로 다른 에이전트가 의존하기 전에 사람이 직접 읽고 틀린 부분을 수정할 수 있으며, 재사용이 가능합니다. 잘 작성된 스펙 문서 하나로 5개의 병렬 세션을 동시에 브리핑할 수 있습니다.
 
-"Have the planner write a handoff artifact — file paths, decisions, constraints. The implementer's session opens with a pointer to the artifact and works from it as its brief."
+_사용 예시:_
 
-### Spec
+"기획을 맡은 [에이전트](#agent)와 실제 구현을 맡은 에이전트 사이의 작업을 어떻게 분리해야 할까요?"
 
-A [handoff artifact](#handoff-artifact) describing a multi-[session](#session) piece of work — what's being built, not how each session does its share. Mutates as work progresses. Made of [tickets](#ticket).
+"기획자에게 핸드오프 아티팩트를 쓰게 하세요. 파일 경로, 결정 사항, 제약 조건을 명시하는 겁니다. 구현자 세션은 그 아티팩트를 가리키는 포인터를 들고 시작하여 이를 작업 지침으로 삼으면 됩니다."
 
-The spec exists because sessions are disposable and big work isn't. Anything that takes more than one [context window](#context-window) of effort needs a home outside the [context](#context) — somewhere in the agent's [environment](#environment) that survives [clearing](#clearing), whether that's a file in the repo, a GitHub issue, or an issue tracker the agent can reach. The spec is that home: the goal, the constraints, the decisions made so far, and the list of tickets with their status. Any fresh session can read it and know where the work stands without inheriting the previous session's accumulated noise.
+### Spec (스펙/명세)
 
-Specs come in recognisable styles, mostly inherited from how teams already write things down. A _product requirements document_ (PRD) leans toward the user-facing what and why — features, behaviour, acceptance criteria. A _design doc_ or _RFC_ leans technical — the chosen approach, the alternatives rejected, the trade-offs. At the small end, a plain `plan.md` with a checklist of tickets does the same job for a multi-session feature. The style matters less than the role: for the [agent](#agent), each of these is the same thing — the durable statement of intent it reads at the start of every session.
+여러 [세션](#session)에 걸쳐 진행되는 거대한 작업 단위를 정의한 [핸드오프 아티팩트](#handoff-artifact)입니다. 각 세션이 구체적으로 일을 '어떻게' 처리할지가 아니라 '무엇'을 만들고 있는지에 집중합니다. 작업이 진행됨에 따라 지속적으로 업데이트됩니다. 여러 개의 [티켓](#ticket)들로 구성됩니다.
 
-_Usage:_
+스펙이 존재하는 이유는 세션은 일회용이지만 거대한 작업은 그렇지 않기 때문입니다. 둘 이상의 [컨텍스트 윈도우](#context-window) 분량의 노력이 들어가는 모든 일은 [컨텍스트](#context) 바깥에 영구적인 안식처를 마련해야 합니다. 저장소 안의 마크다운 파일이든, GitHub 이슈든, 에이전트가 접근할 수 있는 이슈 트래커든 세션을 [비워도(Clearing)](#clearing) 사라지지 않는 [환경](#environment) 어딘가에 보관되어야 합니다. 스펙이 바로 그 집입니다. 목표, 제약 조건, 지금까지 내린 결정 사항, 그리고 진행 상태가 표시된 티켓 목록이 여기에 담깁니다. 백지상태의 어떤 새 세션이라도 스펙을 읽으면 이전 세션이 쌓아둔 소음을 물려받지 않고도 작업이 지금 어디까지 와있는지 즉시 파악할 수 있습니다.
 
-"Should this all be one session?"
+스펙은 팀들이 문서를 작성해 오던 익숙한 양식을 따릅니다. PRD(제품 요구사항 정의서)는 사용자 관점의 목표와 이유(기능, 동작 방식, 인수 조건)에 치중합니다. 설계 문서(Design Doc)나 RFC는 기술적인 측면(채택한 접근법, 기각된 대안들, 트레이드오프)에 집중합니다. 작은 규모라면 체크리스트 형태의 티켓들이 나열된 소박한 `plan.md` 파일 하나로도 여러 세션에 걸친 기능 개발을 훌륭하게 이끌 수 있습니다. 문서의 양식보다 중요한 것은 역할입니다. [에이전트](#agent) 입장에서 이 모든 것은 동일합니다. 매 세션의 시작마다 읽게 되는 불변의 의도 진술서입니다.
 
-"No, write it up as a spec — break it into tickets, run each one in its own session. Trying to do the whole thing in a single context will hit the [dumb zone](#smart-zone) before you're halfway."
+_사용 예시:_
 
-### Ticket
+"이 작업을 세션 하나에서 다 끝내야 할까요?"
 
-A [handoff artifact](#handoff-artifact) scoping one [session](#session) of work. Stands alone, or hangs off a [spec](#spec) as one of its children. Tickets can block or be blocked by sibling tickets, so the order of work falls out of their dependency graph rather than a linear plan.
+"아닙니다. 스펙 문서로 작성하세요. 티켓 단위로 쪼개고 각 티켓을 독립된 세션에서 실행해야 합니다. 단 하나의 컨텍스트로 이 전체를 다 밀어붙이려다간 절반도 못 가서 [덤 존](#smart-zone)에 부딪힐 겁니다."
 
-The defining constraint is the size: one session. A ticket should be completable before the session drifts out of the [smart zone](#smart-zone) — and that constraint is testable. If sessions on your tickets routinely degrade before the work is done, the tickets are too big; split them. If each session spends most of its [context](#context) on setup before doing five minutes of work, they're too small; merge them.
+### Ticket (티켓)
 
-A good ticket is written for a reader with no other context. The goal, the acceptance criteria, and [context pointers](#context-pointer) to the relevant files and decisions — enough that the session can start working without re-deriving what the last one knew.
+단 1회의 [세션](#session) 분량으로 범위를 한정한 [핸드오프 아티팩트](#handoff-artifact)입니다. 독립적으로 존재할 수도 있고, [스펙](#spec) 문서 아래에 딸린 자식 항목으로 매달려 있을 수도 있습니다. 티켓들은 서로를 블로킹(선행 의존)할 수 있으므로, 전체 작업의 순서는 일직선 계획이 아니라 의존성 그래프의 형태로 자연스럽게 도출됩니다.
 
-The dependency graph is also what unlocks parallelism. Independent tickets — the leaves of the graph — can each run in their own session at the same time. This is an effective way of running multiple agents at once.
+티켓을 규정짓는 핵심 제약은 크기입니다. 바로 **"단 1회의 세션"**입니다. 티켓은 세션이 [스마트 존](#smart-zone)을 벗어나 흐려지기 전에 완수될 수 있는 크기여야 하며, 이 제약은 실제로 테스트해 볼 수 있습니다. 여러분의 티켓을 물고 들어간 세션들이 작업을 채 끝내기도 전에 상습적으로 품질 저하를 겪는다면 티켓이 너무 큰 것이니 쪼개야 합니다. 반대로 세션들이 본격적인 작업을 5분 하겠다고 컨텍스트의 대부분을 환경 파악과 셋업에만 낭비하고 있다면 티켓이 너무 잘게 쪼개진 것이니 합쳐야 합니다.
 
-_Usage:_
+좋은 티켓은 다른 배경 맥락이 전혀 없는 독자를 상정하고 작성됩니다. 명확한 목표, 인수 조건, 그리고 관련된 파일과 결정 사항을 가리키는 [컨텍스트 포인터](#context-pointer)가 포함되어야 합니다. 이전 세션이 알던 것을 처음부터 다시 역산하느라 시간 낭비하지 않고 즉시 작업을 시작할 수 있을 만큼 충분한 정보가 담겨야 합니다.
 
-"Where do I start on the migration spec?"
+의존성 그래프는 병렬 작업의 문을 열어주는 열쇠이기도 합니다. 그래프의 말단에 위치한 서로 독립적인 티켓(리프 노드)들은 각자의 세션에서 동시에 병렬로 실행할 수 있습니다. 이것이 여러 에이전트를 한꺼번에 효율적으로 굴리는 가장 강력한 방법입니다.
 
-"Look at the ticket graph — the schema change blocks the backfill, the backfill blocks the API switch. Pick a leaf and run a session on it."
+_사용 예시:_
 
-### Compaction
+"마이그레이션 스펙에서 어디서부터 손을 대야 할까요?"
 
-A [handoff](#handoff) done in-memory: the previous [session](#session)'s history is summarised, and the summary seeds a fresh session. Lossy by design: the transcript is a [primary source](#primary-source), the summary a [secondary source](#secondary-source) — detail traded for headroom. Triggered manually by the user, or automatically via [autocompact](#autocompact).
+"티켓 의존성 그래프를 보세요. 스키마 변경이 데이터 백필을 막고 있고, 백필이 API 전환을 막고 있습니다. 의존성이 없는 말단 티켓을 하나 골라서 세션을 띄우세요."
 
-The mechanism: the [context window](#context-window) is finite, and a long session fills it — every [tool result](#tool-result), every file read, every wrong turn stays in history. When it gets heavy, the [harness](#harness) asks the [model](#model) to summarise the session, throws the original history away, and seeds a fresh session with the summary. Whatever didn't make it into the summary is gone from the context. Some harnesses soften this by keeping the old transcript on disk and leaving a [context pointer](#context-pointer) to it in the summary — the secondary source links back to its primary source, so a detail the summary lost can be recovered by re-reading the original.
+### Compaction (압축)
 
-The summary is written by the model, so it can be prompted. "Preserve the schema decisions" makes the generated artifact more deliberate. Timing matters too — compact at a phase boundary, after the plan is settled, not mid-task.
+메모리 상에서 수행되는 [핸드오프](#handoff)입니다. 이전 [세션](#session)의 대화 이력을 요약하고, 그 요약본을 씨앗 삼아 깨끗한 새 세션을 엽니다. 태생적으로 손실을 내포합니다. 원본 대화 전문은 [1차 출처](#primary-source)이고 요약본은 [2차 출처](#secondary-source)이므로, 헤드룸(여유 공간)을 얻는 대가로 디테일을 포기하는 것입니다. 사용자가 수동으로 트리거할 수도 있고, [자동 압축(Autocompact)](#autocompact)을 통해 자동으로 발동될 수도 있습니다.
 
-Contrast with [clearing](#clearing), which drops everything and starts cold: compaction tries to carry the essentials across; clearing bets they're already written down somewhere better.
+동작 원리: [컨텍스트 윈도우](#context-window)는 유한하며 긴 세션은 이를 가득 채웁니다. 모든 [툴 결과](#tool-result), 읽었던 모든 파일, 헛발질했던 시도들이 이력에 고스란히 남습니다. 윈도우가 무거워지면 [하네스](#harness)는 [모델](#model)에게 지금까지의 세션을 요약해 달라고 요청한 뒤, 원본 이력을 버리고 그 요약본으로 새 세션을 시작합니다. 요약문에 포함되지 못한 모든 정보는 컨텍스트에서 영구히 사라집니다. 일부 하네스는 과거 대화 로그를 디스크에 보존해 두고 요약문 안에 그 로그를 가리키는 [컨텍스트 포인터](#context-pointer)를 남겨둠으로써 충격을 완화합니다. 2차 출처가 1차 출처로 돌아가는 링크를 품고 있으므로, 요약 과정에서 유실된 세부 사항을 원본 로그를 다시 읽어 복구할 수 있게 돕는 것입니다.
 
-_Usage:_
+요약문은 모델이 작성하므로 프롬프트를 통해 유도할 수 있습니다. "스키마에 관한 결정 사항은 반드시 보존해 줘"라고 지시하면 훨씬 목적의식이 뚜렷한 아티팩트가 생성됩니다. 타이밍도 중요합니다. 작업 도중이 아니라 계획이 확정된 후와 같은 단계 전환 지점에서 압축을 수행하세요.
 
-"[Context](#context)'s getting heavy and I still have the test pass to do."
+모든 것을 버리고 차갑게 백지에서 시작하는 [비우기(Clearing)](#clearing)와 대조해 보세요. 압축은 핵심을 어떻게든 건져서 다음으로 넘기려 시도하는 것이고, 비우기는 중요한 내용은 이미 더 좋은 어딘가(디스크)에 적혀 있을 것이라 믿고 미련 없이 던지는 것입니다.
 
-"Compact before you start — write what must survive into the summary prompt so the new session keeps the schema decisions and drops the exploration."
+_사용 예시:_
 
-### Autocompact
+"[컨텍스트](#context)가 너무 무거워졌는데 아직 테스트 통과 작업이 남아 있어요."
 
-[Compaction](#compaction) triggered automatically by the [harness](#harness) when the [context window](#context-window) approaches full.
+"시작하기 전에 압축을 돌리세요. 요약 프롬프트에 꼭 보존해야 할 내용을 명시하여, 탐색 과정의 찌꺼기는 버리고 스키마 결정 사항만 새 세션으로 넘기도록 하세요."
 
-The harness watches how full the context window is. When it crosses a threshold — often around 80% — it pauses, asks the [model](#model) to summarise the [session](#session) so far, and seeds a fresh session with the summary. Work then continues as if nothing happened.
+### Autocompact (자동 압축)
 
-Except something did happen. Compaction is lossy, and autocompact is lossy at a moment you didn't choose. A manual compact happens at a phase boundary, when you can tell the model what to preserve. Autocompact fires mid-task, whenever the threshold is hit — possibly halfway through a refactor, with the summary deciding for itself which of your decisions were worth keeping. The classic symptom: the [agent](#agent) carries on confidently but has quietly forgotten a constraint you established an hour ago, and you only notice when its work starts contradicting it.
+[컨텍스트 윈도우](#context-window)가 한계치에 도달했을 때 [하네스](#harness)가 자동으로 발동시키는 [압축(Compaction)](#compaction)입니다.
 
-The defence is to not let it fire. Watch the context indicator and compact manually at a natural boundary, or write decisions into a plan doc or [handoff artifact](#handoff-artifact) on disk, where no summary can lose them. Most harnesses also let you customise the buffer — moving the threshold earlier or later, or turning autocompact off entirely — so you can tune how much headroom you keep before it fires.
+하네스는 컨텍스트 윈도우가 얼마나 찼는지 지속적으로 감시합니다. 흔히 80% 전후의 특정 임계값을 넘어서면 작업을 잠시 멈추고, [모델](#model)에게 지금까지의 [세션](#session)을 요약하게 한 뒤, 그 요약본으로 새 세션을 엽니다. 그리고는 아무 일도 없었다는 듯 작업을 이어갑니다.
 
-_Usage:_
+하지만 분명히 무슨 일이 일어났습니다. 압축은 손실을 수반하며, 자동 압축은 여러분이 선택하지 않은 타이밍에 기습적으로 손실을 일으킵니다. 수동 압축은 사용자가 남길 것을 통제할 수 있는 작업 전환기에 일어나지만, 자동 압축은 리팩토링의 한가운데든 언제든 임계값을 치는 순간 발동하여 무엇을 남기고 무엇을 버릴지를 요약 모델 스스로 결정해 버립니다. 전형적인 증상: [에이전트](#agent)가 여전히 자신만만하게 일하지만 한 시간 전에 합의했던 핵심 제약 조건을 조용히 까먹어버리고, 한참 뒤에 에이전트의 결과물이 그 제약을 정면으로 위반하는 것을 보고서야 사태를 깨닫게 됩니다.
 
-"It doesn't seem to remember what we decided about the schema earlier."
+가장 좋은 방어책은 자동 압축이 터지지 않게 관리하는 것입니다. 컨텍스트 사용량 게이지를 주시하다가 자연스러운 작업 매듭에서 수동으로 압축하거나, 중요한 결정 사항은 디스크의 계획 문서나 [핸드오프 아티팩트](#handoff-artifact)에 기록해 두어 어떤 요약 모델도 지워버릴 수 없게 만드세요. 대부분의 하네스는 임계값 버퍼를 조정하거나 자동 압축을 아예 끌 수 있는 설정 기능을 제공하므로, 강제 압축이 터지기 전 여유 공간을 얼마나 확보할지 직접 튜닝할 수 있습니다.
 
-"Autocompact fired between [turns](#turn) — the early decisions got summarised and we must have lost something. Reload the plan doc, or compact manually next time so you control what gets kept."
+_사용 예시:_
 
-## Section 6 — Memory and Steering
+"아까 스키마에 대해 결정했던 내용을 전혀 기억하지 못하는 것 같아요."
 
-### Memory system
+"[턴](#turn) 사이에 자동 압축이 돌아버렸네요. 초반 결정 사항들이 요약되는 과정에서 유실된 게 분명합니다. 계획 문서를 다시 로드해 주거나, 다음부터는 중요한 내용이 날아가지 않게 적절한 시점에 수동으로 압축하세요."
 
-A system that attempts to make an [agent](#agent) [stateful](#stateful) across [sessions](#session). Persists information into the [environment](#environment) during a session and reloads it into the [context window](#context-window) at the start of future ones, so the agent carries continuity beyond the user [clearing](#clearing) the session.
+---
 
-A memory system has two halves. The write path: during a session, the agent records what it learned — a preference you stated, a fact about the project — as files in the environment. The read path: at session start, the [harness](#harness) loads those files, or an index of them, back into the context window. Many harnesses ship their own memory system — Claude Code's `/memory` is one — but you can also build one yourself: a directory of notes plus an instruction in [AGENTS.md](#agentsmd) to consult it.
+## 섹션 6 — 메모리와 조향 (Memory and Steering)
 
-The same trade-offs as any always-loaded content apply. Memories accumulate, so most systems load a one-line index and leave the bodies behind [context pointers](#context-pointer) rather than inlining everything. And memories are [secondary sources](#secondary-source), so they drift: a fact recorded in March is loaded with equal confidence in June, after the project has moved on. A memory system needs pruning, the same way AGENTS.md does.
+### Memory system (메모리 시스템)
 
-_Usage:_
+[세션](#session)을 넘어 [에이전트](#agent)를 [상태 유지(Stateful)](#stateful) 형태로 유지하려는 시스템입니다. 세션 중에 습득한 정보를 [환경](#environment)에 영속화해 두고, 미래의 다른 세션이 시작될 때 [컨텍스트 윈도우](#context-window)로 다시 불러와 줌으로써, 사용자가 세션을 [비워도(Clearing)](#clearing) 에이전트가 영속적인 연속성을 갖도록 만듭니다.
 
-"I keep having to re-tell it I'm on Postgres, not MySQL."
+메모리 시스템은 두 갈래 경로로 이루어집니다. 쓰기 경로: 세션 중에 에이전트는 알게 된 사실(사용자의 코딩 취향, 프로젝트의 특이점)을 환경 안의 파일로 기록합니다. 읽기 경로: 새 세션이 시작될 때 [하네스](#harness)는 그 파일들, 또는 파일들의 인덱스 목록을 컨텍스트 윈도우에 다시 밀어 넣습니다. 많은 하네스가 자체 내장 메모리 시스템을 제공하지만(Claude Code의 `/memory` 등), 직접 구축할 수도 있습니다. 메모용 디렉터리를 하나 파두고 [AGENTS.md](#agentsmd)에 세션 시작 시 그 디렉터리를 확인하라는 지침을 적어두면 됩니다.
 
-"Wire up a memory system — write what it learns to the [filesystem](#filesystem) on the first [turn](#turn), reload it at session start. The [model](#model) itself is [stateless](#stateless); the memory layer fakes continuity."
+상시 로드되는 모든 콘텐츠와 동일한 트레이드오프가 여기에 적용됩니다. 기억은 시간이 갈수록 쌓여가므로, 대부분의 시스템은 모든 본문을 때려 박는 대신 한 줄짜리 인덱스만 로드하고 본문은 [컨텍스트 포인터](#context-pointer) 뒤에 숨겨둡니다. 그리고 메모리는 [2차 출처](#secondary-source)이므로 시간이 지나면 현실과 어긋납니다. 3월에 기록된 메모는 프로젝트가 한참 변해버린 6월에도 똑같은 당당함으로 로드됩니다. 메모리 시스템도 AGENTS.md와 마찬가지로 주기적인 가지치기와 청소가 필요합니다.
+
+_사용 예시:_
+
+"MySQL이 아니라 Postgres를 쓴다고 매번 다시 말해줘야 해요."
+
+"메모리 시스템을 구축하세요. 첫 번째 [턴](#turn)에서 배운 내용을 [파일시스템](#filesystem)에 적어두고, 세션 시작 시 다시 읽어오게 하는 겁니다. [모델](#model) 자체는 [무상태](#stateless)이므로 메모리 계층이 겉으로 연속성을 흉내 내주어야 합니다."
 
 ### AGENTS.md
 
-A file in the [environment](#environment) that the [harness](#harness) loads into the [context window](#context-window) at [session](#session) start — the project's standing brief to the [agent](#agent). Cross-harness convention; some harnesses also have their own variant (Claude Code's is CLAUDE.md).
+[세션](#session)이 시작될 때 [하네스](#harness)가 [컨텍스트 윈도우](#context-window)에 자동으로 로드하는 [환경](#environment) 내의 파일입니다. [에이전트](#agent)에게 전달하는 프로젝트의 '상시 브리핑' 역할을 합니다. 여러 하네스를 아우르는 범용적 컨벤션이며, 일부 하네스는 자체 변형을 사용하기도 합니다(Claude Code의 `CLAUDE.md`).
 
-Because it loads automatically, it's one way to avoid repeating yourself across sessions. The [model](#model) is [stateless](#stateless) — a correction you give in one session is gone in the next, and you end up telling every fresh session that the project uses pnpm, that tests run with a particular flag, that a directory is generated and shouldn't be touched. When you've corrected the agent for the same thing twice, that correction is a candidate line for AGENTS.md.
+세션 시작 시 무조건 로드되므로, 세션을 넘어 같은 말을 반복하지 않기 위한 가장 훌륭한 수단입니다. [모델](#model)은 [무상태](#stateless)이므로 이전 세션에서 준 피드백은 다음 세션에서 증발합니다. 결국 새 세션을 열 때마다 우리 프로젝트는 pnpm을 쓴다느니, 테스트는 특정 플래그를 붙여 돌려야 한다느니, 저 디렉터리는 자동 생성 파일이니 건드리지 말라느니 하는 말을 앵무새처럼 되풀이하게 됩니다. 에이전트에게 같은 지적을 두 번 이상 했다면, 그 피드백은 AGENTS.md에 들어갈 유력한 후보입니다.
 
-Suitable content is whatever the agent can't derive from the code: build and test commands, conventions the codebase doesn't make obvious, hard constraints ("never edit the generated client"). Short and declarative — it's a brief, not documentation.
+들어가기에 적합한 내용은 에이전트가 코드 자체만 보고는 도저히 유추할 수 없는 정보들입니다. 빌드 및 테스트 명령어, 코드베이스만 봐서는 드러나지 않는 암묵적 컨벤션, 강력한 제약 조건("자동 생성된 클라이언트 파일은 절대 직접 수정하지 말 것") 등이 해당합니다. 문서가 아니라 브리핑이므로 간결하고 선언적인 문장으로 작성되어야 합니다.
 
-The trade-off is that everything in it is always loaded. Instructions accumulate, most of them irrelevant to any given task, and a long AGENTS.md both costs tokens and dilutes itself — the more instructions in context, the less reliably the model follows any one of them.
+대가는 이 파일의 모든 내용이 예외 없이 항상 로드된다는 점입니다. 지침은 시간이 갈수록 무분별하게 쌓여가고, 그중 대부분은 당장 주어진 과업과 아무런 상관이 없는 내용들입니다. 길어진 AGENTS.md는 토큰 비용을 청구할 뿐만 아니라 자기 자신의 효력을 희석시킵니다. 컨텍스트에 지침이 많아질수록 모델이 그중 어느 하나를 충실하게 따를 확률은 떨어집니다.
 
-_Avoid:_ using AGENTS.md for content that should be [progressively disclosed](#progressive-disclosure) — anything in it pays a [token](#token) cost every [turn](#turn), in every session, whether or not that session needs it. A style guide can go behind a [skill](#skill) or a [context pointer](#context-pointer) instead; keep AGENTS.md for the lines that apply everywhere.
+_지양할 표현:_ [점진적으로 공개(Progressive disclosure)](#progressive-disclosure)되어야 마땅한 내용들을 AGENTS.md에 쏟아붓기 — 여기에 적힌 모든 것은 해당 세션에서의 필요 여부와 무관하게 모든 세션의 매 [턴](#turn)마다 [토큰](#token) 비용을 지불합니다. 스타일 가이드 같은 문서는 [스킬](#skill)이나 [컨텍스트 포인터](#context-pointer) 뒤로 숨겨두어야 합니다. AGENTS.md는 모든 작업에 예외 없이 적용되는 핵심 규칙만을 위해 아껴두세요.
 
-_Usage:_
+_사용 예시:_
 
-"Why is every session starting with 4k tokens already burned?"
+"왜 모든 세션이 시작하자마자 4천 토큰씩 깎이고 시작하죠?"
 
-"Check AGENTS.md — someone pasted the entire style guide in there instead of putting it behind a skill."
+"AGENTS.md를 확인해 보세요. 누군가 스타일 가이드 전체를 스킬로 분리하지 않고 파일에 통째로 붙여넣어 놨네요."
 
-### Progressive disclosure
+### Progressive disclosure (점진적 공개)
 
-Loading only the [context](#context) an [agent](#agent) needs right now, with [context pointers](#context-pointer) to the rest. Borrowed from UI design, where it means showing users only the controls relevant to their current task and hiding the rest behind a click.
+[에이전트](#agent)가 지금 당장 필요로 하는 [컨텍스트](#context)만 로드하고, 나머지는 [컨텍스트 포인터](#context-pointer)로 남겨두어 필요할 때 찾아 읽게 만드는 기법입니다. UI 디자인에서 사용자의 현재 과업에 필요한 컨트롤만 먼저 보여주고 나머지는 클릭 뒤로 숨겨두는 설계 방식에서 차용했습니다.
 
-The technique exists because context is a cost twice over. Every [token](#token) loaded up front is billed as [input tokens](#input-tokens) on every [turn](#turn), and every token spends [attention budget](#attention-budget) whether the agent needs it or not. An [AGENTS.md](#agentsmd) stuffed with the full style guide, deployment runbook, and database conventions makes the agent worse at all of them — the instructions that matter for the current task are diluted by the ones that don't. The tell is an agent that ignores rules you know are in its context: they're in there, but buried.
+이 기법이 필요한 이유는 컨텍스트가 이중의 비용을 청구하기 때문입니다. 처음에 미리 로드된 모든 [토큰](#token)은 매 [턴](#turn)마다 [입력 토큰](#input-tokens) 요금으로 부과되며, 에이전트의 필요 여부와 상관없이 [어텐션 예산](#attention-budget)을 축냅니다. [AGENTS.md](#agentsmd)에 전체 스타일 가이드, 배포 런북, 데이터베이스 컨벤션을 전부 구겨 넣으면 에이전트는 그 모든 작업을 오히려 더 못하게 됩니다. 현재 과업에 정말 중요한 지침이 무관한 다른 지침들에 파묻혀 희석되기 때문입니다. 분명히 컨텍스트 안에 들어있는 규칙을 에이전트가 뻔뻔하게 무시하고 있다면 바로 이 현상 때문입니다. 규칙이 존재하지만 잡음 밑에 묻혀버린 것입니다.
 
-Progressive disclosure inverts this. Keep the always-loaded layer small — a sentence per topic and a pointer to where the detail lives. The agent reads the style guide when it's writing a component, the deployment runbook when it's deploying, and neither when it's fixing a test. [Skills](#skill) are the pattern built into the [harness](#harness): a short description loaded every [session](#session), the full instructions only when triggered.
+점진적 공개는 이를 뒤집습니다. 상시 로드되는 계층은 극도로 콤팩트하게 유지합니다. 주제별로 핵심 요약 한 줄과 상세 내용이 있는 위치를 가리키는 포인터만 둡니다. 에이전트는 컴포넌트를 작성할 때만 스타일 가이드를 찾아 읽고, 배포 작업을 할 때만 배포 런북을 읽으며, 버그 테스트를 수정할 때는 둘 다 거들떠보지 않습니다. [스킬(Skills)](#skill)은 이 패턴을 [하네스](#harness) 수준에서 공식화한 형태입니다. 짧은 설명문만 매 [세션](#session)마다 로드해 두고, 실제 상세 지침은 트리거되었을 때만 안으로 불러들입니다.
 
-_Usage:_
+_사용 예시:_
 
-"Should I dump the entire style guide into AGENTS.md?"
+"스타일 가이드 전문을 AGENTS.md에 다 털어 넣을까요?"
 
-"No — progressive disclosure. Reference the style guide as a skill the agent loads when it actually needs to write a component. AGENTS.md pays the token cost every turn."
+"안 됩니다. 점진적 공개를 쓰세요. 스타일 가이드는 에이전트가 실제로 컴포넌트를 작성해야 할 때 로드하는 스킬로 분리하세요. AGENTS.md에 넣으면 매 턴마다 불필요한 토큰 비용을 내야 합니다."
 
-### Context pointer
+### Context pointer (컨텍스트 포인터)
 
-A mention in one document that points to another, so the [agent](#agent) can pull it into the [context window](#context-window) only when the task calls for it. The unit [progressive disclosure](#progressive-disclosure) is built from.
+어떤 문서 안에서 다른 문서를 가리키는 경로 언급으로, [에이전트](#agent)가 작업에 필요할 때만 해당 문서를 [컨텍스트 윈도우](#context-window)로 끌어올 수 있도록 유도하는 참조 링크입니다. [점진적 공개](#progressive-disclosure)를 구축하는 기본 벽돌입니다.
 
-The reason to use a pointer (instead of inlining the content) is cost. A pointer is one line in the context window. The document behind it might be thousands of [tokens](#token), but those tokens cost nothing until the agent actually follows the pointer. Inline a 2,000-token runbook in [AGENTS.md](#agentsmd) and every [session](#session) pays for it; replace it with "deploy process: see `internal/deploy.md`" and only the sessions that deploy ever load it. The agent follows the pointer with a [tool call](#tool-call) when the task matches.
+내용을 본문에 인라인으로 다 적지 않고 포인터를 남겨두는 이유는 비용 때문입니다. 포인터는 컨텍스트 윈도우에서 단 한 줄을 차지합니다. 그 뒤에 숨어있는 문서는 수천 [토큰](#token)에 달할 수 있지만, 에이전트가 실제로 포인터를 따라 열어보기 전까지는 비용이 단 1토큰도 들지 않습니다. 2,000토큰짜리 배포 런북을 [AGENTS.md](#agentsmd)에 인라인으로 박아두면 모든 [세션](#session)이 그 비용을 독박 쓰지만, "배포 프로세스: `internal/deploy.md` 참고"라고 한 줄 포인터로 바꿔두면 실제로 배포를 수행하는 세션만 그 문서를 로드합니다. 에이전트는 과업이 매칭되었을 때 [툴 호출](#tool-call)을 통해 포인터를 추적하여 내용을 읽습니다.
 
-A pointer needs two parts to work: a stable path, and enough description for the agent to know when following it is worth it. A bare path is a pointer the agent has no reason to follow; "see `internal/deploy.md`" with no hint of what's inside gets skipped by a session that needed it. Write the line so it matches how tasks present: "release, deploy, or rollback — read `internal/deploy.md` first".
+포인터가 제구실을 하려면 두 가지가 필요합니다. 안정적인 경로, 그리고 에이전트가 언제 이 포인터를 열어보아야 할지 판단할 수 있는 충분한 설명입니다. 맥락 없는 헐벗은 파일 경로는 에이전트가 굳이 따라가 볼 이유를 찾지 못하는 죽은 포인터입니다. 안에 무엇이 들어있는지 힌트도 없이 적힌 "참조: `internal/deploy.md`"는 정작 배포 문서가 절실한 세션조차 그냥 지나치게 만듭니다. 실제 과업이 주어지는 양상에 맞추어 문장을 구성하세요: "배포, 릴리즈, 또는 롤백 작업 시 — `internal/deploy.md`를 먼저 읽을 것."
 
-Pointers are everywhere once you look: lines in AGENTS.md, [skill](#skill) descriptions (the harness loads the description; the skill body waits behind it), filenames in a directory listing, links between docs.
+포인터는 눈을 돌리면 어디에나 있습니다. AGENTS.md의 참조 한 줄, [스킬](#skill)의 설명문(하네스는 설명만 먼저 띄우고 본문은 포인터 뒤에 숨겨둡니다), 디렉터리 목록의 파일명들, 문서 간의 링크가 모두 포인터입니다.
 
-A pointer can also tie a [secondary source](#secondary-source) back to the [primary source](#primary-source) it was derived from — the compaction summary that names the original transcript, the doc that names the source file it describes. This makes the secondary source's lossiness recoverable: when the summary turns out not to be enough, the agent follows the pointer and reads the original, instead of working from whatever the summary kept.
+포인터는 [2차 출처](#secondary-source)를 그것이 탄생한 [1차 출처](#primary-source)와 다시 묶어주는 역할도 합니다. 원본 대화 로그의 파일명을 적어둔 압축 요약문, 묘사 대상 소스 코드의 경로를 적어둔 설계 문서가 그렇습니다. 이는 2차 출처의 태생적 한계인 정보 유실을 복구 가능하게 만들어줍니다. 요약된 내용만으로 부족할 때, 에이전트는 유실된 단편에 매달려 헤매는 대신 포인터를 따라가 원본 1차 출처를 직접 읽을 수 있습니다.
 
-_Avoid:_ "reference" — too dry; doesn't convey that following it pulls more context in. "Portal" — too florid.
+_지양할 표현:_ "레퍼런스(Reference/참조)" — 너무 무미건조하여 포인터를 따라갈 때 더 많은 컨텍스트가 딸려 들어온다는 역동성을 담지 못합니다. "포털(Portal)" — 지나치게 화려한 미사여구입니다.
 
-_Usage:_
+_사용 예시:_
 
-"AGENTS.md is getting huge."
+"AGENTS.md가 너무 뚱뚱해지고 있어요."
 
-"Most of it should be context pointers, not content. Keep the always-on rules inline; turn the deploy runbook and the style guide into skills and leave a context pointer behind."
+"대부분의 내용을 내용 본문이 아니라 컨텍스트 포인터로 바꿔야 합니다. 상시 지켜야 할 기본 규칙만 인라인으로 남기고, 배포 런북이나 스타일 가이드는 스킬로 분리한 뒤 컨텍스트 포인터만 남겨두세요."
 
-### Skill
+### Skill (스킬)
 
-A teachable capability bundled as a unit — instructions and resources for doing one task well, kept in the [environment](#environment) until a [context pointer](#context-pointer) pulls it into the [context window](#context-window) for the task at hand. The unit of [progressive disclosure](#progressive-disclosure) in a [harness](#harness).
+하나의 과업을 훌륭하게 수행하기 위한 지침과 리소스를 하나로 묶은 가르칠 수 있는 역량 단위입니다. 평소에는 [환경](#environment)에 머물러 있다가, 과업이 주어졌을 때 [컨텍스트 포인터](#context-pointer)를 통해 [컨텍스트 윈도우](#context-window)로 당겨옵니다. [하네스](#harness) 환경에서 [점진적 공개](#progressive-disclosure)를 달성하는 표준 단위입니다.
 
-Skills are an open standard, defined at [agentskills.io](https://agentskills.io) — originally developed by Anthropic and since adopted by most major harnesses, so a skill written once works across them. The format is a folder containing:
+스킬은 [agentskills.io](https://agentskills.io)에 정의된 공개 표준 규격입니다. 원래 Anthropic이 개발했으나 이후 주요 하네스 벤더 대부분이 채택하여, 한 번 작성한 스킬은 여러 하네스에서 두루 호환됩니다. 스킬은 다음과 같은 폴더 구조를 갖습니다:
 
-- A `SKILL.md` file — metadata (a name and description, at minimum) plus the instructions themselves
-- Optionally, scripts the [agent](#agent) can run
-- Optionally, templates and reference material the instructions point to
+- `SKILL.md` 파일 — 메타데이터(최소한 이름과 설명 포함)와 본 지침 내용
+- (선택 사항) [에이전트](#agent)가 실행할 수 있는 실행 스크립트들
+- (선택 사항) 지침이 참조할 수 있는 템플릿 및 레퍼런스 자료들
 
-Only the name and description sit in [context](#context) by default. When the agent's task matches, it loads the rest. Until then, the skill takes up almost no room — a sentence or two of [tokens](#token), however large its full instructions are.
+기본 상태에서는 오직 이름과 설명문만이 [컨텍스트](#context)에 상주합니다. 에이전트에게 떨어진 과업이 설명문과 일치할 때 비로소 나머지 상세 본문이 로드됩니다. 그전까지 스킬은 본문이 아무리 방대하더라도 고작 문장 한두 개 수준의 미미한 [토큰](#token) 공간만 차지합니다.
 
-This distinguishes skills from [AGENTS.md](#agentsmd), which is loaded into every [session](#session) regardless of the task. A skill is read when a particular kind of work comes up — releasing, scaffolding a new service, writing a migration — and ignored the rest of the time.
+이 점이 과업과 무관하게 매 [세션](#session)마다 통째로 로드되는 [AGENTS.md](#agentsmd)와의 결정적 차이점입니다. 스킬은 배포, 새 서비스 보일러플레이트 생성, 마이그레이션 작성 등 특정한 유형의 작업이 수면 위로 떠올랐을 때만 선택적으로 읽히고, 평소에는 조용히 숨어있습니다.
 
-_Avoid:_ "[tool](#tool)" — a tool is what the agent _calls_; a skill is instructions it _reads_.
+_지양할 표현:_ "[툴(Tool)](#tool)" — 툴은 에이전트가 '호출하는 코드 함수'이고, 스킬은 에이전트가 '읽는 지침 문서'입니다.
 
-_Usage:_
+_사용 예시:_
 
-"Where should I put the deploy runbook?"
+"배포 런북 문서를 어디에 두어야 할까요?"
 
-"As a skill — the agent loads it only when the task involves deploys. In AGENTS.md it'd burn tokens on every [turn](#turn) for something we use weekly."
+"스킬로 만드세요. 에이전트가 배포와 관련된 작업을 맡았을 때만 로드하도록 하는 겁니다. AGENTS.md에 두면 일주일에 한 번 쓸까 말까 한 내용을 위해 매 [턴](#turn)마다 토큰을 낭비하게 됩니다."
 
-### Subagent
+### Subagent (서브에이전트/하위 에이전트)
 
-An [agent](#agent) spawned by another agent via a [tool call](#tool-call). Runs in its own [session](#session) with its own [context window](#context-window), and reports a single [tool result](#tool-result) back. Distinct from a [handoff](#handoff) — the parent specifically expects a return; a handoff has no return path. **Cannot spawn further subagents** — the tree is one level deep. Subagents exist to isolate [context](#context), not to compose hierarchies.
+상위 에이전트가 [툴 호출](#tool-call)을 통해 생성해 내는 별도의 [에이전트](#agent)입니다. 자신만의 독립된 [세션](#session)과 독립된 [컨텍스트 윈도우](#context-window)에서 작업을 수행하며, 최종 결과를 단 하나의 [툴 결과](#tool-result)로 묶어 상위 에이전트에게 보고합니다. [핸드오프](#handoff)와 구별됩니다. 부모 에이전트는 자식이 결과를 들고 돌아오기를 명시적으로 기다리지만, 핸드오프에는 돌아갈 길이 없습니다. **서브에이전트가 또 다른 서브에이전트를 낳을 수는 없습니다** — 트리 구조의 깊이는 엄격히 1단계로 제한됩니다. 서브에이전트의 존재 목적은 복잡한 위계 조직을 구성하는 것이 아니라 [컨텍스트](#context)를 격리하는 데 있습니다.
 
-The point is to keep noisy work out of the parent's context. A broad search or a long file-reading expedition produces pages of tool results, most of which matter only long enough to find the answer. Run inside the parent and all of it stays in the parent's context for the rest of the session. Run inside a subagent and the noise fills a disposable window instead — only the final report lands in the parent's context. The report is a [secondary source](#secondary-source): the parent gets the subagent's account of what it found, not the raw results, so anything the report leaves out is invisible to the parent.
+핵심 목적은 소음이 많이 발생하는 작업을 부모의 컨텍스트에서 격리하여 쫓아내는 것입니다. 광범위한 코드베이스 검색이나 긴 파일들을 줄줄이 읽어나가는 탐색 작업은 수십 페이지 분량의 툴 결과를 쏟아내며, 그중 대부분은 정답을 찾고 나면 두 번 다시 볼 필요가 없는 찌꺼기들입니다. 부모 에이전트가 직접 이 작업을 수행하면 그 방대한 소음이 남은 세션 내내 부모의 컨텍스트를 틀어쥐고 있게 됩니다. 반면 서브에이전트를 띄워 작업을 맡기면 그 소음은 서브에이전트의 일회용 윈도우 안에서만 소모되고 파기되며, 오직 정제된 최종 보고서만이 부모의 컨텍스트로 들어옵니다. 그 보고서는 일종의 [2차 출처](#secondary-source)입니다. 부모는 날것의 검색 결과가 아니라 자식이 요약한 설명을 전달받는 것이므로, 보고서에서 누락된 디테일은 부모에게 보이지 않습니다.
 
-Subagents also run concurrently — a parent can fan several out at once over independent pieces of work.
+또한 서브에이전트는 병렬로 실행될 수 있습니다. 부모는 독립된 작업 여러 개를 향해 서브에이전트 여러 명을 동시에 흩뿌려 일을 시킬 수 있습니다.
 
-_Usage:_
+_사용 예시:_
 
-"The grep results are blowing out my context."
+"grep 검색 결과 로그가 너무 길어서 내 컨텍스트를 다 집어삼키고 있어요."
 
-"Spawn a subagent to do the search — it'll burn its own context window on the noise and report back the two file paths you actually need."
+"검색 작업을 수행할 서브에이전트를 띄우세요. 소음은 자기 컨텍스트 윈도우를 태워서 처리하고, 부모에게는 실제로 수정해야 할 파일 경로 두 개만 깔끔하게 보고하게 될 겁니다."
 
-## Section 7 — Patterns of Work
+---
 
-### Human-in-the-loop
+## 섹션 7 — 작업 패턴 (Patterns of Work)
 
-A working pattern where one or more humans pair with the [agent](#agent) during a [session](#session) — reviewing, redirecting, or collaborating in real time. The human is present and engaged, not just gating individual actions.
+### Human-in-the-loop (인간 참여/휴먼인더루프)
 
-The contrast is with [AFK](#afk) work, where the agent runs unattended and you judge the result afterwards. Human-in-the-loop means catching problems while they're still cheap: you see the agent reach for the wrong file, misread the requirement, or start down a dead end, and you redirect it in one sentence — rather than discovering twenty minutes of confident work built on that mistake. Agents don't reliably know when they're off track; left alone, they tend to push forward rather than stop and ask.
+[세션](#session)이 진행되는 동안 한 명 이상의 인간이 [에이전트](#agent)와 실시간으로 페어(짝)를 이루어 검토하고, 방향을 틀어주고, 협업하는 작업 패턴입니다. 단순히 개별 위험 작업을 승인해 주는 것을 넘어, 인간이 주의를 기울이며 실시간으로 작업에 관여합니다.
 
-Which pattern fits depends on the work. Well-specified, low-risk, easy-to-verify tasks suit AFK. Tasks that are ambiguous, irreversible, or where you'd struggle to review the finished result — a schema migration, a tricky design decision, anything touching production — suit staying in the loop. The judgement call is essentially: how expensive is a wrong turn, and how late would you catch it?
+대비되는 개념은 에이전트 혼자 일하도록 내버려 두고 사후에 결과물만 평가하는 [AFK](#afk) 작업 패턴입니다. 인간이 루프 안에 머문다는 것은 오류를 아직 수습 비용이 쌀 때 일찍 잡아낸다는 뜻입니다. 에이전트가 엉뚱한 파일을 건드리려 하거나, 요구사항을 오해했거나, 막다른 골목으로 향하는 낌새가 보일 때 한 문장으로 즉시 방향을 바로잡을 수 있습니다. 혼자 두었다면 그 사소한 착각 위에 20분 동안 자신만만하게 쌓아 올렸을 거대한 헛수고를 사전에 차단하는 것입니다. 에이전트는 자신이 언제 궤도를 벗어났는지 스스로 잘 알아채지 못하며, 방치하면 멈춰서 질문하기보다는 어떻게든 앞으로 밀어붙이려는 경향이 있습니다.
 
-Some work is in-the-loop by nature, because your reactions are the input. [Grilling](#grilling) only works with you there to answer the questions; [prototyping](#prototyping) only works with you there to react to the artifact.
+어떤 패턴을 선택할지는 작업의 성격에 달려 있습니다. 명세가 명확하고, 리스크가 낮으며, 검증하기 쉬운 작업은 AFK에 적합합니다. 반면 모호하거나, 되돌릴 수 없거나, 완성된 결과물을 사후에 검토하기가 대단히 까다로운 작업—스키마 마이그레이션, 난해한 아키텍처 설계, 프로덕션 인프라를 건드리는 작업—은 루프 안에 머무는 것이 맞습니다. 판단의 기준은 단순합니다: **'잘못된 방향으로 샜을 때의 수습 비용이 얼마나 큰가, 그리고 그 이탈을 얼마나 늦게 발견하게 될 것인가?'**
 
-Staying in the loop costs your attention, which is the scarce resource. Part of getting better with agents is moving more work safely out of the loop — with plans, [automated checks](#automated-check), and [human review](#human-review) at the end instead of supervision throughout.
+어떤 작업은 인간의 실시간 반응 자체가 입력값이 되기 때문에 태생적으로 인간이 루프 안에 있어야만 성립합니다. [그릴링(Grilling)](#grilling)은 인간이 질문에 답을 해주어야만 굴러가고, [프로토타이핑](#prototyping)은 결과물을 보고 인간이 피드백을 주어야만 의미가 있습니다.
 
-_Usage:_
+루프 안에 머무는 것은 인간의 주의력을 소모하며, 주의력은 가장 희소한 자원입니다. 에이전트를 잘 다루는 엔지니어가 된다는 것은 계획 수립, [자동화된 점검](#automated-check), 그리고 작업 끝단에서의 [인간 검토](#human-review)를 탄탄히 다져둠으로써 더 많은 작업을 루프 바깥으로 안전하게 밀어내는 법을 익히는 과정입니다.
 
-"Run this AFK overnight?"
+_사용 예시:_
 
-"No, schema migration — keep it human-in-the-loop. I want to see each step and steer if it picks the wrong column to backfill from."
+"이 작업을 밤새 AFK로 돌려둘까요?"
 
-### AFK
+"안 됩니다. 스키마 마이그레이션이잖아요. 인간이 루프 안에 붙어있어야 합니다. 각 단계를 내 눈으로 직접 보고, 백필할 컬럼을 잘못 잡으면 즉시 개입해서 틀어줄 겁니다."
 
-Away from keyboard. A working pattern where the user kicks off a [session](#session) and leaves the [agent](#agent) to run unattended. The throughput multiplier of [AI](#ai) coding — many AFK sessions can run in parallel while you sleep, eat, or work on something else. Usually requires a permissive [permission mode](#permission-mode) plus [sandboxing](#sandbox) to be safe.
+### AFK (자리 비움 작업)
 
-When you're not there, the agent handles ambiguity differently. While you're watching, an ambiguous decision surfaces as a question and you answer it; once you've walked away, the agent picks a default and keeps going, and every later decision builds on that guess. The characteristic failure is coming back to hours of finished, confident work built on a wrong call made in the first ten minutes. The work isn't sloppy — it's coherent, just coherent about the wrong thing.
+Away from keyboard. 사용자가 [세션](#session)을 시작해 두고 자리를 비워 [에이전트](#agent)가 감독 없이 혼자 일하도록 내버려 두는 작업 패턴입니다. [AI](#ai) 코딩의 처리량(Throughput)을 폭발적으로 늘려주는 승수 효과의 원천입니다. 사용자가 잠을 자거나, 밥을 먹거나, 다른 업무를 처리하는 동안 수많은 AFK 세션을 병렬로 돌려둘 수 있습니다. 안전을 위해 일반적으로 관대한 [권한 모드](#permission-mode)와 [샌드박스](#sandbox) 격리가 필수적으로 요구됩니다.
 
-Since you can't give input during the run, give it before and after instead. Before: resolve the ambiguity up front — a [grilling](#grilling) session, a written [spec](#spec) — so there are fewer gaps for the agent to fill alone. During: [automated checks](#automated-check) and [automated review](#automated-review) stand in for the attention you're not giving, failing fast on what can be caught mechanically. After: the run ends in something reviewable — a PR, not changes already merged. AFK doesn't remove [human review](#human-review); it defers all of it to the end, which is why what arrives at the end has to be worth reviewing. This is also why [AX](#ax) matters most in AFK runs — with no one watching, the environment is the only support the agent gets.
+자리를 비우면 에이전트는 모호함을 전혀 다른 방식으로 처리합니다. 지켜보고 있을 때는 애매한 결정 사항이 생기면 질문을 던져오지만, 사용자가 자리를 비우고 나면 에이전트는 임의로 기본값을 하나 찍어 정하고 그대로 돌진합니다. 그리고 그 뒤의 모든 판단은 그 찍어 맞춘 가정 위에 차곡차곡 쌓아 올려집니다. 이로 인해 발생하는 전형적인 참사는 몇 시간 뒤 자리에 돌아왔을 때, 첫 10분 만에 내린 잘못된 단 하나의 결정 위에 지어진 방대하고 정교하며 확신에 찬 결과물과 마주하는 것입니다. 코드가 조잡해서가 아닙니다. 작업물 자체는 매우 논리정연하지만, '엉뚱한 목표를 향해' 논리정연할 뿐입니다.
 
-_Avoid:_ "background agent" — centers the machine ("running in the background") rather than the human pattern ("user has walked away"). AFK names the fact that matters: the user isn't watching.
+작업 도중에 개입할 수 없으므로, 개입은 반드시 작업 전과 작업 후에 집중되어야 합니다. **작업 전:** 모호함을 미리 해소해 두어야 합니다. [그릴링](#grilling) 세션을 거치거나 잘 정제된 [스펙](#spec)을 쥐어주어 에이전트가 자의적으로 빈칸을 채워 넣을 여지를 없애야 합니다. **작업 중:** [자동화된 점검](#automated-check)과 [자동화된 리뷰](#automated-review)가 여러분의 빈자리를 대신하여 기계적으로 잡아낼 수 있는 문제들을 빠르게 실패시켜야 합니다. **작업 후:** 실행의 끝은 반드시 사람이 검토할 수 있는 형태(이미 메인 브랜치에 머지된 코드가 아니라 풀 리퀘스트 형태)로 끝나야 합니다. AFK는 [인간 검토](#human-review)를 아예 없애는 것이 아닙니다. 모든 검토를 작업의 맨 끝으로 미루는 것뿐이며, 그렇기 때문에 맨 끝에 도착한 결과물이 검토할 가치가 있는 상태여야 합니다. 감시자가 없는 AFK 실행에서 코드베이스의 [AX(에이전트 경험)](#ax)가 가장 결정적인 차이를 만들어내는 이유가 바로 여기에 있습니다. 아무도 지켜보지 않을 때 에이전트를 지탱해 주는 유일한 버팀목은 환경뿐이기 때문입니다.
 
-_Usage:_
+_지양할 표현:_ "백그라운드 에이전트(Background agent)" — 인간의 행동 양식("사용자가 자리를 비웠다") 대신 기계 중심의 상태("백그라운드에서 돈다")를 강조하는 모호한 단어입니다. AFK라는 단어만이 사태의 핵심인 '인간의 눈길이 닿지 않고 있다'는 사실을 정확히 짚어냅니다.
 
-"I'm running this AFK — three sandboxed agents on the refactor, reviewing the PRs in the morning."
+_사용 예시:_
 
-"[Bypass permissions](#agent-mode)?"
+"이 리팩토링은 AFK로 돌려둘 겁니다. 샌드박스 에이전트 세 대를 띄워두고 내일 아침에 PR들을 몰아서 리뷰할 거예요."
 
-"Yeah, read-only [filesystem](#filesystem), no network."
+"[Bypass permissions(완전 자동)](#agent-mode) 모드로요?"
 
-### Automated check
+"네, 파일시스템은 격리되어 있고 외부 네트워크는 막아뒀습니다."
 
-A deterministic verification that runs in the [environment](#environment) — tests, type checks, lints, build, pre-commit hooks. Pass/fail, no judgement. The signal an [agent](#agent) can self-correct from without involving anyone else. A flaky test is a broken check, not a non-check; automated checks are deterministic _by design_.
+### Automated check (자동화된 점검)
 
-Self-correction works as a loop. The agent makes a change, runs the check as a [tool call](#tool-call), and the failure output lands in its [context window](#context-window) — a type error with a file and line, a failing assertion with expected and actual values. That's enough for the agent to fix the problem and run the check again, around and around until it passes, with no human in the loop. Determinism is what makes the loop trustworthy: the same code always produces the same verdict, so a pass means something. A flaky check poisons this — the agent "fixes" code that was fine, or retries past a real failure.
+[환경](#environment)에서 구동되는 결정론적(Deterministic) 검증 메커니즘입니다. 단위 테스트, 타입 검사, 린트(Lint), 빌드 스크립트, 프리커밋 훅 등이 해당합니다. 성공(Pass) 아니면 실패(Fail)만 있을 뿐 인간적인 판단은 개입하지 않습니다. [에이전트](#agent)가 다른 누구의 도움도 받지 않고 스스로 실수를 교정해 낼 수 있게 해주는 핵심 신호입니다. 간헐적으로 깨지는 플래키(Flaky) 테스트는 검점이 아니라 고장 난 점검입니다. 자동화된 점검은 **설계상 결정론적**이어야 합니다.
 
-This is why good checks are a large part of a codebase's [AX](#ax). An agent in a repo with strict types, a fast test suite, and a linter catches most of its own mistakes before you see them; an agent in a repo with none of those ships whatever it produces. The difference matters most in [AFK](#afk) runs, where checks are the only verification happening during the run. But a check only catches what it asserts — green checks mean the asserted properties hold, not that the code is right. The judgement-shaped gaps are what [automated review](#automated-review) and [human review](#human-review) are for.
+자기 교정은 하나의 루프로 작동합니다. 에이전트가 코드를 수정하고, [툴 호출](#tool-call)을 통해 점검을 실행하면, 실패 로그가 에이전트의 [컨텍스트 윈도우](#context-window)로 떨어집니다(파일과 라인 번호가 찍힌 타입 에러, 기대값과 실제값이 적힌 실패 어설션 등). 이 정보만 있으면 에이전트는 인간의 개입 없이도 문제를 수정하고 점검을 다시 돌리는 과정을 통과할 때까지 뱅뱅 돌 수 있습니다. 결정론은 이 루프를 신뢰할 수 있게 해주는 뼈대입니다. 동일한 코드는 언제나 동일한 판정을 내리므로 '통과'라는 결과가 실질적인 보증이 됩니다. 플래키한 테스트는 이 루프를 오염시킵니다. 멀쩡한 코드를 고치겠다고 헛발질하거나, 진짜 버그가 있는데도 재시도를 통해 통과했다고 착각하게 만듭니다.
 
-_Avoid:_ "feedback loop" / "backpressure" — both lump checks together with review. _Avoid:_ "test" — tests are automated checks, but not all automated checks are tests.
+엄격하고 빠른 점검 체계가 코드베이스 [AX](#ax)의 거대한 지분을 차지하는 이유가 바로 이것입니다. 빈틈없는 타입 시스템, 초고속 테스트 스위트, 린터를 갖춘 레포지토리의 에이전트는 여러분이 눈치채기도 전에 실수의 대부분을 스스로 바로잡습니다. 반면 그런 방어막이 전무한 레포지토리의 에이전트는 자기가 빚어낸 쓰레기 코드를 그대로 통과시켜 버립니다. 이 차이는 점검 체계가 유일한 감시망 역할을 하는 [AFK](#afk) 실행에서 가장 극명하게 드러납니다. 하지만 점검은 자신이 단언(Assert)한 내용만 잡아낼 수 있을 뿐입니다. 초록불이 떴다는 것은 단언된 속성들이 참이라는 뜻이지, 코드 전체가 올바르다는 뜻은 아닙니다. 판단의 영역에 속하는 거대한 구멍들을 메우기 위해 [자동화된 리뷰](#automated-review)와 [인간 검토](#human-review)가 존재하는 것입니다.
 
-_Usage:_
+_지양할 표현:_ "피드백 루프" / "백프레셔(Backpressure)" — 두 표현 모두 기계적인 점검과 주관적인 리뷰를 한데 뭉뚱그려버립니다. _지양할 표현:_ "테스트" — 테스트는 자동화된 점검의 일부일 뿐이며, 모든 점검이 테스트인 것은 아닙니다.
 
-"The agent keeps shipping broken code in the AFK runs."
+_사용 예시:_
 
-"What automated checks are wired into the [sandbox](#sandbox)?"
+"AFK로 돌릴 때마다 에이전트가 깨진 코드를 자꾸 밀어 넣어요."
 
-"Just the unit tests."
+"[샌드박스](#sandbox) 안에 어떤 자동화된 점검들이 걸려 있나요?"
 
-"Add typecheck and lint — it'll self-correct from those before the PR ever lands."
+"단위 테스트만 돌리고 있습니다."
 
-### Automated review
+"타입체크와 린트도 붙이세요. PR이 만들어지기도 전에 그것들을 보고 스스로 알아서 고쳐둘 겁니다."
 
-An [agent](#agent) reviewing another agent's work, often with a different [model](#model) or [system prompt](#system-prompt). Non-deterministic: it forms a judgement. Runs anywhere — pre-merge on a PR, post-hoc on commit history, mid-session as a [subagent](#subagent). An LLM-as-judge in CI is automated review, not an [automated check](#automated-check); what the assertion _does_ decides the category, not where it runs.
+### Automated review (자동화된 리뷰)
 
-The separation from the working agent is what makes it work. Asking the agent that wrote the code to review its own work gets you very little — the [session](#session) that produced the bug also contains the reasoning that produced it, and the agent reads its own conclusions back as confirmation. A reviewer with a fresh [context window](#context-window) has none of that attachment: it sees the diff the way a stranger would, which is what review depends on. A different model or a review-specific system prompt sharpens this further — different blind spots, and a system prompt scoped to what you actually care about (security, API contracts, performance) rather than a vague "look for problems".
+한 [에이전트](#agent)가 다른 에이전트의 작업물을 검토하는 작업으로, 주로 작업 에이전트와 다른 [모델](#model)이나 별도의 [시스템 프롬프트](#system-prompt)를 장착하고 수행합니다. 비결정론적입니다. 즉, 주관적 '판단'을 형성합니다. PR이 머지되기 직전 CI 단계, 커밋 히스토리에 대한 사후 점검, 혹은 세션 도중 [서브에이전트](#subagent)를 띄워 수행하는 중간 점검 등 어디서나 돌아갈 수 있습니다. CI 파이프라인에서 돌아가는 LLM-as-judge는 [자동화된 점검](#automated-check)이 아니라 자동화된 리뷰입니다. 판단의 범주를 가르는 것은 그것이 어디서 실행되느냐가 아니라 그 단언(Assertion)이 **무엇을 수행하느냐**입니다.
 
-It slots between the other review layers. Automated checks are deterministic and catch what can be asserted mechanically; [human review](#human-review) is expensive and scales worst. Automated review sits in the middle: it catches judgement-shaped problems — a misleading function name, a missed edge case — at machine cost. Because it's non-deterministic, it can miss things and flag non-issues; treat it as a filter that raises the floor before a human looks, not a gate that replaces one.
+코드를 작성한 에이전트와 리뷰하는 에이전트를 분리하는 것이 성패의 핵심입니다. 코드를 직접 짠 에이전트에게 자기 코드를 셀프 리뷰하라고 시키면 건질 것이 거의 없습니다. 그 버그를 만들어낸 바로 그 [세션](#session) 안에 버그를 낳았던 편향된 사고 과정이 고스란히 들어있기 때문에, 에이전트는 자기 확신을 재확인하는 수준에 그칩니다. 반면 완전히 비어있는 깨끗한 [컨텍스트 윈도우](#context-window)를 들고 온 리뷰어는 그러한 집착이 전혀 없습니다. 낯선 사람의 시선으로 diff를 바라보며, 이것이 바로 진정한 코드 리뷰가 작동하는 방식입니다. 다른 모델을 쓰거나 리뷰에 특화된 시스템 프롬프트를 쥐어주면 이 효과는 더욱 날카로워집니다. 작업 모델과는 다른 사각지대를 갖고 있으며, 막연히 "문제를 찾아봐"라고 하는 대신 보안, API 규약, 성능 등 사용자가 실제로 중시하는 영역에만 집중하도록 시스템 프롬프트를 조여줄 수 있습니다.
 
-_Avoid:_ "AI review" / "agent review" — too vague to distinguish from the working agent itself.
+자동화된 리뷰는 다른 검증 계층들 사이에 안착합니다. 자동화된 점검은 결정론적이며 기계적으로 단언할 수 있는 것만 잡습니다. [인간 검토](#human-review)는 비용이 비싸고 확장이 어렵습니다. 자동화된 리뷰는 그 중간에 위치합니다. 오해의 소지가 있는 함수명, 미처 고려하지 못한 엣지 케이스 등 주관적인 판단이 개입되는 문제들을 기계의 비용으로 낚아챕니다. 비결정론적이므로 버그를 놓칠 수도 있고 문제가 아닌 것을 지적할 수도 있습니다. 인간 검토를 완전히 대체하는 관문이 아니라, 인간이 직접 코드를 보기 전에 코드의 기본 바닥을 한 단계 끌어올려 주는 필터로 취급해야 합니다.
 
-_Usage:_
+_지양할 표현:_ "AI 리뷰" / "에이전트 리뷰" — 코드를 작성한 작업 에이전트가 한 것인지 독립된 리뷰어가 한 것인지 구분할 수 없을 만큼 모호합니다.
 
-"We're getting too many bad PRs from the [AFK](#afk) runs."
+_사용 예시:_
 
-"Add an automated review step before merge — different model, separate system prompt, scoped to security and contract changes."
+"AFK 세션에서 올라오는 PR들 중에 품질이 엉망인 게 너무 많아요."
 
-### Human review
+"머지 전 단계에 자동화된 리뷰 스텝을 추가하세요. 다른 모델을 물리고, 별도의 시스템 프롬프트를 얹어서, 보안과 인터페이스 변경점만 집중적으로 검사하도록 스코프를 좁히는 겁니다."
 
-The user reading the code the [agent](#agent) produced and forming a judgement on it. Reading the diff or the changed files counts; reading the agent's _description_ of what it did does not — narration is not the artifact. The description is a [secondary source](#secondary-source), written by the party being reviewed; the diff is the [primary source](#primary-source), and review means reading it.
+### Human review (인간 검토)
 
-Agents raise the volume of code produced, so review becomes the bottleneck. One useful idea is layering different review strategies. [Automated checks](#automated-check) catch the mechanical failures, [automated review](#automated-review) catches the describable ones, and human review is reserved for what only you can judge — whether the change is the right change, whether the approach fits the codebase, whether this should exist at all.
+사용자가 [에이전트](#agent)가 작성한 코드를 직접 눈으로 읽고 그에 대한 가치 판단을 내리는 행위입니다. 코드 diff나 변경된 파일 원본을 직접 읽는 것만이 여기에 해당합니다. 에이전트가 자기가 무슨 일을 했는지 늘어놓은 '설명 요약문'을 읽는 것은 절대 인간 검토가 아닙니다. 설명은 작업물 그 자체가 아닙니다. 설명은 심사를 받아야 할 당사자가 작성한 [2차 출처](#secondary-source)일 뿐이며, diff야말로 [1차 출처](#primary-source)입니다. 검토란 바로 그 diff를 읽는 것입니다.
 
-Review is also cheaper earlier. Reading a plan before work starts, or a small diff mid-flight, takes minutes; excavating a finished branch after an [AFK](#afk) run takes longer. Where you place the review checkpoint is a [human-in-the-loop](#human-in-the-loop) decision, not an afterthought.
+에이전트가 쏟아내는 코드의 양이 폭발적으로 늘어나면서 인간의 검토 역량이 전체 개발의 병목이 됩니다. 효과적인 전략은 검토의 계층을 나누는 것입니다. [자동화된 점검](#automated-check)이 기계적인 결함을 걸러내고, [자동화된 리뷰](#automated-review)가 기술적으로 설명 가능한 오류를 걸러내면, 인간의 검토는 오직 인간만이 판단할 수 있는 본질적인 영역을 위해 아껴두는 것입니다. 이 변경이 비즈니스적으로 옳은 변경인가, 우리 코드베이스의 철학과 방향성에 부합하는가, 애초에 이 코드가 존재해야만 하는가.
 
-_Avoid:_ "code review" alone — ambiguous between human and automated.
+또한 검토는 작업의 앞단에서 수행할수록 비용이 쌉니다. 작업이 시작되기 전에 계획 문서를 읽거나, 진행 중에 작은 단위의 diff를 확인하는 것은 몇 분이면 충분합니다. 하지만 [AFK](#afk) 작업이 끝난 뒤 거대하게 부풀어 오른 브랜치 전체를 사후에 발굴하듯 파헤치는 것은 엄청난 고통을 수반합니다. 검토 체크포인트를 파이프라인의 어디에 배치할 것인가는 나중에 고민할 부차적 문제가 아니라 [인간 참여(Human-in-the-loop)](#human-in-the-loop) 설계의 핵심입니다.
 
-_Usage:_
+_지양할 표현:_ 단순히 "코드 리뷰"라고만 부르기 — 인간이 수행한 것인지 자동화 도구가 수행한 것인지 모호해집니다.
 
-"I human-reviewed the AFK output."
+_사용 예시:_
 
-"You read the diff or just the summary?"
+"AFK 작업 결과물을 인간 검토했습니다."
 
-"Diff. The summary said it deleted dead code — turned out the function was called from a generated file."
+"diff를 직접 읽으셨나요, 아니면 에이전트가 쓴 요약만 읽으셨나요?"
 
-### Vibe coding
+"diff를 봤습니다. 요약문에는 쓰지 않는 데드 코드를 지웠다고 적혀 있었는데, 알고 보니 자동 생성 파일에서 호출하고 있던 필수 함수였어요."
 
-A working pattern where the user accepts the [agent](#agent)'s code without [human review](#human-review). The diff is treated as opaque — what matters is whether the program behaves, not what's inside. [Automated review](#automated-review) and [automated checks](#automated-check) may still run; vibe coding is silent on both.
+### Vibe coding (바이브 코딩)
 
-The term comes from Andrej Karpathy, who [coined it in early 2025](https://x.com/karpathy/status/1886192184808149383): you "fully give in to the vibes" and "forget that the code even exists" — describe what you want, accept what comes back, and judge it by running it.
+사용자가 [에이전트](#agent)가 작성한 코드를 [인간 검토](#human-review) 없이 맹목적으로 수용하는 작업 패턴입니다. 코드 diff를 블랙박스(불투명한 상자) 취급합니다. 중요한 것은 프로그램이 겉보기에 돌아가는가일 뿐, 코드 내부에 무엇이 들어있는지는 신경 쓰지 않습니다. [자동화된 리뷰](#automated-review)나 [자동화된 점검](#automated-check)은 여전히 돌아갈 수 있지만, 바이브 코딩 자체는 둘의 유무에 대해 침묵합니다.
 
-Vibe coding trades inspection for speed. Reading diffs is usually the slowest step in agent-driven work, so dropping it removes the main bottleneck. For code whose failures are cheap — [prototypes](#prototyping), one-off scripts, internal tools — that's a reasonable trade. The risk scales with the code's lifespan and stakes.
+이 용어는 안드레이 카파시(Andrej Karpathy)가 [2025년 초에 만든 말](https://x.com/karpathy/status/1886192184808149383)입니다. 코드를 일일이 뜯어보는 대신 "완전히 느낌(Vibe)에 몸을 맡기고", "코드가 존재한다는 사실조차 잊어버린 채", 내가 원하는 것을 말로 설명하고, 반환된 것을 수락하며, 오직 실행해 보면서 겉으로 드러나는 동작만으로 결과물을 평가하는 방식입니다.
 
-The cost arrives later. Vibe-coded changes accumulate into a codebase nobody has read, and behaviour was the only thing checked — so anything behaviour doesn't surface, like a secret written to logs, a missing edge case, or quietly wrong data handling, ships unseen. The first time someone debugs the system is the first time anyone reads the code. With human review gone, whatever automated verification still runs — tests, types, automated review — is the only gate the code passes through.
+바이브 코딩은 정밀한 검사를 포기하는 대가로 극한의 속도를 얻습니다. diff를 읽는 작업은 대개 에이전트 기반 작업 흐름에서 가장 느린 병목이므로, 이를 생략하면 속도를 가로막는 주된 걸림돌이 사라집니다. 실패의 대가가 극도로 저렴한 코드—일회성 스크립트, [프로토타입](#prototyping), 내부용 토이 프로젝트—에서는 매우 합리적인 교환입니다. 위험은 그 코드의 수명과 중요도에 비례하여 커집니다.
 
-_Avoid:_ "vibe coding" as a synonym for "low-quality AI coding" — the term names the review stance, not the resulting code.
+대가는 나중에 청구됩니다. 바이브 코딩으로 밀어 넣은 변경점들이 누적되면 결국 아무도 읽어본 적 없는 거대한 코드베이스가 탄생합니다. 눈에 보이는 동작만을 확인했기 때문에, 겉으로 드러나지 않는 결함들—로그 파일에 시크릿 키를 평문으로 흘리는 행위, 누락된 엣지 케이스 처리, 데이터의 조용한 오염 등—은 아무런 제지도 받지 않고 프로덕션에 그대로 배포됩니다. 언젠가 시스템에 문제가 터져 누군가 디버깅을 시작하는 바로 그 순간이, 역사상 최초로 인간이 그 코드를 읽는 순간이 됩니다. 인간 검토가 거세된 상태에서는 테스트, 타입 검사, 자동 리뷰 등 남아있는 기계적 검증만이 코드가 거쳐 가는 유일한 관문이 됩니다.
 
-_Usage:_
+_지양할 표현:_ "바이브 코딩"을 단순히 "저품질 AI 코딩"의 동의어로 쓰기 — 이 단어는 결과물의 수준이 아니라 작업자의 검토 태세를 가리키는 이름입니다.
 
-"Did you read what it changed in the auth flow?"
+_사용 예시:_
 
-"Vibe coded it — login still works, that's all I checked."
+"인증 플로우에서 에이전트가 뭘 바꿨는지 코드 확인해 봤어?"
 
-"Read the diff before you push, vibing on auth is how secrets leak into logs."
+"그냥 바이브 코딩했어. 로그인은 잘 되길래 그걸로 끝냈지."
 
-### Design concept
+"푸시하기 전에 diff 꼭 읽어봐. 인증 쪽에서 바이브 타다간 로그 파일로 비밀번호 다 털린다."
 
-The shared understanding of what's being built, held in common between user and [agent](#agent) but separate from any asset. Brooks' term (_The Design of Design_): the conversation, [handoff artifacts](#handoff-artifact), and the code are all assets that try to capture or reach the design concept, but none of them _are_ it. Quality of the design concept is felt through the quality of the conversation that built it.
+### Design concept (디자인 콘셉트/설계 개념)
 
-The term names the gap behind a familiar frustration: the agent writes exactly what you asked for and it's still wrong. The usual cause is that you hadn't fully figured out what you wanted. The design concept wasn't finished in your own head — your prompt captured the parts you'd worked out, and was silent on the parts you hadn't. The agent filled those silences with its own assumptions, because there was nothing to align with. Nothing malfunctioned. There was no shared design concept, because there wasn't yet a whole one to share.
+사용자와 [에이전트](#agent) 사이에 공유된 '무엇을 만들고자 하는가'에 대한 본질적인 이해를 뜻합니다. 그 어떤 산출물과도 구별되는 추상적인 개념입니다. 프레더릭 브룩스(Frederick Brooks)가 자신의 저서 *The Design of Design*에서 제시한 개념입니다. 사용자와 나눈 대화, [핸드오프 아티팩트](#handoff-artifact), 그리고 최종 코드는 모두 이 디자인 콘셉트를 포착하거나 도달하려는 자산(Asset)들일 뿐, 그 어느 것도 디자인 콘셉트 그 자체는 아닙니다. 디자인 콘셉트의 성숙도는 그것을 구축해 나가는 대화의 품질을 통해 체감됩니다.
 
-You can tell a design concept is shared the same way you can with a colleague: the other party starts answering questions you haven't asked yet the way you would. Until then, the work is conversation — [grilling](#grilling) is the deliberate version — and writing a [spec](#spec) too early just captures the misalignment in a more durable asset. The design concept also moves as you learn; assets lag it, which is why a spec faithful to last week's understanding can still mislead this week's session.
+이 개념은 우리가 자주 겪는 답답한 상황의 원인을 정확히 짚어줍니다. 에이전트가 내가 요구한 그대로 토씨 하나 안 틀리고 작성해 주었는데도 결과물은 엉망인 상황입니다. 대개의 원인은 사용자 본인의 머릿속에서도 만들고자 하는 바가 완전히 정리되지 않았기 때문입니다. 내 머릿속에서 디자인 콘셉트가 완성되지 않았던 것입니다. 내가 작성한 프롬프트는 머릿속에서 정리된 일부분만을 담고 있었을 뿐이고, 아직 결론을 내리지 못한 나머지 수많은 지점에 대해서는 침묵했습니다. 에이전트는 사용자가 침묵한 그 공백을 자신의 자의적인 추측으로 채워 넣었습니다. 에이전트와 맞추어 볼 공유된 기준선 자체가 애초에 존재하지 않았기 때문입니다. 도구가 고장 난 것이 아닙니다. 온전한 디자인 콘셉트가 부재했기 때문에 양자 간에 공유된 이해도 존재할 수 없었던 것입니다.
 
-_Usage:_
+동료 개발자와 일할 때와 똑같은 방식으로 디자인 콘셉트가 성공적으로 공유되었음을 확인할 수 있습니다. 내가 아직 묻지도 않은 질문에 대해 상대방이 내가 생각했던 바로 그 방식으로 대답하기 시작할 때입니다. 그 수준에 도달하기 전까지는 대화가 계속되어야 합니다. [그릴링(Grilling)](#grilling)은 이를 의도적으로 밀어붙이는 기술이며, 개념이 무르익기도 전에 서둘러 [스펙](#spec)을 써 내려가는 것은 어긋난 이해를 단지 파일이라는 영구적인 자산에 박제하는 것에 불과합니다. 또한 디자인 콘셉트는 학습이 진행됨에 따라 유기적으로 변화합니다. 산출물은 언제나 현실을 뒤늦게 쫓아오므로, 지난주의 이해를 충실히 담아냈던 스펙 문서가 이번 주의 세션을 엉뚱한 방향으로 오도할 수 있습니다.
 
-"It's writing exactly what I asked for and it's still wrong."
+_사용 예시:_
 
-"You don't share a design concept yet — it's filling gaps with assumptions. Keep talking until cancellation, refunds, and partial fulfilment all line up between you before you let it write a spec."
+"내가 시킨 대로 똑같이 짜줬는데도 결과물이 완전히 틀렸어요."
 
-### Grilling
+"아직 에이전트와 디자인 콘셉트를 공유하지 못했기 때문입니다. 에이전트가 빈칸을 자기 멋대로 채워 넣고 있는 거예요. 주문 취소, 환불 정책, 부분 배송 처리에 대한 생각이 둘 사이에 완벽하게 일치할 때까지 대화를 더 나누세요. 스펙 문서를 작성하게 하는 것은 그 이후입니다."
 
-A technique for developing a [design concept](#design-concept) with an [agent](#agent): the agent interviews the user Socratically, one decision at a time, proposing a recommended answer for each. Slows the rush to a finished plan — no [handoff artifact](#handoff-artifact) is written until the concept stabilises.
+### Grilling (그릴링/집요한 질의)
 
-The technique exists because agents fill gaps silently. Asked to write a [spec](#spec) from a two-line prompt, the agent doesn't stop at the decisions you haven't made — it picks defaults and writes them in. The result looks complete, and the guesses are indistinguishable from the choices, so you discover them late: at review, or when the built feature handles an edge case in a way you never chose. Grilling inverts this — instead of guessing, the agent has to ask.
+[에이전트](#agent)와 함께 [디자인 콘셉트](#design-concept)를 발전시켜 나가는 소크라테스식 대화 기법입니다. 에이전트가 사용자에게 한 번에 하나의 의사결정 사항을 집요하게 캐묻고, 각 질문마다 권장하는 답변을 함께 제안하도록 만듭니다. 성급하게 완성된 기획안을 도출하려는 유혹을 억누르며, 개념이 안정화되기 전까지는 그 어떤 [핸드오프 아티팩트](#handoff-artifact)도 작성하지 못하게 막습니다.
 
-It's a [human-in-the-loop](#human-in-the-loop) technique: your answers are the input. When a question can't be answered in conversation — you'd have to see the thing — switch to [prototyping](#prototyping).
+이 기법이 존재하는 이유는 에이전트가 공백을 조용히 지어내어 메우기 때문입니다. 두 줄짜리 짧은 프롬프트를 던져주고 [스펙](#spec)을 쓰라고 시키면, 에이전트는 사용자가 아직 결정하지 못한 부분을 만났다고 해서 멈춰 서지 않습니다. 자기 멋대로 기본값을 골라 문서에 자연스럽게 녹여냅니다. 결과물은 그럴싸하게 완벽해 보이지만, 사용자가 직접 내린 결정과 에이전트의 자의적 추측이 한데 뒤섞여 분간할 수 없게 됩니다. 그리고 그 대가는 나중에 치르게 됩니다. 코드 리뷰를 하다가, 혹은 완성된 기능이 사용자가 원한 적도 없는 방식으로 엣지 케이스를 처리하고 있는 것을 보고서야 뒤늦게 사태를 깨닫습니다. 그릴링은 이 과정을 정반대로 뒤집습니다. 에이전트가 멋대로 추측하는 대신 집요하게 묻도록 강제하는 것입니다.
 
-_Usage:_
+이것은 본질적으로 [인간 참여(Human-in-the-loop)](#human-in-the-loop) 기법입니다. 사용자의 답변이 곧 에이전트의 입력값이 됩니다. 대화만으로는 도저히 결론을 내릴 수 없는 질문에 부딪혔을 때—실제 눈으로 봐야만 알 수 있을 때—비로소 [프로토타이핑](#prototyping)으로 전환합니다.
 
-"It went straight to writing the spec and got the cancellation logic wrong."
+_사용 예시:_
 
-"Grill it first — make it ask you about partial cancels, refunds, and timing before it commits anything to the doc. Cheaper to resolve in conversation than in code."
+"에이전트가 다짜고짜 스펙부터 작성하더니 취소 로직을 완전히 엉뚱하게 짜놨어요."
 
-### Prototyping
+"그릴링을 먼저 거쳤어야 합니다. 부분 취소, 환불 규정, 처리 타이밍에 대해 문서에 단 한 글자라도 적기 전에 에이전트가 당신을 집요하게 취조하듯 묻게 만들었어야 해요. 코드로 짠 뒤에 고치는 것보다 대화로 풀고 넘어가는 편이 훨씬 비용이 쌉니다."
 
-Having the [agent](#agent) build a quick, rough version of something, for when conversation is too low-fidelity and you need a real artifact to talk about.
+### Prototyping (프로토타이핑)
 
-[Grilling](#grilling) resolves design decisions in conversation. Conversation is cheap, but it's low-fidelity: some questions can't be answered in words — how an interaction feels, whether an API shape is ergonomic in real calling code, whether the layout works at real data sizes. The interview hits a question and your honest answer is "I don't know, I'd have to see it." Past that point the discussion circles. Instead, have the agent build the thing, look at it, and come back to the conversation with an answer.
+대화만으로는 해상도가 너무 낮아서 실제로 만져볼 수 있는 물리적 결과물을 두고 이야기해야 할 때, [에이전트](#agent)에게 거칠고 빠른 시제품을 만들게 하는 기법입니다.
 
-Agents lower the cost of building, which is what makes this practical. A rough version that used to take a day to mock up now takes minutes, so it's worth doing routinely. It's a [human-in-the-loop](#human-in-the-loop) technique: the prototype is there for you to react to.
+[그릴링](#grilling)은 대화를 통해 설계 의사결정을 해결합니다. 대화는 비용이 저렴하지만 해상도가 떨어집니다. 말로는 도저히 결론을 낼 수 없는 질문들이 존재합니다. 인터랙션의 조작감이 실제로 어떠한지, API 인터페이스가 실제 호출하는 코드에서 다루기 편한지, 대규모 실제 데이터가 들어왔을 때 레이아웃이 버텨주는지 등입니다. 인터뷰가 이런 질문에 도달하면 사용자의 솔직한 대답은 하나뿐입니다. "말로만 들어선 모르겠고, 실제로 봐야 알겠는데." 이 지점부터 대화는 헛돌기 시작합니다. 이때 말싸움을 멈추고 에이전트에게 시제품을 만들게 한 뒤, 직접 눈으로 확인하고, 그 경험을 바탕으로 다시 대화로 돌아와 명쾌하게 결론을 내리는 것입니다.
 
-You usually don't stop at one look. Iterate with the prototype — react, ask for a change, react again — so each round resolves another decision against the real artifact, at a higher fidelity than conversation allows.
+에이전트는 코드 작성 비용을 바닥으로 떨어뜨렸고, 바로 이 점이 프로토타이핑을 일상적인 실천으로 만들어줍니다. 예전에는 목업을 만드는 데 꼬박 하루가 걸렸지만 이제는 몇 분이면 충분합니다. 그러니 주저 없이 시도할 수 있습니다. 이것은 [인간 참여](#human-in-the-loop) 기법입니다. 프로토타입은 오직 인간이 반응하고 피드백을 주기 위해 존재하는 징검다리입니다.
 
-A prototype doesn't have to be all-scrappy. You can build the pieces you're actually evaluating to production quality, so when the decision lands, the component or API you reacted to can transfer into the real codebase. This makes prototyping essential material for the [spec](#spec) to reference.
+대개 한 번 보고 끝내지 않습니다. 프로토타입을 만져보며 점진적으로 개선합니다. 결과를 보고, 변경을 요구하고, 다시 확인하는 과정을 반복합니다. 매 라운드마다 실제 작동하는 결과물을 두고 의사결정을 검증해 나가며, 이는 대화가 도달할 수 있는 수준보다 훨씬 높은 해상도로 결정을 매듭짓게 해줍니다.
 
-_Usage:_
+프로토타입이라고 해서 모든 것을 조잡하게 날림으로 짤 필요는 없습니다. 내가 실제로 검증하고자 하는 핵심 부품은 프로덕션 수준의 높은 품질로 빌드할 수 있습니다. 그렇게 하면 의사결정이 끝났을 때, 내가 테스트했던 바로 그 컴포넌트나 API를 실제 코드베이스로 고스란히 이식할 수 있습니다. 이는 프로토타이핑이 향후 [스펙](#spec) 문서가 참조할 수 있는 결정적인 원천 자료가 되게 해줍니다.
 
-"We've spent half an hour arguing about whether the wizard should be one page or three steps."
+_사용 예시:_
 
-"Words won't settle it — have the agent prototype both. We'll click through them and know in five minutes."
+"위저드 폼을 단일 페이지로 만들지 3단계로 쪼갤지를 두고 30분째 말싸움만 하고 있어요."
 
-### DX
+"말로 해봐야 답 안 나옵니다. 에이전트에게 둘 다 프로토타입으로 짜보라고 하세요. 5분 동안 직접 클릭해 보면 바로 답이 나올 겁니다."
 
-Developer experience — how easy a codebase and its toolchain make it for humans to do good work. Good DX is fast feedback, clear error messages, documentation that answers the question you actually have, and setup that works on the first try. The term long predates AI coding; it's in this dictionary mainly as the contrast for [AX](#ax).
+### DX (개발자 경험)
 
-DX is the interaction between the human and the codebase — nothing more. The main difference between the two audiences is that humans are [stateful](#stateful) and agents are [stateless](#stateless). A human learns the codebase once and carries that knowledge into every day after, which is why poor DX is survivable: they route around slow CI by batching their pushes, around missing docs by asking in Slack once, around confusing structure by remembering where things live. The workarounds accumulate, and a team ends up productive in a codebase that fights them.
+Developer Experience. 코드베이스와 도구 체계가 인간 개발자로 하여금 원활하게 일할 수 있도록 얼마나 잘 조성되어 있는가를 나타냅니다. 훌륭한 DX란 빠른 피드백 루프, 명확한 에러 메시지, 내가 실제로 궁금해하는 질문에 답을 주는 충실한 문서, 그리고 첫 시도에 매끄럽게 돌아가는 개발 환경 셋업을 의미합니다. 이 용어는 AI 코딩 이전부터 오랫동안 사용되어 왔으며, 본 사전에는 [AX(에이전트 경험)](#ax)와의 선명한 대비를 위해 수록되었습니다.
 
-[Agents](#agent) face the same codebase with none of that accumulation. Stateless across [sessions](#session), an agent re-learns the codebase from scratch every time — it benefits from the fast test suite and the clear error messages, but anything it figured out yesterday is gone unless it was written into the [environment](#environment), which the agent only perceives through [tool results](#tool-result). That's the gap AX names: the parts of DX that survive when the developer is an agent, plus concerns humans don't have, like keeping the [context window](#context-window) free.
+DX는 철저히 **인간과 코드베이스 사이의 상호작용**만을 가리킵니다. 인간 개발자와 에이전트라는 두 청중 사이의 가장 결정적인 차이점은, 인간은 [상태 유지(Stateful)](#stateful)적이고 에이전트는 [무상태(Stateless)](#stateless)라는 점입니다. 인간은 코드베이스를 한 번 배우고 나면 그 지식을 머릿속에 담아둔 채 다음 날, 그 다음 날로 이어갑니다. 바로 이 점 때문에 인간은 형편없는 DX 속에서도 용케 살아남습니다. 느려터진 CI는 커밋을 몰아서 푸시하는 요령으로 우회하고, 부실한 문서는 Slack에서 동료에게 한 번 물어보는 것으로 넘어가며, 엉망진창인 폴더 구조는 파일이 어디 있는지 머릿속으로 외워버림으로써 극복합니다. 이런 땜질식 노하우들이 머릿속에 축적되면서, 개발팀은 자신들을 끊임없이 괴롭히는 코드베이스 안에서도 어떻게든 생산성을 유지해 냅니다.
 
-The overlap means DX investment often improves AX for free — strict types, fast tests, and predictable structure help both. The divergence means it doesn't always: a beautiful onboarding doc helps a human for a week and an agent not at all unless it's reachable from [AGENTS.md](#agentsmd).
+[에이전트](#agent)는 그런 축적된 노하우가 전혀 없는 상태로 동일한 코드베이스를 마주합니다. [세션](#session) 간에 무상태인 에이전트는 매 세션마다 코드베이스를 백지에서부터 다시 파악해야 합니다. 빠른 테스트 스위트와 명확한 에러 메시지의 혜택은 에이전트도 똑같이 누리지만, 어제 머리를 쥐어뜯으며 알아냈던 깨달음은 [환경](#environment) 어딘가에 적어두지 않는 한 흔적도 없이 증발합니다. 그리고 에이전트는 오직 [툴 결과](#tool-result)를 통해서만 환경을 인식할 수 있습니다. 이것이 바로 AX가 메우고자 하는 틈새입니다. 개발자가 에이전트로 바뀌었을 때도 여전히 유효한 DX의 영역들, 그리고 [컨텍스트 윈도우](#context-window)의 여유 공간 확보처럼 인간에게는 전혀 없던 에이전트 고유의 관심사들이 결합된 것입니다.
 
-_Usage:_
+두 영역이 겹치기 때문에 DX에 투자하면 AX도 덤으로 개선되는 경우가 많습니다. 엄격한 타입 시스템, 빠른 테스트, 예측 가능한 폴더 구조는 인간과 에이전트 모두에게 축복입니다. 그러나 두 영역이 갈라지는 지점도 분명합니다. 공들여 쓴 아름다운 온보딩 가이드는 신규 입사자에게는 일주일 내내 큰 힘이 되지만, [AGENTS.md](#agentsmd)에서 도달할 수 있는 경로를 열어주지 않는 한 에이전트에게는 티끌만큼의 도움도 되지 못합니다.
 
-"Our DX is fine — new hires are productive in a week."
+_사용 예시:_
 
-"Productive because someone sits with them for that week. The agent doesn't get that week; check the AX separately."
+"우리 레포 DX는 훌륭해요. 신규 입사자도 일주일이면 적응해서 일하거든요."
 
-### AX
+"일주일 동안 사수가 옆에 붙어서 하나하나 알려주니까 적응하는 겁니다. 에이전트에게는 그런 일주일의 시간이 주어지지 않아요. AX 관점에서 다시 점검해 보세요."
 
-Agent experience — how well the [environment](#environment) is set up for an [agent](#agent) to do good work in a codebase. The agent-facing counterpart to [DX](#dx). When the same agent performs well in one repo and badly in another — same [model](#model), same [harness](#harness) — the difference is usually AX. The instinct is to blame the model or rewrite the prompt; the fix is more often in the repo.
+### AX (에이전트 경험)
 
-Good AX has three main dimensions:
+Agent Experience. [에이전트](#agent)가 코드베이스 안에서 양질의 작업을 수행할 수 있도록 [환경](#environment)이 얼마나 잘 구축되어 있는가를 나타냅니다. 인간을 대상으로 하는 [DX(개발자 경험)](#dx)의 에이전트 버전입니다. 동일한 [모델](#model), 동일한 [하네스](#harness)를 썼는데도 어떤 레포지토리에서는 날아다니고 다른 레포지토리에서는 엉망진창으로 헤맨다면, 그 차이는 대개 AX에서 비롯됩니다. 본능적으로 모델을 탓하거나 프롬프트를 다시 고쳐 쓰려 들기 쉽지만, 실제 해결책은 레포지토리 환경 자체를 뜯어고치는 데 있습니다.
 
-| Dimension        | What good AX looks like                                                                                                                                                                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Automated checks | Fast, deterministic [automated checks](#automated-check) — types, tests, lints — that the agent can self-correct from without a human                                                                                                          |
-| Architecture     | A codebase the agent can navigate without reading everything: predictable structure, a lot of behaviour behind small interfaces, names that say what things do                                                                                       |
-| Free context     | [AGENTS.md](#agentsmd), [skills](#skill), and [tools](#tool) kept lean, so most of the [context window](#context-window) is available for the task and the agent stays in the [smart zone](#smart-zone) instead of drowning |
+훌륭한 AX를 지탱하는 3대 기둥:
 
-AX and DX overlap — good checks and clean architecture help both audiences — but they diverge. Humans tolerate tribal knowledge, slow CI, and "ask Sarah about the billing module"; agents can't. Agents don't benefit from IDE tooltips or pretty dashboards; they need failures as text in a [tool result](#tool-result). A codebase can have good DX and poor AX.
+| 차원 | 훌륭한 AX의 모습 |
+| --- | --- |
+| 자동화된 점검 | 에이전트가 인간의 개입 없이도 스스로 오류를 바로잡을 수 있는 빠르고 결정론적인 [자동화된 점검](#automated-check)(타입 검사, 단위 테스트, 린트) 체계 |
+| 아키텍처 | 모든 파일을 일일이 다 읽지 않고도 에이전트가 길을 찾을 수 있는 코드베이스: 예측 가능한 폴더 구조, 작은 인터페이스 뒤로 캡슐화된 거대한 동작, 역할을 명확히 드러내는 직관적인 이름들 |
+| 여유 컨텍스트 확보 | [AGENTS.md](#agentsmd), [스킬](#skill), [툴](#tool) 정의를 군더더기 없이 콤팩트하게 유지하여, [컨텍스트 윈도우](#context-window)의 대부분을 당면 과업에 집중할 수 있게 비워두고 잡음에 짓눌리지 않은 채 [스마트 존](#smart-zone)에 머물게 하는 환경 |
 
-_Avoid:_ treating AX as a synonym for DX — the audiences need different investments.
+AX와 DX는 겹칩니다. 빈틈없는 테스트와 깔끔한 아키텍처는 인간과 에이전트 모두에게 혜택을 줍니다. 하지만 둘은 분명히 갈라집니다. 인간은 팀 내의 암묵지, 느려터진 CI 파이프라인, "결제 모듈은 Sarah한테 물어봐" 같은 주먹구구식 운영을 어떻게든 참고 견뎌내지만, 에이전트는 그럴 수 없습니다. 에이전트는 화려한 IDE 툴팁이나 알록달록한 대시보드 그래프를 보지 못합니다. 에이전트에게 필요한 것은 [툴 결과](#tool-result) 창에 텍스트 형태로 떨어지는 명확한 에러 메시지입니다. DX는 훌륭하지만 AX는 바닥인 코드베이스가 얼마든지 존재할 수 있습니다.
 
-_Usage:_
+_지양할 표현:_ AX를 단순히 DX의 동의어로 취급하기 — 두 청중이 필요로 하는 투자의 방향은 엄연히 다릅니다.
 
-"The agent writes great code in the API repo and garbage in the frontend."
+_사용 예시:_
 
-"The API repo has strict types and a fast test suite; the frontend has neither and forty always-loaded skills. That's an AX gap, not a model problem."
+"에이전트가 백엔드 API 레포에서는 기가 막히게 코드를 짜는데, 프론트엔드 레포에만 오면 쓰레기를 양산해요."
 
+"API 레포는 엄격한 타입에 빠른 테스트 스위트가 갖춰져 있는 반면, 프론트엔드 레포는 둘 다 없고 상시 로드되는 스킬만 40개가 넘게 걸려 있잖아요. 이건 모델의 지능 문제가 아니라 AX의 격차입니다."
