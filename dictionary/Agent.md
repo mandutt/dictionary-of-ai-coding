@@ -1,17 +1,17 @@
 ---
-description: A model harnessed with tools, a system prompt, and a context window, that takes turns with a user. The model in motion.
+description: 툴, 시스템 프롬프트, 컨텍스트 윈도우를 갖춘 하네스로 무장하여 사용자와 턴을 주고받는 모델. 실제로 동작하는 모델의 모습.
 ---
 
-A [model](./Model.md) [harnessed](./Harness.md) with [tools](./Tool.md), a [system prompt](./System%20prompt.md), and a [context window](./Context%20window.md), that takes [turns](./Turn.md) with a user. _Claude Code is an agent. Cursor is an agent. Claude.ai is an agent._ An agent is what you actually talk to — it's the model in motion, configured for a purpose.
+[툴](./Tool.md), [시스템 프롬프트](./System%20prompt.md), [컨텍스트 윈도우](./Context%20window.md)를 갖춘 [하네스](./Harness.md)로 무장하여 사용자와 [턴](./Turn.md)을 주고받는 [모델](./Model.md)입니다. _Claude Code는 에이전트입니다. Cursor도 에이전트입니다. Claude.ai도 에이전트입니다._ 에이전트는 사용자가 실제로 대화하는 상대이며, 특정 목적을 위해 구성되어 동작하는 '움직이는 모델'입니다.
 
-Unlike most terms in this dictionary, "agent" doesn't name a mechanical part. The model is a file of [parameters](./Parameters.md); the harness is software you can point at. The agent is neither — it's the unit you're speaking to. People anthropomorphize [AI](./AI.md) constantly, and the agent is the anthropomorphized unit: the thing you delegate to, the thing that reads your message and answers, the "it" in "it broke the build again". When you say the agent did something, you mean the model-plus-harness did it, but you're addressing the combination as a single actor.
+본 사전의 대부분의 용어와 달리 "에이전트"는 기계적인 부품의 이름이 아닙니다. 모델은 [매개변수](./Parameters.md) 파일이고, 하네스는 손으로 가리킬 수 있는 소프트웨어입니다. 에이전트는 둘 다 아니며, 여러분이 말을 건네는 대상 단위입니다. 사람들은 [AI](./AI.md)를 끊임없이 의인화하는데, 에이전트는 바로 그 의인화의 대상이 되는 단위입니다. 일을 위임하는 대상, 내 메시지를 읽고 답하는 대상, "그 녀석이 빌드를 또 깨먹었다"고 할 때의 '그 녀석'입니다. 에이전트가 무언가를 했다고 말할 때, 그것은 모델과 하네스의 결합체가 수행했음을 뜻하지만, 우리는 그 결합체를 하나의 행위자로 대합니다.
 
-The idea is older than this wave of AI. Software agents — programs you delegate a goal to, which act on your behalf — have been a concept for as long as AI has.
+이 개념은 이번 AI 붐보다 훨씬 오래되었습니다. 소프트웨어 에이전트 — 사용자를 대신하여 행동하도록 목표를 위임받는 프로그램 — 는 AI라는 학문이 시작된 이래 줄곧 존재해 온 개념입니다.
 
-_Avoid:_ "the AI", "the bot" (too vague — they hide whether you mean the parameters or the harnessed thing).
+_지양할 표현:_ "AI", "봇(bot)" (너무 모호함 — 매개변수를 의미하는지 하네스가 결합된 대상을 의미하는지 가려버립니다).
 
-_Usage:_
+_사용 예시:_
 
-"Which agent are you using for the migration?"
+"마이그레이션 작업에 어떤 에이전트를 쓰고 계신가요?"
 
-"Claude Code locally, Cursor for the UI work — same model underneath, different harnesses."
+"로컬 작업에는 Claude Code를 쓰고 UI 작업에는 Cursor를 씁니다 — 밑단 모델은 같지만 하네스가 다르죠."
