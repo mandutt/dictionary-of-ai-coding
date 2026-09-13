@@ -1,17 +1,17 @@
 ---
-description: As a session grows, each token's attention budget spreads across more competitors; signal on meaningful relationships shrinks.
+description: 세션이 커질수록 각 토큰의 어텐션 예산이 더 많은 경쟁자들에게 분산되고, 의미 있는 관계에 실리는 신호는 줄어듭니다.
 ---
 
-As a [session](./Session.md) grows, each [token](./Token.md)'s [attention budget](./Attention%20budget.md) is spread across more competitors. The signal on any one [meaningful relationship](./Attention%20relationship.md) shrinks; noise from irrelevant [context](./Context.md) crowds in. Same [model](./Model.md), same [parameters](./Parameters.md) — just more mouths to feed from the same plate. Cause of the smart zone / dumb [zone effect](./Smart%20zone.md).
+[세션](./Session.md)이 커짐에 따라 각 [토큰](./Token.md)의 [어텐션 예산](./Attention%20budget.md)은 더 많은 경쟁자들에게 얇게 분배됩니다. [의미 있는 관계](./Attention%20relationship.md)에 실리는 신호의 강도는 줄어들고, 무관한 [컨텍스트](./Context.md)에서 나오는 잡음이 밀려듭니다. [모델](./Model.md)도 그대로고 [매개변수](./Parameters.md)도 그대로지만, 같은 밥그릇을 두고 다투어야 할 입만 늘어난 셈입니다. 스마트 존 / 덤 [존 효과](./Smart%20zone.md)를 일으키는 원인입니다.
 
-It presents as the model getting worse mid-session: constraints it followed for an hour start slipping, it re-asks things it was told, it writes code that ignores a file it read earlier. Nothing about the model changed — the only variable is how much context it's now attending over.
+세션 중간부터 모델이 점차 멍청해지는 양상으로 나타납니다. 한 시간 동안 잘 지키던 제약 조건을 슬그머니 무시하기 시작하고, 이미 알려준 내용을 다시 묻고, 앞서 읽었던 파일의 내용을 깡그리 무시한 코드를 작성합니다. 모델 자체에 대해 달라진 것은 아무것도 없습니다 — 유일한 변수는 모델이 지금 어텐션을 쏟아부어야 할 컨텍스트의 양뿐입니다.
 
-It's gradual, which is what makes it hard to catch from inside the session. There's no error and no threshold; each [turn](./Turn.md) is only slightly worse than the last, and by the time the slips are obvious you've been in the dumb zone for a while.
+변화가 점진적으로 일어나기 때문에 세션 안에서는 알아차리기가 어렵습니다. 에러가 뜨는 것도 아니고 명확한 임계치도 없습니다. 각 [턴](./Turn.md)은 직전 턴보다 아주 미세하게 나빠질 뿐이며, 실수가 눈에 띄게 드러날 때쯤에는 이미 덤 존에 한참 발을 담근 상태입니다.
 
-You recover by removing context, not adding more. Re-pasting the ignored instruction adds another competitor to the same crowded window and helps only briefly. What works: [clear](./Clearing.md) and reload only what the task needs, or [compact](./Compaction.md), or [hand off](./Handoff.md) to a fresh session. Treat declining instruction-following as a signal about context length, not about the model.
+컨텍스트를 덜어냄으로써만 회복할 수 있으며, 더 추가해서는 해결되지 않습니다. 무시당한 지시사항을 다시 붙여넣는 것은 복잡한 윈도우에 경쟁자를 하나 더 밀어 넣는 꼴이라 아주 잠깐 반짝 효과를 낼 뿐입니다. 올바른 방법은 과업에 필요한 것만 남기고 [비우고(Clear)](./Clearing.md) 다시 로드하거나, [압축(Compact)](./Compaction.md)하거나, 깨끗한 새 세션으로 [인계(Hand off)](./Handoff.md)하는 것입니다. 지시사항 이행 능력이 떨어지는 것을 모델의 지능 문제가 아니라 컨텍스트 길이에 대한 경고 신호로 받아들이세요.
 
-_Usage:_
+_사용 예시:_
 
-"It's deep in the dumb zone — inventing generics that aren't in the type file."
+"완전 덤 존 깊숙이 빠졌네요 — 타입 파일에 없는 제네릭을 제멋대로 만들어내고 있어요."
 
-"Attention degradation. The type definitions are still in context, but the signal on them is buried under everything we've added since. Clear and reload."
+"어텐션 저하 현상입니다. 타입 정의는 여전히 컨텍스트 안에 있지만, 그 신호가 그 뒤로 추가된 모든 내용 밑에 파묻혀 버린 거예요. 세션을 비우고 다시 로드합시다."
