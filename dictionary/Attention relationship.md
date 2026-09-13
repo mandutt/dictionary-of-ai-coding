@@ -1,25 +1,25 @@
 ---
-description: The pairing between two tokens — meaningful pairs influence each other more than unrelated ones. A context of N tokens has ~N² of these.
+description: 두 토큰 간의 페어링(짝) — 의미 있는 토큰 쌍은 무관한 쌍보다 서로에게 더 큰 영향을 미칩니다. N개 토큰의 컨텍스트는 대략 N²개의 관계를 갖습니다.
 ---
 
-When predicting each [token](./Token.md), the [model](./Model.md) factors in every other token in the [context](./Context.md) — some heavily, others barely at all. The pairing between two tokens is an **attention relationship**, and meaningful pairs ("her" with "Sarah", or a `getUser()` call with its `function getUser` definition) influence each other more than unrelated ones. A context of N tokens has on the order of N² relationships.
+각 [토큰](./Token.md)을 예측할 때, [모델](./Model.md)은 [컨텍스트](./Context.md) 안에 존재하는 다른 모든 토큰을 고려합니다 — 어떤 토큰은 깊게 반영하고, 어떤 토큰은 거의 고려하지 않습니다. 두 토큰 사이의 이러한 연결 고리를 **어텐션 관계(Attention relationship)**라고 부르며, 의미 있는 토큰 쌍("Sarah"와 대명사 "her", 또는 `function getUser` 정의와 `getUser()` 호출부)은 서로 무관한 토큰 쌍보다 훨씬 더 큰 영향을 주고받습니다. N개의 토큰으로 구성된 컨텍스트는 대략 N² 차수(order of N²)의 관계를 형성합니다.
 
-The pairings are where the model's apparent understanding lives. When it resolves a pronoun, it's because the attention relationship between "her" and "Sarah" is strong. When it calls a function with the right arguments, the relationship between the call site and the definition it read earlier is doing the work. None of this is looked up — it's computed fresh on every [model provider request](./Model%20provider%20request.md), for every pair.
+이 토큰 쌍들의 연결 속에 모델의 소위 '이해력'이 깃들어 있습니다. 대명사를 올바르게 해석해 낸다면, 그것은 "her"와 "Sarah" 사이의 어텐션 관계가 강력하기 때문입니다. 함수를 올바른 인자로 호출한다면, 호출부와 앞서 읽어 들인 함수 정의 사이의 관계가 제 역할을 다하고 있기 때문입니다. 이 중 어느 것도 사전에 검색해 오는 것이 아닙니다 — 매 [모델 프로바이더 요청](./Model%20provider%20request.md)마다 모든 토큰 쌍에 대해 처음부터 새로 연산됩니다.
 
-The N² figure is worth sitting with, because it grows faster than intuition suggests:
+N²이라는 숫자는 진지하게 곱씹어 볼 가치가 있습니다. 우리의 직관보다 훨씬 가파르게 증가하기 때문입니다:
 
-| Context size   | Pairings (~N²) |
-| -------------- | -------------- |
-| 1,000 tokens   | ~1 million     |
-| 10,000 tokens  | ~100 million   |
-| 100,000 tokens | ~10 billion    |
+| 컨텍스트 크기 | 토큰 쌍의 수 (~N²) |
+| --- | --- |
+| 1,000 토큰 | 약 100만 개 |
+| 10,000 토큰 | 약 1억 개 |
+| 100,000 토큰 | 약 100억 개 |
 
-Each pairing is also computed more than once. Models have multiple attention heads — exact counts for frontier models are unpublished, but fifty to a hundred is a reasonable guess — and each head computes its own version of every relationship. So every pairing in the table above is duplicated across every head. That's a lot of pairings.
+심지어 각 토큰 쌍의 관계는 한 번만 계산되는 것도 아닙니다. 모델은 여러 개의 어텐션 헤드(Attention head)를 가지고 있으며 — 프론티어 모델의 정확한 개수는 공개되지 않았으나 50개에서 100개 사이로 보는 것이 합리적입니다 — 각 헤드는 모든 관계에 대해 자신만의 관점으로 연산합니다. 따라서 위 표의 모든 토큰 쌍 수는 모든 헤드에 걸쳐 중복되어 연산됩니다. 어마어마한 양의 페어링입니다.
 
-Only a small number of these relationships matter for any given task. The pairing between your instruction and the code it governs is one of a handful that count; almost everything else in the pool is noise. And the two grow at different rates: the relationships that matter stay roughly constant, while the total pool grows quadratically with context size. At 1,000 tokens, the pairing you care about is one in a million; at 100,000 tokens, it's one in ten billion. This is the arithmetic underneath the [attention budget](./Attention%20budget.md), and [attention degradation](./Attention%20degradation.md) is what it feels like when the relationships that matter get too thin a share.
+주어진 과업에서 실제로 중요한 관계는 이 중 극히 일부에 불과합니다. 사용자의 지시사항과 그것이 지배하는 코드 사이의 연결 고리는 전체 수십억 개 중 손에 꼽히는 몇 안 되는 핵심입니다. 전체 풀 안의 나머지 거의 모든 것은 잡음에 가깝습니다. 문제는 두 관계가 늘어나는 속도가 서로 다르다는 점입니다. 실제로 중요한 관계의 수는 대체로 일정하게 유지되는 반면, 전체 풀은 컨텍스트 크기에 따라 2차 함수(제곱)를 그리며 폭증합니다. 1,000토큰일 때 내가 관심 있는 토큰 쌍은 100만 개 중 하나였지만, 100,000토큰일 때는 100억 개 중 하나로 희석됩니다. 이것이 바로 [어텐션 예산](./Attention%20budget.md)의 밑바닥에 깔린 수학적 진실이며, 중요한 관계에 턱없이 적은 몫의 지분이 돌아갈 때 체감되는 현상이 바로 [어텐션 저하](./Attention%20degradation.md)입니다.
 
-_Usage:_
+_사용 예시:_
 
-"It keeps confusing the two `user` symbols across the diff — sounds like we're in the [dumb zone](./Smart%20zone.md)."
+"diff 전체에서 두 개의 `user` 심볼을 자꾸 헷갈려하네요 — [덤 존](./Smart%20zone.md)에 들어간 것 같습니다."
 
-"Yeah, the attention relationship between each call site and its declaration is fighting the other one — same token shape, different bindings. Rename one and the pairings sharpen."
+"맞아요. 각 호출부와 선언부 사이의 어텐션 관계가 서로 간섭하고 있는 겁니다. 토큰 형태는 같은데 바인딩된 대상이 다르니까요. 하나를 리네이밍해 주면 페어링 관계가 다시 또렷해질 겁니다."
