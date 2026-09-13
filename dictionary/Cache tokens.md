@@ -1,24 +1,24 @@
 ---
-description: Input tokens the provider has cached from a previous request via its prefix cache, billed at a much lower rate.
+description: 프로바이더가 접두사 캐시를 통해 이전 요청으로부터 캐싱해 두어 다시 처리할 필요가 없는 입력 토큰. 훨씬 저렴한 요율로 청구됩니다.
 ---
 
-[Input tokens](./Input%20tokens.md) the [provider](./Model%20provider.md) has cached from a previous [model provider request](./Model%20provider%20request.md) so it doesn't have to re-process them. When consecutive requests share a prefix, the provider reuses the work via its [prefix cache](./Prefix%20cache.md) and bills the cached portion at a much lower rate. The lever that makes long [sessions](./Session.md) affordable — without it, every [turn](./Turn.md) re-pays for the whole history.
+이전 [모델 프로바이더 요청](./Model%20provider%20request.md)에서 [프로바이더](./Model%20provider.md)가 이미 연산하여 캐싱해 둔 덕분에 다시 처리할 필요가 없는 [입력 토큰](./Input%20tokens.md)들입니다. 연속된 요청들이 동일한 접두사를 공유할 때, 프로바이더는 [접두사 캐시](./Prefix%20cache.md)를 통해 기존 작업을 재사용하고 캐싱된 부분에 대해 훨씬 저렴한 요금을 청구합니다. 긴 [세션](./Session.md)을 경제적으로 유지할 수 있게 해주는 핵심 레버입니다 — 이것이 없다면 매 [턴](./Turn.md)마다 대화 이력 전체에 대해 요금을 계속 다시 지불해야 합니다.
 
-The reason this matters is how sessions are billed. The [model](./Model.md) is [stateless](./Stateless.md), so every request resends the entire conversation — [system prompt](./System%20prompt.md), every message, every [tool result](./Tool%20result.md) — as input tokens. By turn fifty, each request carries fifty turns of history, and you'd pay full rate on all of it, every time. The cache changes the maths: tokens the provider has already processed in an identical prefix are billed as cache tokens, often at a tenth of the input rate or less. On a long session, most of what you send is cache tokens, and the bill stays sane.
+이 개념이 중요한 이유는 세션 과금 방식 때문입니다. [모델](./Model.md)은 [무상태](./Stateless.md)이므로 매 요청마다 [시스템 프롬프트](./System%20prompt.md), 모든 메시지, 모든 [툴 결과](./Tool%20result.md)를 포함한 대화 전체를 입력 토큰으로 다시 보냅니다. 50번째 턴에 이르면 각 요청은 50턴 분량의 이력을 짊어지게 되며, 캐시가 없다면 매번 그 전체에 대해 정가를 내야 합니다. 캐시는 이 계산 방식을 바꿉니다: 프로바이더가 동일한 접두사에서 이미 처리한 토큰은 캐시 토큰으로 청구되며, 대개 일반 입력 토큰 요율의 10% 이하로 책정됩니다. 긴 세션에서는 전송하는 데이터의 대부분이 캐시 토큰이 되므로 청구서 금액을 합리적인 수준으로 방어할 수 있습니다.
 
-An example shows when tokens are cached and when they're not. Each letter stands for a block of conversation content; each request sends the conversation so far:
+토큰이 언제 캐싱되고 언제 캐싱되지 않는지 보여주는 예시입니다. 각 알파벳은 대화 내용의 한 블록을 나타내며, 매 요청은 지금까지의 대화 전체를 전송합니다:
 
-| Request sends | Cached  | Billed at full rate | Why                                               |
-| ------------- | ------- | ------------------- | ------------------------------------------------- |
-| `AB`          | nothing | `AB`                | First request — nothing to match against          |
-| `ABC`         | `AB`    | `C`                 | `AB` is an exact prefix of the previous request   |
-| `ABCD`        | `ABC`   | `D`                 | Prefix still intact                               |
-| `AXCD`        | `A`     | `XCD`               | An edit changed `B` to `X`; the match fails there |
+| 요청 내용 | 캐시 적용 | 정가 청구 | 이유 |
+| --- | --- | --- | --- |
+| `AB` | 없음 | `AB` | 첫 번째 요청 — 비교할 기존 데이터가 없음 |
+| `ABC` | `AB` | `C` | `AB`가 이전 요청의 정확한 접두사와 일치함 |
+| `ABCD` | `ABC` | `D` | 접두사가 여전히 유지됨 |
+| `AXCD` | `A` | `XCD` | 수정으로 인해 `B`가 `X`로 변경됨; 그 지점부터 일치 실패 |
 
-The cache is fragile in a specific way: it matches exact prefixes. If anything changes earlier in the conversation — the [harness](./Harness.md) reorders content, a timestamp updates, a file's representation shifts — the cache misses from that point onward and everything after it is billed at full input rate. Caches also expire after a few minutes of inactivity, so a session resumed after a long pause re-pays its history once. When a session's cost jumps without an obvious cause, compare cache tokens to input tokens in the usage report — a broken cache shows up there first.
+캐시는 특정한 방식으로 취약합니다: 바로 **정확한 접두사**만을 매칭한다는 점입니다. 대화의 앞부분에서 무언가 변경되면 — [하네스](./Harness.md)가 내용 순서를 바꾸거나, 타임스탬프가 업데이트되거나, 파일 표현 방식이 달라지는 등 — 캐시는 그 지점부터 미스가 발생하여 그 뒤에 오는 모든 데이터가 정가 입력 요율로 청구됩니다. 또한 캐시는 몇 분 동안 활동이 없으면 만료되므로, 긴 휴식 후 재개된 세션은 과거 이력에 대해 비용을 한 번 정가로 다시 치르게 됩니다. 세션 비용이 뚜렷한 이유 없이 급증했다면 사용량 보고서에서 캐시 토큰과 일반 입력 토큰의 비율을 비교해 보세요 — 깨진 캐시는 거기서 가장 먼저 드러납니다.
 
-_Usage:_
+_사용 예시:_
 
-"Cost on long sessions is brutal — eight bucks for a refactor."
+"세션이 길어지니까 비용이 살인적이네요 — 리팩토링 한 번에 8달러라니."
 
-"Check the cache tokens. If the harness is reordering the system prompt or files between turns, the prefix breaks and you re-pay full input rate every request."
+"캐시 토큰 수치를 확인해 보세요. 하네스가 턴 사이에 시스템 프롬프트나 파일 순서를 뒤섞고 있다면 접두사가 깨져서 매 요청마다 전체 입력 비용을 정가로 내고 있을 수 있습니다."
