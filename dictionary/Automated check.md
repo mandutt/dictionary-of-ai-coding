@@ -1,21 +1,21 @@
 ---
-description: A deterministic verification that runs in the environment — tests, type checks, lints, build, pre-commit hooks. Pass/fail, no judgement.
+description: 환경에서 실행되는 결정론적 검증 — 테스트, 타입 검사, 린트, 빌드, 프리커밋 훅. 성공/실패만 있을 뿐 주관적 판단은 없습니다.
 ---
 
-A deterministic verification that runs in the [environment](./Environment.md) — tests, type checks, lints, build, pre-commit hooks. Pass/fail, no judgement. The signal an [agent](./Agent.md) can self-correct from without involving anyone else. A flaky test is a broken check, not a non-check; automated checks are deterministic _by design_.
+[환경](./Environment.md)에서 실행되는 결정론적(Deterministic) 검증 메커니즘입니다 — 테스트, 타입 검사, 린트(Lint), 빌드, 프리커밋(pre-commit) 훅 등이 해당합니다. 성공/실패만 있을 뿐 주관적 판단은 개입하지 않습니다. [에이전트](./Agent.md)가 다른 누구의 개입 없이도 스스로 오류를 교정할 수 있게 해주는 핵심 신호입니다. 간헐적으로 실패하는 플래키(Flaky) 테스트는 점검이 아닌 것이 아니라 고장 난 점검입니다. 자동화된 점검은 **설계상 결정론적**이어야 합니다.
 
-Self-correction works as a loop. The agent makes a change, runs the check as a [tool call](./Tool%20call.md), and the failure output lands in its [context window](./Context%20window.md) — a type error with a file and line, a failing assertion with expected and actual values. That's enough for the agent to fix the problem and run the check again, around and around until it passes, with no human in the loop. Determinism is what makes the loop trustworthy: the same code always produces the same verdict, so a pass means something. A flaky check poisons this — the agent "fixes" code that was fine, or retries past a real failure.
+자기 교정은 하나의 루프로 작동합니다. 에이전트가 코드를 수정하고, [툴 호출](./Tool%20call.md)을 통해 점검을 실행하면, 실패 로그가 [컨텍스트 윈도우](./Context%20window.md)로 떨어집니다 — 파일과 라인 번호가 적힌 타입 에러, 기대값과 실제값이 적힌 실패 단언문(Assertion) 등이 그렇습니다. 이 정보만 있으면 에이전트는 인간의 개입 없이도 문제를 수정하고 점검을 다시 돌리며 통과할 때까지 뱅뱅 돌 수 있습니다. 결정론은 이 루프를 신뢰할 수 있게 만들어주는 뼈대입니다: 동일한 코드는 언제나 동일한 판정을 내리므로, '통과'라는 결과가 실질적인 보증이 됩니다. 플래키한 점검은 이 신뢰를 오염시킵니다 — 에이전트가 멀쩡한 코드를 "수정"하려 들거나, 실제 발생한 실패를 무시하고 재시도만 거듭해 넘어가 버립니다.
 
-This is why good checks are a large part of a codebase's [AX](./AX.md). An agent in a repo with strict types, a fast test suite, and a linter catches most of its own mistakes before you see them; an agent in a repo with none of those ships whatever it produces. The difference matters most in [AFK](./AFK.md) runs, where checks are the only verification happening during the run. But a check only catches what it asserts — green checks mean the asserted properties hold, not that the code is right. The judgement-shaped gaps are what [automated review](./Automated%20review.md) and [human review](./Human%20review.md) are for.
+이것이 바로 훌륭한 점검 체계가 코드베이스 [AX](./AX.md)의 거대한 지분을 차지하는 이유입니다. 엄격한 타입, 빠른 테스트 스위트, 린터를 갖춘 레포지토리의 에이전트는 여러분이 눈치채기도 전에 실수의 대부분을 스스로 바로잡습니다. 반면 그런 방어막이 전무한 레포지토리의 에이전트는 자기가 만들어낸 코드가 무엇이든 그대로 배포해 버립니다. 이 차이는 점검 체계가 실행 중에 일어나는 유일한 검증 수단인 [AFK](./AFK.md) 실행에서 가장 극명하게 드러납니다. 하지만 점검은 자신이 단언(Assert)한 내용만 잡아낼 수 있을 뿐입니다 — 초록불이 떴다는 것은 단언된 속성들이 충족되었다는 뜻이지, 코드 전체가 올바르다는 뜻은 아닙니다. 주관적 판단의 영역에 속하는 거대한 빈틈들을 메우기 위해 [자동화된 리뷰](./Automated%20review.md)와 [인간 검토](./Human%20review.md)가 존재하는 것입니다.
 
-_Avoid:_ "feedback loop" / "backpressure" — both lump checks together with review. _Avoid:_ "test" — tests are automated checks, but not all automated checks are tests.
+_지양할 표현:_ "피드백 루프(feedback loop)" / "백프레셔(backpressure)" — 둘 다 기계적인 점검과 주관적인 리뷰를 한데 뭉뚱그려버립니다. _지양할 표현:_ "테스트(test)" — 테스트는 자동화된 점검의 한 종류일 뿐이며, 모든 자동화된 점검이 테스트인 것은 아닙니다.
 
-_Usage:_
+_사용 예시:_
 
-"The agent keeps shipping broken code in the AFK runs."
+"AFK 실행에서 에이전트가 깨진 코드를 자꾸 밀어 넣어요."
 
-"What automated checks are wired into the [sandbox](./Sandbox.md)?"
+"[샌드박스](./Sandbox.md) 안에 어떤 자동화된 점검들이 걸려 있나요?"
 
-"Just the unit tests."
+"단위 테스트만 돌리고 있습니다."
 
-"Add typecheck and lint — it'll self-correct from those before the PR ever lands."
+"타입 검사와 린트도 붙이세요 — PR이 만들어지기도 전에 그것들을 보고 스스로 알아서 교정해 둘 겁니다."
