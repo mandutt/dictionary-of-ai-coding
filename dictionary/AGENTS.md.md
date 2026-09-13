@@ -1,19 +1,19 @@
 ---
-description: A file in the environment that the harness loads into the context window at session start — the project's standing brief to the agent.
+description: 세션 시작 시 하네스가 컨텍스트 윈도우로 로드하는 환경 내의 파일 — 에이전트에게 전달하는 프로젝트의 상시 브리핑.
 ---
 
-A file in the [environment](./Environment.md) that the [harness](./Harness.md) loads into the [context window](./Context%20window.md) at [session](./Session.md) start — the project's standing brief to the [agent](./Agent.md). Cross-harness convention; some harnesses also have their own variant (Claude Code's is CLAUDE.md).
+[세션](./Session.md) 시작 시 [하네스](./Harness.md)가 [컨텍스트 윈도우](./Context%20window.md)로 로드하는 [환경](./Environment.md) 내의 파일 — [에이전트](./Agent.md)에게 전달하는 프로젝트의 상시 브리핑 역할을 합니다. 여러 하네스를 아우르는 범용적 컨벤션이며, 일부 하네스는 자체 변형을 사용하기도 합니다(Claude Code의 경우 `CLAUDE.md`).
 
-Because it loads automatically, it's one way to avoid repeating yourself across sessions. The [model](./Model.md) is [stateless](./Stateless.md) — a correction you give in one session is gone in the next, and you end up telling every fresh session that the project uses pnpm, that tests run with a particular flag, that a directory is generated and shouldn't be touched. When you've corrected the agent for the same thing twice, that correction is a candidate line for AGENTS.md.
+자동으로 로드되기 때문에, 세션을 넘어 같은 말을 반복하지 않기 위한 효과적인 방법입니다. [모델](./Model.md)은 [무상태](./Stateless.md)이므로 한 세션에서 준 피드백은 다음 세션에서 증발합니다. 결국 새 세션을 열 때마다 우리 프로젝트는 pnpm을 쓴다느니, 테스트는 특정 플래그를 붙여 돌려야 한다느니, 이 디렉터리는 자동 생성 파일이니 건드리지 말라느니 하는 말을 앵무새처럼 되풀이하게 됩니다. 에이전트에게 같은 지적을 두 번 이상 했다면, 그 피드백은 AGENTS.md에 들어갈 유력한 후보 한 줄이 됩니다.
 
-Suitable content is whatever the agent can't derive from the code: build and test commands, conventions the codebase doesn't make obvious, hard constraints ("never edit the generated client"). Short and declarative — it's a brief, not documentation.
+들어가기에 적합한 내용은 에이전트가 코드 자체만 보고는 도저히 유추할 수 없는 정보들입니다. 빌드 및 테스트 명령어, 코드베이스만 봐서는 드러나지 않는 암묵적 컨벤션, 강력한 제약 조건("자동 생성된 클라이언트 파일은 절대 직접 수정하지 말 것") 등이 해당합니다. 짧고 선언적인 문장으로 작성되어야 합니다 — 이것은 장황한 문서가 아니라 핵심 브리핑입니다.
 
-The trade-off is that everything in it is always loaded. Instructions accumulate, most of them irrelevant to any given task, and a long AGENTS.md both costs tokens and dilutes itself — the more instructions in context, the less reliably the model follows any one of them.
+대가는 이 파일의 모든 내용이 예외 없이 항상 로드된다는 점입니다. 지침은 시간이 갈수록 쌓여가고, 그중 대부분은 당장 주어진 과업과 아무런 상관이 없는 내용들입니다. 길어진 AGENTS.md는 토큰 비용을 청구할 뿐만 아니라 자기 자신의 효력을 희석시킵니다 — 컨텍스트에 지침이 많아질수록 모델이 그중 어느 하나를 충실하게 따를 확률은 떨어집니다.
 
-_Avoid:_ using AGENTS.md for content that should be [progressively disclosed](./Progressive%20disclosure.md) — anything in it pays a [token](./Token.md) cost every [turn](./Turn.md), in every session, whether or not that session needs it. A style guide can go behind a [skill](./Skill.md) or a [context pointer](./Context%20pointer.md) instead; keep AGENTS.md for the lines that apply everywhere.
+_지양할 점:_ [점진적으로 공개](./Progressive%20disclosure.md)되어야 마땅한 내용들을 AGENTS.md에 쏟아붓기 — 여기에 적힌 모든 것은 해당 세션에서의 필요 여부와 무관하게 모든 세션의 매 [턴](./Turn.md)마다 [토큰](./Token.md) 비용을 지불합니다. 스타일 가이드 같은 문서는 [스킬](./Skill.md)이나 [컨텍스트 포인터](./Context%20pointer.md) 뒤로 숨겨둘 수 있습니다. AGENTS.md는 어디에나 예외 없이 적용되는 핵심 규칙만을 위해 아껴두세요.
 
-_Usage:_
+_사용 예시:_
 
-"Why is every session starting with 4k tokens already burned?"
+"왜 모든 세션이 시작하자마자 4천 토큰씩 깎이고 시작하죠?"
 
-"Check AGENTS.md — someone pasted the entire style guide in there instead of putting it behind a skill."
+"AGENTS.md를 확인해 보세요. 누군가 스타일 가이드 전체를 스킬로 분리하지 않고 파일에 통째로 붙여넣어 놨네요."
