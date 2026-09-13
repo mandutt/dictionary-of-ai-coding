@@ -1,27 +1,27 @@
 ---
-description: A moving label, not a technology. Points at whatever computers can newly, impressively do — right now, large language models.
+description: 기술이 아니라 끊임없이 움직이는 라벨. 컴퓨터가 새롭고 인상적으로 해낼 수 있는 대상을 가리키며, 지금은 대규모 언어 모델을 뜻합니다.
 ---
 
-A moving label, not a technology. "AI" doesn't name a fixed thing the way [model](./Model.md) or [token](./Token.md) does — it points at whatever computers can newly, impressively do. Right now it points at large language models. It has pointed at very different things before:
+고정된 기술이 아니라 끊임없이 움직이는 라벨입니다. "AI"는 [모델](./Model.md)이나 [토큰](./Token.md)처럼 고정된 실체를 지칭하지 않습니다 — 컴퓨터가 새롭고 인상적으로 해낼 수 있는 무언가를 그때그때 가리킬 뿐입니다. 지금은 대규모 언어 모델(LLM)을 가리키고 있지만, 과거에는 완전히 다른 대상을 가리켰습니다:
 
-| Era       | What "AI" meant                                                                                       |
-| --------- | ----------------------------------------------------------------------------------------------------- |
-| 1950s     | Symbolic reasoning — theorem provers, checkers programs.                                              |
-| 1960s–70s | Rule-based symbolic programs — ELIZA, SHRDLU.                                                         |
-| 1980s     | Expert systems — thousands of hand-written if-then rules encoding human expertise.                    |
-| 1990s     | Game-tree search — Deep Blue beating Kasparov (1997). Researchers avoided the word "AI" entirely      |
-| 2000s     | Statistical machine learning — spam filters, recommenders. Still sold as "machine learning", not "AI" |
-| 2010s     | Deep learning — image recognition (AlexNet, 2012), AlphaGo (2016).                                    |
-| 2020s     | Large language models — ChatGPT (2022) made "AI" mean chatbots                                        |
+| 시대 | "AI"가 의미했던 것 |
+| --- | --- |
+| 1950년대 | 기호 추론(Symbolic reasoning) — 정리 증명기, 체커 프로그램. |
+| 1960–70년대 | 규칙 기반 기호 프로그램 — ELIZA, SHRDLU. |
+| 1980년대 | 전문가 시스템 — 인간의 전문성을 수천 개의 손수 작성한 if-then 규칙으로 부호화. |
+| 1990년대 | 게임 트리 탐색 — 카스파로프를 꺾은 딥블루(1997). 당시 연구자들은 "AI"라는 단어를 완전히 기피함. |
+| 2000년대 | 통계적 머신러닝 — 스팸 필터, 추천 시스템. 여전히 "AI"가 아닌 "머신러닝"으로 판매됨. |
+| 2010년대 | 딥러닝 — 이미지 인식(AlexNet, 2012), 알파고(2016). |
+| 2020년대 | 대규모 언어 모델 — ChatGPT(2022) 출시 이후 "AI"는 챗봇을 뜻하게 됨. |
 
-The pointer moves by a known mechanism, sometimes called the AI effect: once a technique works reliably, it gets renamed — it's "just" search, "just" statistics — and "AI" slides forward to the next unsolved thing. The observation is old. Bertram Raphael put it this way in 1971: "AI is a collective name for problems which we do not yet know how to solve properly by computer." Larry Tesler's version, from around 1979: "Intelligence is whatever machines haven't done yet."
+이 지칭 대상은 흔히 'AI 효과(AI effect)'라 불리는 익히 알려진 메커니즘에 의해 이동합니다. 어떤 기술이 안정적으로 작동하기 시작하면 이름이 바뀝니다 — "그냥" 탐색 알고리즘일 뿐이라거나, "그냥" 통계일 뿐이라 격하되고 — "AI"라는 말은 아직 해결되지 않은 다음 난제로 미끄러져 나아갑니다. 이러한 통찰은 오래되었습니다. 버트럼 라파엘(Bertram Raphael)은 1971년에 이렇게 표현했습니다: "AI란 컴퓨터로 어떻게 제대로 풀어야 할지 아직 모르는 문제들을 통칭하는 이름이다." 1979년경 래리 테슬러(Larry Tesler)의 버전은 이렇습니다: "지능이란 기계가 아직 해내지 못한 모든 것을 뜻한다."
 
-This is why conversations about AI so often talk past each other. A claim like "AI can't reason" or "AI is overhyped" carries a hidden timestamp — it may be about expert systems, about 2010s image classifiers, or about last month's LLM, and each reference supports a different conclusion. When a discussion about AI stalls, the fix is usually to swap the word for whichever precise term is actually meant: the model, the [harness](./Harness.md), the [agent](./Agent.md), the [context](./Context.md) it was given.
+사람들이 AI를 두고 대화할 때 자꾸 엇갈리는 이유가 바로 여기에 있습니다. "AI는 추론할 수 없다"거나 "AI는 과대평가되었다"는 주장은 보이지 않는 타임스탬프를 달고 있습니다 — 전문가 시스템에 대한 이야기일 수도 있고, 2010년대 이미지 분류기에 대한 이야기일 수도 있으며, 지난달 출시된 LLM에 대한 이야기일 수도 있습니다. 그리고 각 대상마다 서로 다른 결론을 뒷받침합니다. AI에 관한 논의가 헛돌기 시작한다면, 모델, [하네스](./Harness.md), [에이전트](./Agent.md), 혹은 모델에 주어진 [컨텍스트](./Context.md) 등 실제로 의미하는 정밀한 단어로 교체하는 것이 일반적인 해결책입니다.
 
-_Avoid:_ "AI" in any technical claim — name the part you mean instead. "AI coding" as a label for the practice is fine; "the AI is hallucinating" is not.
+_지양할 표현:_ 기술적 주장을 펼칠 때 "AI"라는 단어 쓰기 — 대신 지칭하고자 하는 구체적 구성요소를 명시하세요. 관행을 가리키는 라벨로서 "AI 코딩"은 괜찮지만, "AI가 환각을 일으킨다"는 잘못된 표현입니다.
 
-_Usage:_
+_사용 예시:_
 
-"The CTO wants to know whether AI could handle the triage queue."
+"CTO가 우리 이슈 분류 큐 처리에 AI를 도입할 수 있는지 묻더군요."
 
-"Translate that before scoping it — she means an LLM in a harness with access to the ticket system. 'AI' on its own isn't a spec."
+"범위를 정하기 전에 그 말을 번역해야 합니다 — 티켓 시스템 접근 권한이 있는 하네스에 탑재된 LLM을 의미하는 겁니다. 'AI' 그 자체는 아무런 기술 명세가 되지 못해요."
