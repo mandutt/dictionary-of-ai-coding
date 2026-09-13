@@ -1,17 +1,17 @@
 ---
-description: Each token has a finite amount of influence to distribute across the rest of the context. Per-token, doesn't grow when context does.
+description: 각 토큰은 나머지 컨텍스트에 분배할 수 있는 영향력의 총량이 유한합니다. 토큰 단위로 고정되며, 컨텍스트가 늘어나도 증가하지 않습니다.
 ---
 
-Each [token](./Token.md) has a finite amount of influence to distribute across the rest of the [context](./Context.md). Heavy influence on [one relationship](./Attention%20relationship.md) leaves less for others. The budget is per-token and doesn't grow when the context does, which is why long [sessions](./Session.md) dilute.
+각 [토큰](./Token.md)은 나머지 [컨텍스트](./Context.md) 전반에 나누어 줄 수 있는 영향력의 총량이 유한하게 정해져 있습니다. [어느 한 관계](./Attention%20relationship.md)에 강한 영향력을 쏟고 나면 다른 관계에 배분할 몫이 줄어듭니다. 이 예산은 토큰당 기준으로 고정되어 있으며 컨텍스트가 늘어난다고 해서 함께 커지지 않습니다. 긴 [세션](./Session.md)에서 집중력이 희석되는 이유가 바로 여기에 있습니다.
 
-Think of it as signal and noise. Your instruction is a signal at fixed volume; every other token in the [context window](./Context%20window.md) is competing sound. The instruction never gets quieter — it's still there, character for character — but as the context grows, the room gets louder around it, and the signal-to-noise ratio drops. An instruction that was the loudest thing at 10k tokens of context is background hum at 150k. This is the mechanism behind [attention degradation](./Attention%20degradation.md): the model doesn't forget; the signal gets lost in the noise.
+신호와 잡음(Signal and Noise)의 관계로 이해해 보세요. 여러분의 지시사항은 일정한 음량으로 재생되는 '신호'입니다. [컨텍스트 윈도우](./Context%20window.md) 안의 다른 모든 토큰은 이와 경쟁하는 '주변 소음'입니다. 지시사항 자체의 소리가 줄어드는 것은 결코 아닙니다 — 한 글자 한 글자 그대로 그 자리에 있습니다. 하지만 컨텍스트가 커질수록 방 안이 점점 시끄러워지고, 신호 대 잡음비(SNR)는 곤두박질칩니다. 1만 토큰 컨텍스트에서 가장 우렁찼던 지시사항이 15만 토큰에 이르면 배경 웅얼거림으로 전락합니다. 이것이 [어텐션 저하](./Attention%20degradation.md)의 이면에 깔린 메커니즘입니다. 모델이 지침을 까먹은 것이 아니라, 신호가 소음에 파묻힌 것입니다.
 
-The symptom reads as disobedience — the agent agreed to a constraint early on and then drifts from it, and re-pasting the constraint helps only briefly. The cause isn't the instruction; it's everything else in the window competing with it.
+겉으로는 '불복종'의 형태로 나타납니다. 에이전트가 초반에는 제약 조건에 순순히 동의하다가 점차 그로부터 벗어나며, 제약 조건을 다시 붙여넣어 주어도 아주 잠깐 효과가 있을 뿐입니다. 원인은 지시사항 자체에 있는 것이 아닙니다. 윈도우 안에서 그것과 경쟁하고 있는 다른 모든 토큰들이 문제입니다.
 
-What you can control is what goes into the context. Content that doesn't serve the task isn't neutral — it's noise over everything that does. Keep the window small, [clear](./Clearing.md) when the accumulated context stops paying for itself, and restate the constraints that matter instead of trusting their early mention to hold.
+여러분이 통제할 수 있는 것은 컨텍스트에 무엇을 넣을지뿐입니다. 과업에 도움이 되지 않는 내용은 중립적인 게 아닙니다 — 도움이 되는 모든 것 위에 얹어지는 소음입니다. 윈도우를 작게 유지하고, 쌓여있는 컨텍스트가 밥값을 못 한다 싶으면 [비워내고(Clear)](./Clearing.md), 초반에 한 번 언급했다고 해서 끝까지 지켜질 것이라 믿지 말고 중요한 제약 조건은 작업 지점 근처에서 다시 명시해 주세요.
 
-_Usage:_
+_사용 예시:_
 
-"Why does it keep ignoring the schema I pasted at the top?"
+"맨 위에 붙여넣은 스키마를 왜 자꾸 무시할까요?"
 
-"We're well into the [dumb zone](./Smart%20zone.md) — every token's attention budget is fixed, but the context kept growing. The signal on the schema is now competing with thousands of newer tokens."
+"우리가 [덤 존](./Smart%20zone.md)에 깊숙이 들어왔기 때문입니다. 토큰마다 배정된 어텐션 예산은 고정되어 있는데 컨텍스트는 계속 불어났어요. 스키마에 걸려 있던 신호가 새로 들어온 수천 개의 토큰들과 경쟁하느라 밀려난 겁니다."
