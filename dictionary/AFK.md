@@ -1,22 +1,23 @@
 ---
-description: A working pattern where the user kicks off a session and leaves the agent to run unattended (away from keyboard).
+description: 사용자가 세션을 시작해 두고 자리를 비워 에이전트가 감독 없이 혼자 일하도록 내버려 두는 작업 패턴 (Away from keyboard).
 aliases:
   - away from keyboard
   - AFK (away from keyboard)
+  - 자리 비움 작업
 ---
 
-Away from keyboard. A working pattern where the user kicks off a [session](./Session.md) and leaves the [agent](./Agent.md) to run unattended. The throughput multiplier of [AI](./AI.md) coding — many AFK sessions can run in parallel while you sleep, eat, or work on something else. Usually requires a permissive [permission mode](./Permission%20mode.md) plus [sandboxing](./Sandbox.md) to be safe.
+**Away from keyboard(자리 비움 작업).** 사용자가 [세션](./Session.md)을 시작해 두고 자리를 비워 [에이전트](./Agent.md)가 감독 없이 혼자 일하도록 내버려 두는 작업 패턴입니다. [AI](./AI.md) 코딩의 처리량(Throughput)을 폭발적으로 늘려주는 승수 효과의 원천입니다. 사용자가 잠을 자거나, 식사를 하거나, 다른 업무를 처리하는 동안 수많은 AFK 세션을 병렬로 돌려둘 수 있습니다. 안전을 확보하기 위해 일반적으로 관대한 [권한 모드](./Permission%20mode.md)와 [샌드박스 격리](./Sandbox.md)가 필수적으로 요구됩니다.
 
-When you're not there, the agent handles ambiguity differently. While you're watching, an ambiguous decision surfaces as a question and you answer it; once you've walked away, the agent picks a default and keeps going, and every later decision builds on that guess. The characteristic failure is coming back to hours of finished, confident work built on a wrong call made in the first ten minutes. The work isn't sloppy — it's coherent, just coherent about the wrong thing.
+자리를 비우면 에이전트는 모호함을 전혀 다른 방식으로 처리합니다. 지켜보고 있을 때는 애매한 결정 사항이 생기면 질문을 던져오고 사용자가 답해주지만, 사용자가 자리를 비우고 나면 에이전트는 임의로 기본값을 하나 찍어 정하고 그대로 돌진하며, 그 뒤의 모든 판단은 그 찍어 맞춘 가정 위에 차곡차곡 쌓아 올려집니다. 이로 인해 발생하는 전형적인 실패 양상은, 자리에 돌아왔을 때 첫 10분 만에 내린 잘못된 단 하나의 결정 위에 지어진 몇 시간 분량의 완성되고 자신만만한 작업물을 마주하는 것입니다. 작업이 엉성해서가 아닙니다. 작업물 자체는 매우 논리정연하지만, 단지 '엉뚱한 대상을 향해' 논리정연할 뿐입니다.
 
-Since you can't give input during the run, give it before and after instead. Before: resolve the ambiguity up front — a [grilling](./Grilling.md) session, a written [spec](./Spec.md) — so there are fewer gaps for the agent to fill alone. During: [automated checks](./Automated%20check.md) and [automated review](./Automated%20review.md) stand in for the attention you're not giving, failing fast on what can be caught mechanically. After: the run ends in something reviewable — a PR, not changes already merged. AFK doesn't remove [human review](./Human%20review.md); it defers all of it to the end, which is why what arrives at the end has to be worth reviewing. This is also why [AX](./AX.md) matters most in AFK runs — with no one watching, the environment is the only support the agent gets.
+실행 중에는 입력을 줄 수 없으므로, 개입은 반드시 실행 전과 후에 집중되어야 합니다. **전(Before):** 사전에 모호함을 해소해 두세요. [그릴링](./Grilling.md) 세션을 거치거나 문서화된 [스펙](./Spec.md)을 쥐어주어 에이전트가 혼자 메꿔야 할 빈칸을 최소화하는 것입니다. **중(During):** [자동화된 점검](./Automated%20check.md)과 [자동화된 리뷰](./Automated%20review.md)가 여러분이 쏟지 못하는 주의력을 대신하여, 기계적으로 잡아낼 수 있는 결함들을 빠르게 실패(Fail-fast)시킵니다. **후(After):** 실행의 끝은 반드시 검토 가능한 형태—이미 머지된 변경 사항이 아니라 PR 형태—로 끝나야 합니다. AFK는 [인간 검토](./Human%20review.md)를 아예 없애는 것이 아닙니다. 모든 검토를 작업의 맨 끝으로 미루는 것뿐이며, 그렇기 때문에 맨 끝에 도달한 결과물이 검토할 가치가 있는 상태여야 합니다. 감시자가 없는 AFK 실행에서 [AX](./AX.md)가 가장 결정적인 차이를 만들어내는 이유가 바로 이것입니다. 아무도 지켜보지 않을 때 에이전트를 지탱해 주는 유일한 버팀목은 환경뿐이기 때문입니다.
 
-_Avoid:_ "background agent" — centers the machine ("running in the background") rather than the human pattern ("user has walked away"). AFK names the fact that matters: the user isn't watching.
+_지양할 표현:_ "백그라운드 에이전트(Background agent)" — 인간의 행동 양식("사용자가 자리를 비웠다") 대신 기계 중심의 상태("백그라운드에서 돌아간다")를 강조하는 표현입니다. AFK라는 단어만이 중요한 핵심 사실, 즉 '사용자가 지켜보고 있지 않다'는 점을 정확히 짚어냅니다.
 
-_Usage:_
+_사용 예시:_
 
-"I'm running this AFK — three sandboxed agents on the refactor, reviewing the PRs in the morning."
+"이 작업은 AFK로 돌려둘 겁니다. 샌드박스 에이전트 세 대에 리팩토링을 맡겨두고 내일 아침에 PR을 몰아서 리뷰할 거예요."
 
-"[Bypass permissions](./Agent%20mode.md)?"
+"[Bypass permissions(완전 자동)](./Agent%20mode.md) 모드로요?"
 
-"Yeah, read-only [filesystem](./Filesystem.md), no network."
+"네, 읽기 전용 [파일시스템](./Filesystem.md)에 외부 네트워크는 차단했습니다."
