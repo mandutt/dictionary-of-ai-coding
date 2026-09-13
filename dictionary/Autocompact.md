@@ -1,17 +1,17 @@
 ---
-description: Compaction triggered automatically by the harness when the context window approaches full.
+description: 컨텍스트 윈도우가 가득 차갈 때 하네스가 자동으로 트리거하는 압축(Compaction).
 ---
 
-[Compaction](./Compaction.md) triggered automatically by the [harness](./Harness.md) when the [context window](./Context%20window.md) approaches full.
+[컨텍스트 윈도우](./Context%20window.md)가 한계치에 다다랐을 때 [하네스](./Harness.md)가 자동으로 발동시키는 [압축(Compaction)](./Compaction.md)입니다.
 
-The harness watches how full the context window is. When it crosses a threshold — often around 80% — it pauses, asks the [model](./Model.md) to summarise the [session](./Session.md) so far, and seeds a fresh session with the summary. Work then continues as if nothing happened.
+하네스는 컨텍스트 윈도우가 얼마나 찼는지 지속적으로 감시합니다. 흔히 80% 전후의 특정 임계값을 넘어서면 작업을 잠시 멈추고, [모델](./Model.md)에게 지금까지의 [세션](./Session.md)을 요약하게 한 뒤, 그 요약본으로 새 세션을 엽니다. 그러고는 아무 일도 없었다는 듯 작업을 이어갑니다.
 
-Except something did happen. Compaction is lossy, and autocompact is lossy at a moment you didn't choose. A manual compact happens at a phase boundary, when you can tell the model what to preserve. Autocompact fires mid-task, whenever the threshold is hit — possibly halfway through a refactor, with the summary deciding for itself which of your decisions were worth keeping. The classic symptom: the [agent](./Agent.md) carries on confidently but has quietly forgotten a constraint you established an hour ago, and you only notice when its work starts contradicting it.
+하지만 분명히 무슨 일이 일어났습니다. 압축은 손실을 수반하며, 자동 압축은 사용자가 선택하지 않은 타이밍에 기습적으로 손실을 일으킵니다. 수동 압축은 사용자가 모델에게 무엇을 보존할지 지시할 수 있는 작업 단계의 전환 지점(Phase boundary)에서 일어납니다. 반면 자동 압축은 작업 한가운데서 임계값을 치는 순간 언제든 터져버립니다 — 리팩토링의 절반쯤 진행된 시점에 발동하여, 여러분이 내린 결정 중 무엇이 보존할 가치가 있는지를 요약 모델 스스로 결정해 버립니다. 전형적인 증상: [에이전트](./Agent.md)가 여전히 자신만만하게 작업을 이어가지만 한 시간 전에 합의했던 핵심 제약 조건을 조용히 까먹어버리고, 에이전트의 작업 결과물이 그 제약과 정면으로 모순되기 시작할 때에야 비로소 사태를 눈치채게 됩니다.
 
-The defence is to not let it fire. Watch the context indicator and compact manually at a natural boundary, or write decisions into a plan doc or [handoff artifact](./Handoff%20artifact.md) on disk, where no summary can lose them. Most harnesses also let you customise the buffer — moving the threshold earlier or later, or turning autocompact off entirely — so you can tune how much headroom you keep before it fires.
+가장 좋은 방어책은 자동 압축이 터지지 않게 관리하는 것입니다. 컨텍스트 사용량 게이지를 주시하다가 자연스러운 작업 매듭에서 수동으로 압축하거나, 중요한 결정 사항은 디스크의 계획 문서나 [핸드오프 아티팩트](./Handoff%20artifact.md)에 기록해 두어 어떤 요약 모델도 지워버릴 수 없게 만드세요. 대부분의 하네스는 임계값 버퍼를 조정할 수 있게 해주어 — 임계값을 더 앞이나 뒤로 옮기거나 자동 압축을 아예 끌 수 있도록 하여 — 강제 압축이 터지기 전 여유 공간(Headroom)을 얼마나 유지할지 직접 튜닝할 수 있습니다.
 
-_Usage:_
+_사용 예시:_
 
-"It doesn't seem to remember what we decided about the schema earlier."
+"아까 스키마에 대해 결정했던 내용을 전혀 기억하지 못하는 것 같아요."
 
-"Autocompact fired between [turns](./Turn.md) — the early decisions got summarised and we must have lost something. Reload the plan doc, or compact manually next time so you control what gets kept."
+"[턴](./Turn.md) 사이에 자동 압축이 돌아버렸네요 — 초반 결정 사항들이 요약되는 과정에서 무언가 유실된 게 분명합니다. 계획 문서를 다시 로드해 주거나, 다음부터는 무엇을 남길지 직접 통제할 수 있도록 수동으로 압축하세요."
