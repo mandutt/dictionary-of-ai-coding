@@ -1,17 +1,17 @@
 ---
-description: "An agent reviewing another agent's work, often with a different model or system prompt. Non-deterministic: it forms a judgement."
+description: "한 에이전트가 다른 에이전트의 작업을 검토하는 것(주로 다른 모델이나 시스템 프롬프트 사용). 비결정론적: 주관적 판단을 내립니다."
 ---
 
-An [agent](./Agent.md) reviewing another agent's work, often with a different [model](./Model.md) or [system prompt](./System%20prompt.md). Non-deterministic: it forms a judgement. Runs anywhere — pre-merge on a PR, post-hoc on commit history, mid-session as a [subagent](./Subagent.md). An LLM-as-judge in CI is automated review, not an [automated check](./Automated%20check.md); what the assertion _does_ decides the category, not where it runs.
+한 [에이전트](./Agent.md)가 다른 에이전트의 작업물을 검토하는 작업으로, 주로 작업 에이전트와 다른 [모델](./Model.md)이나 별도의 [시스템 프롬프트](./System%20prompt.md)를 장착하고 수행합니다. 비결정론적입니다: 주관적인 '판단'을 형성합니다. PR 머지 전 단계, 커밋 히스토리에 대한 사후 검토, 세션 도중 [서브에이전트](./Subagent.md)를 통한 중간 점검 등 어디서나 돌아갈 수 있습니다. CI 파이프라인에서 돌아가는 LLM-as-judge는 [자동화된 점검](./Automated%20check.md)이 아니라 자동화된 리뷰입니다. 범주를 가르는 기준은 그것이 어디서 실행되느냐가 아니라 그 단언(Assertion)이 **무엇을 수행하느냐**입니다.
 
-The separation from the working agent is what makes it work. Asking the agent that wrote the code to review its own work gets you very little — the [session](./Session.md) that produced the bug also contains the reasoning that produced it, and the agent reads its own conclusions back as confirmation. A reviewer with a fresh [context window](./Context%20window.md) has none of that attachment: it sees the diff the way a stranger would, which is what review depends on. A different model or a review-specific system prompt sharpens this further — different blind spots, and a system prompt scoped to what you actually care about (security, API contracts, performance) rather than a vague "look for problems".
+작업 에이전트와의 분리가 바로 이것을 작동하게 만드는 핵심입니다. 코드를 직접 짠 에이전트에게 자기 작업을 검토하라고 시키면 건질 것이 거의 없습니다 — 버그를 만들어낸 바로 그 [세션](./Session.md) 안에 버그를 낳았던 추론 과정이 고스란히 들어있기 때문에, 에이전트는 자기 확신을 재확인하는 데 그칩니다. 반면 완전히 비어있는 깨끗한 [컨텍스트 윈도우](./Context%20window.md)를 들고 온 리뷰어는 그러한 애착이 전혀 없습니다: 낯선 사람의 시선으로 diff를 바라보며, 이것이 바로 진정한 리뷰가 의존하는 지점입니다. 다른 모델을 쓰거나 리뷰에 특화된 시스템 프롬프트를 쥐어주면 이 효과는 더욱 날카로워집니다 — 서로 다른 사각지대를 갖게 되며, 막연하게 "문제를 찾아봐"라고 하는 대신 보안, API 규약, 성능 등 사용자가 실제로 신경 쓰는 영역에만 집중하도록 시스템 프롬프트를 좁혀줄 수 있습니다.
 
-It slots between the other review layers. Automated checks are deterministic and catch what can be asserted mechanically; [human review](./Human%20review.md) is expensive and scales worst. Automated review sits in the middle: it catches judgement-shaped problems — a misleading function name, a missed edge case — at machine cost. Because it's non-deterministic, it can miss things and flag non-issues; treat it as a filter that raises the floor before a human looks, not a gate that replaces one.
+자동화된 리뷰는 다른 검증 계층들 사이에 안착합니다. 자동화된 점검은 결정론적이며 기계적으로 단언할 수 있는 것만 잡습니다; [인간 검토](./Human%20review.md)는 비용이 비싸고 확장성이 가장 떨어집니다. 자동화된 리뷰는 그 중간에 위치합니다: 오해의 소지가 있는 함수명이나 놓쳐버린 엣지 케이스처럼 주관적 판단이 필요한 문제들을 기계의 연산 비용으로 잡아냅니다. 비결정론적이므로 버그를 놓칠 수도 있고 문제가 아닌 것을 지적할 수도 있습니다; 인간 검토를 대체하는 관문이 아니라, 인간이 직접 코드를 보기 전에 코드의 기본 바닥 수준을 한 단계 끌어올려 주는 필터로 취급해야 합니다.
 
-_Avoid:_ "AI review" / "agent review" — too vague to distinguish from the working agent itself.
+_지양할 표현:_ "AI 리뷰" / "에이전트 리뷰" — 코드를 작성한 작업 에이전트와 분리된 별도의 검토 주체임을 구별하기에 너무 모호합니다.
 
-_Usage:_
+_사용 예시:_
 
-"We're getting too many bad PRs from the [AFK](./AFK.md) runs."
+"[AFK](./AFK.md) 실행에서 올라오는 PR들 중에 품질이 엉망인 게 너무 많아요."
 
-"Add an automated review step before merge — different model, separate system prompt, scoped to security and contract changes."
+"머지 전 단계에 자동화된 리뷰 단계를 추가하세요 — 다른 모델을 물리고, 별도의 시스템 프롬프트를 얹어서, 보안과 인터페이스 규약 변경점만 집중적으로 검사하도록 스코프를 좁히는 겁니다."
