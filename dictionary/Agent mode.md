@@ -1,26 +1,28 @@
 ---
-description: A preset bundling a permission mode with behavioral instructions injected into the system prompt. Can flip mid-session.
+description: 권한 모드와 시스템 프롬프트에 주입되는 행동 지침을 한데 묶은 프리셋. 세션 도중에도 변경 가능.
 aliases:
   - plan mode
   - accept-edits
   - bypass permissions
   - YOLO mode
+  - 계획 모드
+  - YOLO 모드
 ---
 
-A preset that shapes how the [agent](./Agent.md) operates at runtime — bundles a [permission mode](./Permission%20mode.md) with behavioral instructions injected into the [system prompt](./System%20prompt.md). Examples: a default that prompts on risky calls, a **plan mode** that blocks edits and steers the agent toward research, an **accept-edits** mode that auto-approves edits, a **bypass permissions** mode (colloquially **YOLO mode**) that auto-approves everything. Can flip [mid-session](./Session.md).
+런타임에 [에이전트](./Agent.md)의 작동 방식을 결정짓는 프리셋 — [권한 모드](./Permission%20mode.md)와 [시스템 프롬프트](./System%20prompt.md)에 주입되는 행동 지침을 한데 묶은 것입니다. 예시: 위험한 호출 시 확인을 요청하는 기본 모드, 수정을 차단하고 에이전트를 리서치로 유도하는 **계획 모드(plan mode)**, 수정을 자동으로 승인하는 **수정 수락(accept-edits) 모드**, 모든 것을 자동 승인하는 **권한 우회(bypass permissions) 모드**(구어체로는 **YOLO 모드**). [세션 도중](./Session.md)에도 언제든 전환할 수 있습니다.
 
-The bundling is what distinguishes a mode from a bare permission setting. A permission mode is only a gate: it decides which [tool calls](./Tool%20call.md) go through. A gate alone produces an agent that wants to edit but can't — it proposes the write, gets blocked, and tries another way. The injected instructions remove the want: plan mode doesn't just block edits, it tells the agent it's in a planning phase, so it reads, asks, and proposes instead of straining against the gate. Gate and steer point the same direction.
+이러한 '패키징(번들링)'이 모드와 단순 권한 설정을 구분 짓는 핵심입니다. 권한 모드는 단순한 관문에 불과합니다. 어떤 [툴 호출](./Tool%20call.md)을 통과시킬지만 결정합니다. 관문만 두면 수정을 원하지만 실행하지 못하는 에이전트가 만들어집니다 — 수정을 제안했다가 차단당하고, 끙끙대며 다른 우회로를 찾는 식입니다. 함께 주입되는 지침은 그 '욕구' 자체를 제거합니다. 계획 모드는 편집을 막기만 하는 것이 아니라 지금이 계획 단계임을 에이전트에게 알려주어, 닫힌 문을 억지로 밀치지 않고 스스로 읽고, 묻고, 제안하도록 만듭니다. 관문과 조향이 같은 방향을 바라보게 만드는 것입니다.
 
-In practice, you change mode as your trust changes over the course of a task. The same task can pass through several modes: plan mode while the approach is still being shaped, the prompting default for the first delicate edits, accept-edits once the agent has shown it understands the change, bypass for an [AFK](./AFK.md) run inside a [sandbox](./Sandbox.md). Changing mode costs you nothing: the conversation continues exactly where it was, with new permissions and new instructions. If you find yourself approving every prompt without reading it, the mode is set tighter than your actual trust; if you keep rejecting edits, it's set looser.
+실제 작업에서는 과업이 진행됨에 따라 에이전트에 대한 신뢰도가 변하므로 모드를 수시로 바꿉니다. 하나의 작업도 여러 모드를 거칠 수 있습니다: 접근 방식을 구상하는 동안에는 계획 모드, 섬세한 첫 수정 작업을 진행할 때는 확인을 묻는 기본 모드, 에이전트가 수정 방향을 제대로 이해했음을 보여준 뒤에는 accept-edits 모드, [샌드박스](./Sandbox.md) 안에서 [AFK](./AFK.md)로 돌릴 때는 bypass 모드. 모드 전환에는 아무런 비용이 들지 않습니다: 새로운 권한과 새로운 지침을 장착한 채 대화는 직전 상태에서 그대로 이어집니다. 프롬프트 내용을 읽지도 않고 승인 버튼만 기계적으로 누르고 있다면 신뢰도에 비해 모드가 너무 빡빡한 것이고, 코드 수정을 자꾸 거부하고 있다면 모드가 너무 느슨하게 풀려 있는 것입니다.
 
-_Vendor terms:_ Claude Code calls these "permission modes," Codex calls them "approval modes" — both predate behavioral bundling.
+_벤더별 명칭:_ Claude Code는 이를 "권한 모드(permission modes)"라 부르고, Codex는 "승인 모드(approval modes)"라 부릅니다 — 두 명칭 모두 행동 지침 번들링 개념이 생기기 전의 과거 유산입니다.
 
-_Usage:_
+_사용 예시:_
 
-"It keeps editing files when I just want a plan."
+"그냥 계획만 세워달라는데 자꾸 파일을 수정해요."
 
-"Switch to plan mode — it'll block writes and stay in research."
+"계획 모드로 전환하세요 — 쓰기 작업을 차단하고 리서치 단계에 머물도록 할 겁니다."
 
-"What about for the AFK run later?"
+"나중에 AFK로 돌릴 때는 어떻게 할까요?"
 
-"Bypass mode, but only inside the sandbox."
+"Bypass 모드로 두되, 반드시 샌드박스 안에서만 돌리세요."
