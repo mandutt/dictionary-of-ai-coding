@@ -1,25 +1,26 @@
 ---
-description: "Agent experience: how well the environment is set up for an agent to do good work — checks, architecture, and free context."
+description: "에이전트 경험: 에이전트가 우수한 작업을 수행할 수 있도록 환경이 얼마나 잘 구축되어 있는가 — 점검, 아키텍처, 여유 컨텍스트."
 aliases:
   - Agent experience
+  - 에이전트 경험
 ---
 
-Agent experience — how well the [environment](./Environment.md) is set up for an [agent](./Agent.md) to do good work in a codebase. The agent-facing counterpart to [DX](./DX.md). When the same agent performs well in one repo and badly in another — same [model](./Model.md), same [harness](./Harness.md) — the difference is usually AX. The instinct is to blame the model or rewrite the prompt; the fix is more often in the repo.
+**에이전트 경험(Agent experience)** — [에이전트](./Agent.md)가 코드베이스 안에서 양질의 작업을 수행할 수 있도록 [환경](./Environment.md)이 얼마나 잘 구축되어 있는가를 나타냅니다. 인간을 대상으로 하는 [DX](./DX.md)의 에이전트 버전입니다. 동일한 [모델](./Model.md), 동일한 [하네스](./Harness.md)를 썼는데도 같은 에이전트가 어떤 레포지토리에서는 날아다니고 다른 레포지토리에서는 엉망진창으로 헤맨다면, 그 차이는 대개 AX에서 비롯됩니다. 본능적으로 모델을 탓하거나 프롬프트를 다시 고쳐 쓰려 들기 쉽지만, 실제 해결책은 레포지토리 환경 자체를 손보는 데 있는 경우가 더 많습니다.
 
-Good AX has three main dimensions:
+훌륭한 AX를 지탱하는 3대 차원:
 
-| Dimension        | What good AX looks like                                                                                                                                                                                                                              |
-| ---------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Automated checks | Fast, deterministic [automated checks](./Automated%20check.md) — types, tests, lints — that the agent can self-correct from without a human                                                                                                          |
-| Architecture     | A codebase the agent can navigate without reading everything: predictable structure, a lot of behaviour behind small interfaces, names that say what things do                                                                                       |
-| Free context     | [AGENTS.md](./AGENTS.md.md), [skills](./Skill.md), and [tools](./Tool.md) kept lean, so most of the [context window](./Context%20window.md) is available for the task and the agent stays in the [smart zone](./Smart%20zone.md) instead of drowning |
+| 차원 | 훌륭한 AX의 모습 |
+| --- | --- |
+| 자동화된 점검 (Automated checks) | 에이전트가 인간 없이도 스스로 오류를 바로잡을 수 있는 빠르고 결정론적인 [자동화된 점검](./Automated%20check.md) — 타입, 테스트, 린트 |
+| 아키텍처 (Architecture) | 모든 파일을 일일이 다 읽지 않고도 에이전트가 길을 찾을 수 있는 코드베이스: 예측 가능한 구조, 작은 인터페이스 뒤로 캡슐화된 거대한 동작, 역할을 명확히 드러내는 직관적인 이름들 |
+| 여유 컨텍스트 확보 (Free context) | [AGENTS.md](./AGENTS.md.md), [스킬](./Skill.md), [툴](./Tool.md) 정의를 군더더기 없이 간결하게 유지하여, [컨텍스트 윈도우](./Context%20window.md)의 대부분을 당면 과업에 집중할 수 있게 비워두고 에이전트가 잡음에 파묻히는 대신 [스마트 존](./Smart%20zone.md)에 머물게 하는 환경 |
 
-AX and DX overlap — good checks and clean architecture help both audiences — but they diverge. Humans tolerate tribal knowledge, slow CI, and "ask Sarah about the billing module"; agents can't. Agents don't benefit from IDE tooltips or pretty dashboards; they need failures as text in a [tool result](./Tool%20result.md). A codebase can have good DX and poor AX.
+AX와 DX는 겹칩니다 — 빈틈없는 점검과 깔끔한 아키텍처는 인간과 에이전트 모두에게 도움이 됩니다 — 하지만 둘은 분명히 갈라집니다. 인간은 팀 내의 암묵지, 느려터진 CI 파이프라인, "결제 모듈은 사라(Sarah)한테 물어봐" 같은 주먹구구식 운영을 어떻게든 참고 견뎌내지만, 에이전트는 그럴 수 없습니다. 에이전트는 IDE 툴팁이나 알록달록한 대시보드 그래프를 보지 못합니다. 에이전트에게 필요한 것은 [툴 결과](./Tool%20result.md) 창에 텍스트 형태로 떨어지는 실패 로그입니다. DX는 훌륭하지만 AX는 바닥인 코드베이스가 얼마든지 존재할 수 있습니다.
 
-_Avoid:_ treating AX as a synonym for DX — the audiences need different investments.
+_지양할 점:_ AX를 단순히 DX의 동의어로 취급하기 — 두 청중이 필요로 하는 투자의 방향은 엄연히 다릅니다.
 
-_Usage:_
+_사용 예시:_
 
-"The agent writes great code in the API repo and garbage in the frontend."
+"에이전트가 백엔드 API 레포에서는 기가 막히게 코드를 짜는데, 프론트엔드 레포에만 오면 쓰레기를 양산해요."
 
-"The API repo has strict types and a fast test suite; the frontend has neither and forty always-loaded skills. That's an AX gap, not a model problem."
+"API 레포는 엄격한 타입에 빠른 테스트 스위트가 갖춰져 있는 반면, 프론트엔드 레포는 둘 다 없고 상시 로드되는 스킬만 40개가 넘게 걸려 있잖아요. 이건 모델의 지능 문제가 아니라 AX의 격차입니다."
